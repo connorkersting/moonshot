@@ -1,0 +1,141 @@
+{
+  "_doc": "MOONSHOT v1 cue sheet. Times in seconds of the final 24 fps timeline. Total length 90.0 s. Key: D minor for tension, resolves to D major / Bb-F-C-D lift at the climax swell.",
+  "total": 90.0,
+  "sections": [
+    {
+      "name": "cold_open",
+      "start": 0.0,
+      "end": 10.6,
+      "notes": "Black + countdown dialogue. Low drone (D1/D2, slow filter movement), heartbeat starting ~66 bpm at 0.3 s accelerating to ~110 bpm by 10.0 s, a sub swell, and a rising noise/tonal riser 6.0->10.35. Hard 'suck-back' (reverse swell) 9.9->10.35 then near-silence 10.35->10.6 so the drop hits."
+    },
+    {
+      "name": "drop",
+      "start": 10.6,
+      "end": 19.0,
+      "notes": "10.6 MASSIVE impact: sub boom (pitch-dropping sine 60->28 Hz, 2.5 s tail), distorted low brass-like chord (D2+A2+D3+F3, saw stack through soft clip + lowpass opening), long rumble bed (filtered brown noise) under the whole section. 12.9 whoosh-in (0.3 s). 13.2 second impact (title punch): shorter, brighter, with a metallic ring. 17.2->17.6 whoosh-out."
+    },
+    {
+      "name": "act2_groove",
+      "start": 19.0,
+      "end": 40.0,
+      "bpm": 120,
+      "notes": "Driving trailer ostinato at 120 bpm (beat = 0.5 s, beat 1 = 19.0): 16th-note pulsing synth bass in D minor (D-D-D-F / D-D-C-A pattern every bar), toms/low drums on beats 1 and 3 with a big hit every 2 bars, ticking hi-hat 8ths, a sustained string-like pad (detuned saws, lowpassed) moving i-VI-III-VII (Dm-Bb-F-C), 2 bars per chord. Risers into 26.0 and 34.0 (2 s each). Impacts on 26.0, 34.0 and 37.0. Energy builds; 38.0->40.0 short riser into a cut."
+    },
+    {
+      "name": "lunar_transition",
+      "start": 40.0,
+      "end": 44.0,
+      "notes": "Groove stops dead at 40.0 (tail only). Wide eerie pad (high shimmer, slow tremolo), sparse sonar-like ping at 40.0 and 42.0, sub drone D1."
+    },
+    {
+      "name": "descent_tension",
+      "start": 44.0,
+      "end": 66.0,
+      "notes": "Tension bed: low pulse in D (quarter notes at 120 bpm but very muted), clock tick (8ths) 44->66, heartbeat returns at 52.0 (~90 bpm) accelerating to ~140 bpm by 66.0. 47.0->55.0 is the 1202 alarm sequence: music ducks and stutters (gate/chop the pad in 1/16 pulses) between 47.0 and 49.0, returns. 55.0->63.0 Shepard-tone style rising riser (endless rise) that builds to max at 63.0. Then 63.0->68.6 hold one sustained high cluster with nothing else (the 'Eagle has landed' dialogue sits here)."
+    },
+    {
+      "name": "flash_silence",
+      "start": 68.6,
+      "end": 69.6,
+      "notes": "68.6 everything cuts to digital silence (sharp 5 ms fade) for 1.0 s. Only a very quiet room tone (-60 dBFS) may remain."
+    },
+    {
+      "name": "swell_outro",
+      "start": 69.6,
+      "end": 90.0,
+      "notes": "69.6 the emotional swell: warm wide major pad (D major, add9), slow attack 1.5 s, low strings-like saw ensemble, soft timpani-like roll into 76.0. Progression Bb-F-C-D (2.5 s each, from 69.6), repeat. 83.4 final title impact (warm, big, sub + reverb tail), then pad holds and fades to silence by 89.8."
+    }
+  ],
+  "sfx": [
+    {
+      "t": 0.3,
+      "type": "heartbeat_start"
+    },
+    {
+      "t": 2.2,
+      "type": "low_whoosh",
+      "len": 0.6
+    },
+    {
+      "t": 10.6,
+      "type": "impact_big"
+    },
+    {
+      "t": 12.9,
+      "type": "whoosh_in",
+      "len": 0.3
+    },
+    {
+      "t": 13.2,
+      "type": "impact_metal"
+    },
+    {
+      "t": 17.2,
+      "type": "whoosh_out",
+      "len": 0.4
+    },
+    {
+      "t": 19.0,
+      "type": "impact_small"
+    },
+    {
+      "t": 25.7,
+      "type": "whoosh_in",
+      "len": 0.3
+    },
+    {
+      "t": 26.0,
+      "type": "data_beep_seq",
+      "len": 8.0,
+      "notes": "soft telemetry blips every 0.25 s while a chart draws, very low level"
+    },
+    {
+      "t": 33.7,
+      "type": "whoosh_in",
+      "len": 0.3
+    },
+    {
+      "t": 34.0,
+      "type": "impact_small"
+    },
+    {
+      "t": 37.0,
+      "type": "impact_small"
+    },
+    {
+      "t": 47.0,
+      "type": "glitch_burst",
+      "len": 0.5
+    },
+    {
+      "t": 47.2,
+      "type": "master_alarm",
+      "len": 2.4,
+      "notes": "LM master alarm style: two-tone ~750/1250 Hz beeping, harsh, short"
+    },
+    {
+      "t": 49.6,
+      "type": "glitch_burst",
+      "len": 0.3
+    },
+    {
+      "t": 63.0,
+      "type": "riser_peak"
+    },
+    {
+      "t": 68.6,
+      "type": "flash_hit",
+      "notes": "very short bright transient then hard silence"
+    },
+    {
+      "t": 69.6,
+      "type": "reverse_cymbal_swell",
+      "len": 1.2,
+      "notes": "starts at 68.4 under silence? NO: begins 69.6 quietly"
+    },
+    {
+      "t": 83.4,
+      "type": "impact_warm"
+    }
+  ]
+}

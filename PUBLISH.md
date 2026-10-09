@@ -14,7 +14,8 @@ refreshed from the `v28-final` tag of the pipeline repo.
    Check the performers on their Commons pages before quoting them in a post.
 2. **Watch the final cut once with sound.** The AI critics never heard it. The director's ear is
    the only audio check that counts, and he made the audio calls on 0:33, 1:02 and the v24
-   staging sound. v27 and v28 had no fresh critic pass.
+   staging sound. The final Fable review of v28 could not hear it either (its sound score of 8 is
+   from structure).
 3. **Re-run the scrub scan** after any edit:
    `git grep -n -i -E "conno[^r]|users[\\/]|appdata|@gmail|api[_-]?key|sk-|\.env"`. Review every
    hit; the expected ones are the `.env.example` file, the `.gitignore` entry and the docs that

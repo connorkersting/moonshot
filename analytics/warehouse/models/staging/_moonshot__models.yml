@@ -90,3 +90,9 @@ models:
     columns:
       - name: director_pick_id
         data_tests: [not_null, unique]
+
+  - name: stg_moonshot__baseline_to_final
+    description: One row per category of the final review's baseline-to-final comparison.
+    columns:
+      - name: baseline_comparison_id
+        data_tests: [not_null, unique]

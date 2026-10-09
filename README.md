@@ -17,15 +17,37 @@ director who made the calls the critics couldn't.
 | Run | 2026-10-07 02:43 to 2026-10-09 00:06 EDT, seven ledger segments adding up to 24 h 01 m of loop time (about 16 h of it active work in the transcript) |
 | Final | v28, 87.5 s, 2,100 frames at 24 fps, 1920×1080, −13.8 LUFS, −1.5 dBTP; `BEST.json` pins the file by sha256 and git tag |
 | Versions exported | 28 (v1–v28), none overwritten; 1 reverted after losing a blind A/B (v6); 4 not promoted (v8, v15, v16, v20) |
-| Senior-editor critic (Fable), overall | 5.5 (v1) → 8.0 (v14) → 8.5 (v20, v21) → 9.0 (v22) → 9.5 (v23, v24, v26, its last review) |
-| Last critic pass | v26 for the editor (hook 8.5, pacing 8, variety 9, motion 9.5, type 9, colour 9.5, sound 8, captions 8, story 9.5); v22 for Codex (7.0) and the crowd (shareability 6.5, AI-slop 3.0, would-watch-to-end 6). v27 and v28 had no fresh critic pass |
-| Blind A/B, v22 on | v22 beat v21 4-0 (3 ties); v23 beat v22 5-0 (2); v24 beat v23 1-0 (6); v26 beat v25 3-0 (4); v28 vs v27: 7 ties, no regression. v25 and v27 were adopted on the director's own pick |
+| Senior-editor critic (Fable), overall | **v1 5.0 → v28 9.5** (same critic, same rubric, one sitting, in its final review). Across the run, each review on its own scale: 5.5 (v1) → 8.0 (v14) → 8.5 (v20, v21) → 9.0 (v22) → 9.5 (v23 to v28) |
+| Final review (v28) | hook 8.5, pacing 8, variety 9, motion 9.5, type 9.5, colour 9.5, sound 8 (by structure, it can't hear), captions 8.5, story 9.5, overall 9.5; v28 better than v27 with no material regression, final pick v28 |
+| Honest ceiling | 9.5 on "would a top YouTube editor ship this"; **7.5 against a trailer house's own standard** (see below) |
+| Other critics' last pass | v22 for Codex (7.0) and the crowd (shareability 6.5, AI-slop 3.0, would-watch-to-end 6) |
+| Blind A/B, v22 on | v22 beat v21 4-0 (3 ties); v23 beat v22 5-0 (2); v24 beat v23 1-0 (6); v26 beat v25 3-0 (4); v28 vs v27: 7 ties, no regression, and the final review picks v28. v25 and v27 were adopted on the director's own pick |
 | Blind A/B, whole run | 161 section verdicts in 23 comparisons: the newer version won 39, lost 25, tied 97 |
-| Agent effort | 4,972 Claude requests (Opus 3,409, Sonnet 1,336, Fable 227), 107 subagents, 491 Codex requests (an upper bound), 97 human messages; 97% of the tokens are cache reads, so they measure context, not work |
-| Warehouse | dbt + DuckDB: 4 seeds, 46 models, 531 tests, PASS 580, WARN 1, ERROR 0 |
+| Agent effort | 5,114 Claude requests (Opus 3,461, Sonnet 1,409, Fable 244), 107 subagents, 491 Codex requests (an upper bound), 99 human messages; 97% of the tokens are cache reads, so they measure context, not work |
+| Warehouse | dbt + DuckDB: 4 seeds, 48 models, 554 tests, PASS 605, WARN 1, ERROR 0 |
 | Media | NASA video, photos and audio (public domain) + Musopen public-domain recordings; the pre-rendered 3D frames and scans are not in the repo (see `pipeline/ASSETS.md`) |
 
 ![Every critic's score per version, v1 to v28](docs/plateau_chart.png)
+
+**The ceiling, in the critic's own words.** The final review closes with: "v28 is a clean,
+disciplined piece that a top YouTube editor would ship and a documentary distributor would run as a
+teaser ... It is not yet trailer-house work, and the gap is specific." It names the gap: act 3 not
+cut to the track (0.38 of cuts land on a beat), sound design that ducks a public-domain recording
+under archive audio instead of designing every hit, the soft 16 mm scans carried as they are, six
+seconds of CG explainer in an archive trailer, and 8.7 s of black credit cards at the end. "The craft
+that is here is overlay craft ... what is missing is the re-cut, the mix and the restoration that
+only come from someone sitting in a timeline with the music up." Its limits, briefly: the cut lives
+in a frame compositor, so every change is a re-render and the reviewer could not hear the result;
+the assets are public-domain scans and recordings, not a score written to the cut; and the budget
+was 24 hours and 28 versions.
+
+Two statements in that review are wrong, and are corrected here rather than in the review file:
+- It says there was "no licensed SFX library". The mix does use one: the Sonniss GDC 2024 bundle
+  (licensed for use in a production; it forbids redistribution and AI training, so the files are not
+  in this repo).
+- It says the MAX Q label strike is baked into the render and still open. It was fixed in v23: the
+  ascent was re-rendered with no text, the labels are drawn as overlays, and their clearance from
+  the rings and the trajectory line is gated.
 
 Read the chart with its caveats. The editor's scale moved between reviews: it gave v17 an 8.0 in
 its own review and 7.0 when it re-scored v17 inside the v18 review (the dotted line). The
@@ -209,7 +231,6 @@ one short search, not the field.
 - A vertical teaser, 15 and 30 second cutdowns and a poster.
 - A rebuilt raw-vs-final video, a version-explorer page and a supercut from v28.
 - Captions: the SRT and VTT files were made on the v16 timeline and not regenerated.
-- A fresh critic pass on v27 and v28.
 
 ## Licence
 

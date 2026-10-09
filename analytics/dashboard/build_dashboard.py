@@ -1763,9 +1763,9 @@ def build_plateau(data: dict[str, pd.DataFrame]) -> str:
         '<ul class="notes">'
         "<li>Each Fable score is on that review's own scale. The dotted line is the same critic re-scoring the version in the next "
         "review: v17 was 8.0, then 7.0.</li>"
-        "<li>The Fable editor scored v1 to v11, v14 to v24 and v26; v3, v6, v12, v13, v25, v27 and v28 have no editor review of their "
-        "own (v25 was re-scored 9.5 inside the v26 review; v27 and v28 had no fresh critic pass). Codex and the crowd were last run on v22; "
-        "Codex was not run for v16 and v17.</li>"
+        "<li>The Fable editor scored v1 to v11, v14 to v24, v26 and v28; v3, v6, v12, v13, v25 and v27 have no editor review of their "
+        "own (v25 was re-scored 9.5 inside the v26 review and v27 inside the v28 review). The v28 review also scored v1 again, 5.0, in one "
+        "sitting with v28 (9.5): that is the dotted point at v1. Codex and the crowd were last run on v22; Codex was not run for v16 and v17.</li>"
         "<li>Gemini Flash and TwelveLabs are shown for transparency. TwelveLabs gave v19 and v21 the identical ten scores. The log says "
         "Gemini gave v20 exactly the first v18 run's scores; that file was overwritten by a retry, and the stored v18 differs by 0.5.</li>"
         "<li>The crowd lines come from personas looking at stills (integer scores); lower is better only for the slop line.</li>"
@@ -1779,7 +1779,7 @@ def build_plateau(data: dict[str, pd.DataFrame]) -> str:
         source="mart_critic_plateau, dim_version, dim_critic",
         alt=(
             "Line chart of critic scores for versions 1 to 28 with promoted versions starred and the director's-note versions shaded. "
-            "The Fable editor rises from 5.5 at v1 to 8.0 at v14, sits between 7.5 and 8.5 from v17 to v21, then reads 9.0 at v22 and 9.5 from v23 to v26."
+            "The Fable editor rises from 5.5 at v1 to 8.0 at v14, sits between 7.5 and 8.5 from v17 to v21, then reads 9.0 at v22 and 9.5 from v23 to v28."
         ),
         min_width=1100,
         extra_above=notes,

@@ -562,3 +562,32 @@ sources:
           - name: adopted
           - name: version_effect
           - name: source_ref
+
+      - name: baseline_to_final
+        description: The final Fable review scored the first version and the final version on the same ten categories in one sitting. One row per category, with both scores and their difference. Scores only; the review's prose is not stored.
+        config:
+          meta:
+            csv_columns:
+              review_version: VARCHAR
+              baseline_version: VARCHAR
+              category: VARCHAR
+              baseline_score: DOUBLE
+              final_score: DOUBLE
+              delta: DOUBLE
+        data_tests:
+          - csv_header_matches
+          - unique_combination:
+              arguments:
+                combination_of_columns: [review_version, baseline_version, category]
+        columns:
+          - name: review_version
+            data_tests: [not_null]
+          - name: baseline_version
+            data_tests: [not_null]
+          - name: category
+            data_tests: [not_null]
+          - name: baseline_score
+            data_tests: [not_null]
+          - name: final_score
+            data_tests: [not_null]
+          - name: delta

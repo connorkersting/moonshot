@@ -19,16 +19,16 @@ new column count). To build against another snapshot of the raw CSVs:
 `uv run dbt build --vars '{raw_data_dir: path/to/raw}'`. If `uv` cannot write to the system temp
 folder on Windows, point `TMP` and `TEMP` at a folder inside `analytics/` (`.tmp/` is git-ignored).
 
-Last build (2026-10-09, raw snapshot from reconcile run 01:19 EDT, versions v1 to v28): **4 seeds,
-46 models, 531 data tests: PASS=580, WARN=1, ERROR=0** (581 nodes) in about 90 seconds. The one
+Last build (2026-10-09, raw snapshot from reconcile run 03:16 EDT, versions v1 to v28): **4 seeds,
+48 models, 554 data tests: PASS=605, WARN=1, ERROR=0** (606 nodes) in about 90 seconds. The one
 warning is deliberate and explained under "Data-quality findings", item 8.
 
 ## DAG
 
 ```
-sources (moonshot_raw, 14 CSVs read in place with read_csv and an explicit column list)
+sources (moonshot_raw, 15 CSVs read in place with read_csv and an explicit column list)
   |
-  +-- stg_moonshot__<table>  x14            one per raw table: rename, cast, parse timestamps, build keys
+  +-- stg_moonshot__<table>  x15            one per raw table: rename, cast, parse timestamps, build keys
   |
 seeds: version_outcomes, agent_roles, score_categories, critics
   |
@@ -54,6 +54,7 @@ core
   fct_agent_runs       <- stg subagents + stg agent_spawns + int_llm_requests_by_agent
   fct_critic_scores    <- stg critic_scores
   fct_director_picks   <- stg director_picks
+  fct_baseline_to_final <- stg baseline_to_final
   fct_ab_votes         <- stg ab_votes
   fct_version_audio    <- stg qc_sections
   fct_dialogue_lines   <- stg qc_dialogue
@@ -92,6 +93,7 @@ critic x category).
 | `fct_critic_scores` | version x critic x score category | `critic_score_id` |
 | `fct_ab_votes` | A/B evaluation x repeat x section | `ab_vote_id` |
 | `fct_director_picks` | one pick the director made on a blind audition or side-by-side clip | `director_pick_id` |
+| `fct_baseline_to_final` | review x baseline version x category of the final review's v1-against-v28 scoring | `baseline_comparison_id` |
 | `fct_version_audio` | version x loudness section | `version_section_id` |
 | `fct_dialogue_lines` | version x dialogue line | `dialogue_line_id` |
 | `fct_codex_requests` | Codex session x request sequence | `codex_request_id` |
@@ -121,18 +123,18 @@ source with the custom `unique_combination` test.
 
 | Layer | Tests | What they cover |
 |---|---:|---|
-| Sources | 58 | `not_null` + `unique` on every primary key (composite keys via `unique_combination`), plus a `csv_header_matches` schema contract per file |
+| Sources | 65 | `not_null` + `unique` on every primary key (composite keys via `unique_combination`), plus a `csv_header_matches` schema contract per file |
 | Seeds | 20 | keys and the decision, category and critic enums |
-| Staging | 28 | grain only: `not_null` + `unique` on the key as staging names it |
+| Staging | 30 | grain only: `not_null` + `unique` on the key as staging names it |
 | Intermediate | 28 | the new grain of each model, plus one-comparison-per-version and one-editor-per-version guards |
 | Dimensions | 77 | grain, enums, ranges, relationships between versions |
-| Facts | 190 | grain, `relationships` on every foreign key, `accepted_values` on every enum, score and token ranges |
+| Facts | 203 | grain, `relationships` on every foreign key, `accepted_values` on every enum, score and token ranges |
 | Marts | 116 | grain, relationships, enums, score and share ranges |
-| Singular | 14 | cross-model reconciliation and business rules (below) |
-| **Total** | **531** | |
+| Singular | 15 | cross-model reconciliation and business rules (below) |
+| **Total** | **554** | |
 
-By type: 239 `not_null`, 65 `unique`, 7 `unique_combination`, 47 `accepted_values`,
-41 `relationships`, 39 `value_in_range`, 65 `non_negative`, 14 `csv_header_matches`, 14 singular.
+By type: 252 `not_null`, 67 `unique`, 8 `unique_combination`, 47 `accepted_values`,
+44 `relationships`, 41 `value_in_range`, 65 `non_negative`, 15 `csv_header_matches`, 15 singular.
 
 Custom generic tests (`tests/generic/`): `unique_combination`, `value_in_range` (scores 1 to
 10, shares 0 to 1, correlations -1 to 1), `non_negative` (tokens, durations, hours), and
@@ -170,6 +172,8 @@ Singular tests (`tests/`):
 - `assert_agent_runs_ran_requested_model`: each subagent ran the model family it was asked for;
   a subagent spawned with no model (`inherit`) must have run a family the main agent used.
 - `assert_interventions_are_labelled`: no human message is missing its hand-written label.
+- `assert_baseline_final_matches_review_scores`: the final scores in the baseline block equal the
+  same review's own scores, and every delta is final minus baseline.
 
 ### Schema contracts on the raw files
 
@@ -192,7 +196,10 @@ key set, ledger header, PROGRESS.md score header or judge layout stops the run (
   overall scores where they exist, the crowd's shareability, slop and watch-to-end scores, the
   blind A/B result against the version it was compared with, and the ledger loop hours and
   project tokens spent by its export.
-- **`fct_critic_scores`** has every category score of every critic (363 rows).
+- **`fct_critic_scores`** has every category score of every critic (375 rows).
+- **`fct_baseline_to_final`** has the final review's v1-against-v28 scores on the same ten
+  categories, scored in one sitting (v1 5.0, v28 9.5): the one place the two ends of the run share
+  a scale.
 - **`fct_director_picks`** has the five picks the director made on blind auditions and
   side-by-sides (v24 audio, the v25 hero beat, the v27 slow-mo), the audio ones mapped through
   their key file.
@@ -213,7 +220,7 @@ key set, ledger header, PROGRESS.md score header or judge layout stops the run (
    and the token marts; the `not_null` tests on those columns apply only where
    `requests_usage_final > 0`. `total_tokens_known` still adds the input side, which is
    complete for every request.
-2. **Missing final usage (documented).** 2,580 of 4,972 requests (52%) have NULL
+2. **Missing final usage (documented).** 2,670 of 5,114 requests (52%) have NULL
    `output_tokens` (at the first refresh, 1,821 of 3,643). It is concentrated in subagents (the
    main agent has a final usage record on 99.9% of requests, builders about 22%, researchers
    about 5%, at the first refresh). Output-token figures for
@@ -291,9 +298,13 @@ key set, ledger header, PROGRESS.md score header or judge layout stops the run (
 18. **Client-written placeholder messages (fixed in the reconciliation).** Two assistant records
     with model `<synthetic>` (not provider requests) appeared in the transcript. The ingest skips
     them, and the independent recount now skips and reports them, so the row counts agree.
-19. **v25, v27 and v28 have no editor review of their own.** v25 was re-scored 9.5 inside the v26
-    review; v27 and v28 were promoted on the director's picks and gates, with no fresh critic
-    pass. v28 has a blind A/B against v27: seven ties.
+19. **v25 and v27 have no editor review of their own.** v25 was re-scored 9.5 inside the v26
+    review and v27 inside the v28 review; both were promoted on the director's picks and gates.
+    v28 has the final review (9.5, better than v27, final pick v28) and a blind A/B against v27:
+    seven ties.
+20. **The final review re-scores v1 (5.0 against its own 5.5).** The two numbers are the same
+    critic on different days and scales. The 5.0 is stored as a `fable_editor_rescored` row and in
+    `fct_baseline_to_final`; the 5.5 stays the v1 `fable_editor` score.
 
 ## Design choices and deviations
 

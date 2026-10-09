@@ -1,0 +1,11 @@
+review_version,baseline_version,category,baseline_score,final_score,delta
+28,1,hook,5.0,8.5,3.5
+28,1,pacing,5.5,8.0,2.5
+28,1,variety,6.0,9.0,3.0
+28,1,motion,4.5,9.5,5.0
+28,1,type,4.5,9.5,5.0
+28,1,color,5.5,9.5,4.0
+28,1,sound,5.5,8.0,2.5
+28,1,captions,7.0,8.5,1.5
+28,1,story,5.5,9.5,4.0
+28,1,overall,5.0,9.5,4.5

@@ -9,6 +9,7 @@ version,critic,category,score,critic_model,evaluation_id,source_kind,progress_md
 1,fable_editor,captions,6.5,claude-fable-5-1,a2976af7d82c1e47b,subagent_report,6.5,False,
 1,fable_editor,story,6.5,claude-fable-5-1,a2976af7d82c1e47b,subagent_report,6.5,False,
 1,fable_editor,overall,5.5,claude-fable-5-1,a2976af7d82c1e47b,subagent_report,5.5,False,
+1,fable_editor_rescored,overall,5.0,claude-fable,fable_editor_v28_baseline,qc_json,,False,"v1 scored again inside the v28 review's baseline block, in one sitting with v28"
 2,crowd_ftv,shareability,5.0,claude-sonnet,crowd_progress_md_v2,progress_md_prose,,False,PROGRESS.md v2 crowd critique (mean-commenter persona; Sonnet; 04:25)
 2,crowd_ftv,ai_slop_perception,6.0,claude-sonnet,crowd_progress_md_v2,progress_md_prose,,False,PROGRESS.md v2 crowd critique (mean-commenter persona; Sonnet; 04:25)
 2,fable_editor,hook,6.0,claude-fable-5-1,a4664eff3e9851486,subagent_report,6.0,False,
@@ -362,3 +363,14 @@ version,critic,category,score,critic_model,evaluation_id,source_kind,progress_md
 26,fable_editor,captions,8.0,claude-fable-5-1,a3ffc574550e7f686,qc_json,,False,
 26,fable_editor,story,9.5,claude-fable-5-1,a3ffc574550e7f686,qc_json,,False,
 26,fable_editor,overall,9.5,claude-fable-5-1,a3ffc574550e7f686,qc_json,,False,
+27,fable_editor_rescored,overall,9.5,claude-fable,fable_editor_v28_rescore,qc_json,,False,v27 re-scored by the Fable editor inside its review of v28
+28,fable_editor,hook,8.5,claude-fable,fable_editor_v28_json,qc_json,,False,no matching subagent transcript
+28,fable_editor,pacing,8.0,claude-fable,fable_editor_v28_json,qc_json,,False,no matching subagent transcript
+28,fable_editor,variety,9.0,claude-fable,fable_editor_v28_json,qc_json,,False,no matching subagent transcript
+28,fable_editor,motion,9.5,claude-fable,fable_editor_v28_json,qc_json,,False,no matching subagent transcript
+28,fable_editor,type,9.5,claude-fable,fable_editor_v28_json,qc_json,,False,no matching subagent transcript
+28,fable_editor,color,9.5,claude-fable,fable_editor_v28_json,qc_json,,False,no matching subagent transcript
+28,fable_editor,sound,8.0,claude-fable,fable_editor_v28_json,qc_json,,False,no matching subagent transcript
+28,fable_editor,captions,8.5,claude-fable,fable_editor_v28_json,qc_json,,False,no matching subagent transcript
+28,fable_editor,story,9.5,claude-fable,fable_editor_v28_json,qc_json,,False,no matching subagent transcript
+28,fable_editor,overall,9.5,claude-fable,fable_editor_v28_json,qc_json,,False,no matching subagent transcript

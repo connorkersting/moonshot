@@ -815,3 +815,52 @@ models:
           - not_null:
               config:
                 where: "is_mapped_through_key"
+
+  - name: fct_baseline_to_final
+    description: >
+      The final Fable review scored the first version and the final version on the same ten
+      rubric categories in one sitting (grain: review x baseline version x category). It is the
+      one place the two ends of the run share a scale, unlike the per-review scores in
+      fct_critic_scores, which moved between reviews. The critic cannot hear, so the sound
+      category is scored from structure only.
+    columns:
+      - name: baseline_comparison_id
+        data_tests: [not_null, unique]
+      - name: review_version_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: baseline_version_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: score_category
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_score_category')
+                field: score_category
+      - name: baseline_score
+        data_tests:
+          - not_null
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 10
+      - name: final_score
+        data_tests:
+          - not_null
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 10
+      - name: score_delta
+        description: final_score minus baseline_score.
+        data_tests: [not_null]

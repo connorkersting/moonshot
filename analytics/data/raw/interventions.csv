@@ -96,3 +96,5 @@ h094,2026-10-09T03:23:14.441Z,2026-10-08T23:23:14-04:00,3,instruction,asked to s
 h095,2026-10-09T03:30:00.072Z,2026-10-08T23:30:00-04:00,3,instruction,continue,queued_message,8
 h096,2026-10-09T04:11:05.178Z,2026-10-09T00:11:05-04:00,3,question,asked whether to still run the critique review on v28,queued_message,136
 h097,2026-10-09T04:12:19.131Z,2026-10-09T00:12:19-04:00,3,approval,approved running everything that would not fit the cloud credit budget,queued_message,67
+h098,2026-10-09T05:26:17.631Z,2026-10-09T01:26:17-04:00,3,instruction,asked for the teaser to be opened so he could watch it,queued_message,31
+h099,2026-10-09T07:09:13.462Z,2026-10-09T03:09:13-04:00,3,instruction,asked to try again,queued_message,9

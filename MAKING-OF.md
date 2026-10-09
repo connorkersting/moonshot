@@ -10,9 +10,9 @@ from NASA data, and the music is public-domain recordings.
 versions came out of a loop-time budget of 24 hours, kept in a ledger of seven segments (24 h
 01 m in the ledger; about 16 h of that is active work in the transcript, the rest is renders and
 waits; see `analytics/`). The senior-editor critic went from 5.5 (v1) to 8.0 (v14), 8.5 (v20,
-v21), 9.0 (v22) and 9.5 (v23, v24, v26). v27 and v28 were exported after its last review and had
-no fresh critic pass; v28 was checked against v27 by blind A/B (seven ties, no regression) and
-by the gates below.
+v21), 9.0 (v22) and 9.5 (v23, v24, v26, v28). In its final review the same critic scored v1 again,
+in one sitting with v28, on the same rubric: v1 5.0, v28 9.5. v28 was also checked against v27 by
+blind A/B (seven ties, no regression) and by the gates below.
 
 The first twelve versions came out of the first night (02:43 to 08:52 on 10-07). Versions v13 to
 v28 came from six more ledger segments, covered in "From v13 to v28" below.
@@ -55,12 +55,12 @@ is the Fable editor's own review score; a version with no review of its own says
 | v24 | 10-08 18:25 | 9.5 | 1-0 vs v23, 6 ties | the staging sound change the director picked in a blind audition, the 10.5K Aldrin visor scan, heading and label polish | BEST |
 | v25 | 10-08 19:08 | (none; 9.5 when re-scored in the v26 review) | (none) | Blender Earth-to-Moon hero beat, frames 715-798 | BEST (the director's pick) |
 | v26 | 10-08 20:09 | 9.5 | 3-0 vs v25, 4 ties | "disclosure diet": every on-screen disclosure in one quiet footnote style; a steadier outro | BEST |
-| v27 | 10-08 22:43 | (none) | (none) | the smoke-under-the-title shot as RIFE v4.6 slow motion instead of a frame-rate blend | BEST (the director's pick) |
-| v28 | 10-08 23:57 | (none) | 7 ties vs v27 | the editor's three v26 fixes: a scrim under the ARCHIVE and TIME-COMPRESSED footnotes on bright frames, no caption on the end plate, ascent footnote copy | **FINAL** |
+| v27 | 10-08 22:43 | (none; 9.5 when re-scored in the v28 review) | (none) | the smoke-under-the-title shot as RIFE v4.6 slow motion instead of a frame-rate blend | BEST (the director's pick) |
+| v28 | 10-08 23:57 | 9.5 | 7 ties vs v27 | the editor's three v26 fixes: a scrim under the ARCHIVE and TIME-COMPRESSED footnotes on bright frames, no caption on the end plate, ascent footnote copy | **FINAL** (the final review picks v28) |
 
 Editor sub-scores for v11: hook 7.5, pacing 6.5, visual variety 7.5, motion 7, typography 7.5,
-colour 7, sound 7.5, captions 8, storytelling 7.5. For v26, the last full review: hook 8.5,
-pacing 8, visual variety 9, motion 9.5, typography 9, colour 9.5, sound 8, captions 8,
+colour 7, sound 7.5, captions 8, storytelling 7.5. For v28, the final review: hook 8.5,
+pacing 8, visual variety 9, motion 9.5, typography 9.5, colour 9.5, sound 8, captions 8.5,
 storytelling 9.5, overall 9.5. The editor could not hear, so its sound score is unassessed (the
 review says so).
 
@@ -156,6 +156,29 @@ change only where intended (a decoded difference of −240 dBFS where it should 
 `promote.py` then checks the frame count, decodes the whole file, and writes `BEST.json` with the
 sha256 and the git commit. v28 passed all of them. The mux of its first attempt produced a truncated
 622-frame file; the guard caught it and deleted it, and the retry was clean.
+
+**The final review.** After the loop closed the editor reviewed v28 against v27 (better, no
+material regression, final pick v28, with every claim measured on frames pulled from the files
+themselves) and then scored v1 and v28 on the same ten categories in one sitting, so the two ends
+of the run finally share a scale: v1 5.0, v28 9.5. It judged v1 on its own terms (the 90.0 s file,
+with 1.75 s of black at 0:02, a template title, a middle that is a slide deck and three
+visual skins) and named the differences as the spine of the edit, one design system instead of three,
+and honesty tags that survive the brightest frame. It also gave its honest ceiling: 9.5 on "would
+a top YouTube editor ship this", 7.5 "against a trailer house's own standard". The gap it names is
+specific: cuts not on the track (0.38 land on a beat), sound design that ducks a public-domain
+recording rather than designing each hit, soft 16 mm scans left as they are, six seconds of CG
+explainer, and 8.7 s of black credits. Its stated limits: a frame compositor with no scrubbable
+timeline or monitor mix, so nothing was worked by ear; public-domain assets, with no score built to
+the picture; and 24 hours.
+
+Two statements in that review are factually wrong, and are corrected here (the review file is
+kept as written):
+- It lists "no licensed SFX library" among the asset limits. The Sonniss GDC 2024 bundle is
+  used throughout the mix; it is licensed, and its licence forbids redistribution and AI training.
+- It says the MAX Q label strike is baked into the ascent render and open since v10. v23 fixed it:
+  the ascent is re-rendered with no text, the labels are overlays, and a per-frame test gates
+  their clearance from the rings and the trajectory line (minimum 16.4 px after polish_v24, no
+  label switches).
 
 ## How the loop worked
 

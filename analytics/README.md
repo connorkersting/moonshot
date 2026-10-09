@@ -7,13 +7,13 @@ and a run-accounting report.
 
 | Folder | What it is |
 |---|---|
-| `ingest/` | Parsers and `reconcile.py`: transcripts, QC files and critic reports to 14 CSVs in `data/raw/` |
-| `warehouse/` | dbt + DuckDB project: staging, intermediate, core (dimensions and facts) and mart models, 531 data tests. See `warehouse/README.md` |
+| `ingest/` | Parsers and `reconcile.py`: transcripts, QC files and critic reports to 15 CSVs in `data/raw/` |
+| `warehouse/` | dbt + DuckDB project: staging, intermediate, core (dimensions and facts) and mart models, 554 data tests. See `warehouse/README.md` |
 | `dashboard/` | `build_dashboard.py`: one static page (`site/index.html`) and the standalone plateau chart (`site/plateau.html`) |
 | `reports/` | `build_run_accounting.py`: project-only tokens and time per phase, as Markdown |
 | `studies/` | Frozen harnesses for the reliability and position-bias studies (not yet run) |
 
-Numbers on this page are from the ingest run of **2026-10-09 01:19 EDT** (versions v1 to v28) (the transcript is live,
+Numbers on this page are from the ingest run of **2026-10-09 03:16 EDT** (versions v1 to v28) (the transcript is live,
 so a re-run picks up more). `data/raw/_reconciliation.txt` has the exact figures of the latest
 run and `data/reconciliation_log.csv` keeps every run's source-vs-target counts.
 
@@ -62,7 +62,7 @@ Outputs hold metadata only: timestamps, model ids, token counts, tool names, the
 descriptions given when subagents were spawned, scores, picks and audio measurements. Message
 text, prompts, tool inputs and outputs are never written. Human messages are read only to
 de-duplicate queued copies; their published `label` comes from the hand-written
-`ingest/intervention_labels.csv` (97 rows). The run ledger's free-text note column is dropped
+`ingest/intervention_labels.csv` (99 rows). The run ledger's free-text note column is dropped
 because it names people. Judge and critic reports are parsed in memory for their verdict and
 score tables. `reconcile.py` scans every CSV for drive paths, home paths and e-mail addresses
 and fails if it finds one.
@@ -74,20 +74,21 @@ transcripts store UTC.
 
 | Table | Rows | Grain: one row = | Key |
 |---|---:|---|---|
-| `agent_messages.csv` | 4,972 | one provider request (LLM call) by the main agent or a subagent | `message_id` |
+| `agent_messages.csv` | 5,114 | one provider request (LLM call) by the main agent or a subagent | `message_id` |
 | `agent_spawns.csv` | 107 | one Agent tool call attempt in the main transcript | `spawn_id` |
 | `subagents.csv` | 107 | one subagent invocation (one transcript file) | `subagent_id` |
 | `session_parts.csv` | 3 | one session part (1 overnight run, 2 the 24-hour extension, 3 tool expansion and v22 to v28) | `session_part` |
 | `session_events.csv` | 6 | one compaction or session-part start | `ts_utc` + `event` |
-| `interventions.csv` | 97 | one human message or answer to the agent | `intervention_id` |
+| `interventions.csv` | 99 | one human message or answer to the agent | `intervention_id` |
 | `codex_requests.csv` | 491 | one Codex CLI request attributed to the run | `codex_session_id` + `request_seq` |
 | `versions.csv` | 28 | one exported trailer version | `version` |
-| `critic_scores.csv` | 363 | one version x critic x score category | `version` + `critic` + `category` |
+| `critic_scores.csv` | 375 | one version x critic x score category | `version` + `critic` + `category` |
 | `ab_votes.csv` | 161 | one blind A/B judge pick for one section of one comparison | `evaluation_id` + `repeat_no` + `section_no` |
 | `qc_sections.csv` | 250 | one loudness section of one version's audio QC | `version` + `section_no` |
 | `qc_dialogue.csv` | 519 | one dialogue line of one version's audio QC | `version` + `line_no` |
 | `loop_segments.csv` | 7 | one segment of the run ledger (the agent's own record of loop time) | `segment_id` |
 | `director_picks.csv` | 5 | one pick the director made on a blind audition or side-by-side clip | `pick_id` |
+| `baseline_to_final.csv` | 10 | one category of the final review's v1-against-v28 scoring, in one sitting | `review_version` + `baseline_version` + `category` |
 
 ### agent_messages
 
@@ -117,7 +118,7 @@ request start time from the main agent and all subagents together, sort them, an
 neighbours no more than `ACTIVE_GAP_MINUTES` (5) apart into one interval; active time is the
 summed interval length. Parallel subagents are counted once and never added up, and an isolated
 request adds zero. A new part starts after an idle gap of more than `SESSION_GAP_HOURS` (3):
-part 1 is 6.4 h wall and 4.6 h active, part 2 is 12.8 h and 8.3 h, part 3 is 13.8 h and 6.6 h as of
+part 1 is 6.4 h wall and 4.6 h active, part 2 is 12.8 h and 8.3 h, part 3 is 15.7 h and 7.3 h as of
 this refresh (and still growing, because this refresh is part of it).
 
 ### loop_segments
@@ -153,8 +154,8 @@ for it (never a zero). Sources by critic:
 
 | `critic` | Source | Versions | Categories |
 |---|---|---|---|
-| `fable_editor` | editor subagent's hand-back report (v1 to v17); `qc/vN/fable_editor.json` (v18 to v24 and v26) | 21 | the ten rubric categories |
-| `fable_editor_rescored` | the baseline score inside the next review's `fable_editor.json` | v17 to v23 and v25 | `overall` |
+| `fable_editor` | editor subagent's hand-back report (v1 to v17); `qc/vN/fable_editor.json` (v18 to v24, v26 and v28) | 22 | the ten rubric categories |
+| `fable_editor_rescored` | the baseline score inside the next review's `fable_editor.json` | v1, v17 to v23, v25 and v27 | `overall` |
 | `codex_critic` | `qc/vN/codex_critic.json` | v14, v15, v18 to v22 | ten |
 | `gemini_flash` | `qc/vN/gemini_critic_run1.json` (the critique is a JSON string inside the API response) | v18, v20 | ten |
 | `gemini_pro_web` | `qc/v14/gemini_web_critic.json` | v14 | ten |
@@ -204,7 +205,7 @@ checks as of the 2026-10-09 01:19 run, all with a delta of zero:
 
 | Check | Source | Target |
 |---|---:|---|
-| unique message ids in the transcript files vs `agent_messages` rows | 4,972 | 4,972 |
+| unique message ids in the transcript files vs `agent_messages` rows | 5,114 | 5,114 |
 | subagent transcript files vs `subagents` rows | 107 | 107 |
 | Agent tool calls in the main transcript vs `agent_spawns` rows | 107 | 107 |
 | tokens per model and token type, recounted with separate code, vs the table (12 sums) | see log | equal |
@@ -215,7 +216,7 @@ checks as of the 2026-10-09 01:19 run, all with a delta of zero:
 | `director_picks` rows: every clip of a blind audio audition key has a pick | 3 | 3 |
 
 Other checks in the same run: both parsers run twice over one snapshot give byte-identical CSVs
-(14 of 14); the declared key of every table is unique and not null; `BEST.json` names the one
+(15 of 15); the declared key of every table is unique and not null; `BEST.json` names the one
 version flagged `is_best_final` and its sha256 matches the promoted mp4; every human message has
 a label; no drive paths, home paths or e-mail addresses in any output. The run **fails** on any
 of these. It reports, without failing, the ledger-against-transcript differences and the stale
@@ -226,11 +227,11 @@ of these. It reports, without failing, the ledger-against-transcript differences
 - **Streaming duplicates.** One response is written as several JSONL lines, one per content
   block. Rows are de-duplicated on `message.id` (cross-checked against `requestId`). Input
   and cache counts repeat unchanged on every line and are asserted equal. Summing lines instead
-  would inflate cache reads 2x to 7x depending on the model (see `_reconciliation.txt`): 11,859
-  assistant lines in the transcripts are 4,972 requests (plus 2 client-written `<synthetic>`
+  would inflate cache reads 2x to 7x depending on the model (see `_reconciliation.txt`): 12,159
+  assistant lines in the transcripts are 5,114 requests (plus 2 client-written `<synthetic>`
   placeholder messages, which are not provider requests and are skipped).
 - **Missing final usage.** Streaming lines carry a placeholder output count (about 1 to 100).
-  Only the closing line, which has `stop_reason`, holds the real one. 2,580 of 4,972 requests (52%)
+  Only the closing line, which has `stop_reason`, holds the real one. 2,670 of 5,114 requests (52%)
   never got a closing line written. For those, `output_tokens` is NULL, `usage_final` is false
   and `output_tokens_lower_bound` keeps the placeholder. Input and cache counts are complete
   for every request.
@@ -258,7 +259,7 @@ of these. It reports, without failing, the ledger-against-transcript differences
   the last ledger segment). The snapshot in reconcile makes each run internally consistent, and
   `_reconciliation.txt` records when it ran.
 - PROGRESS.md "CONNOR (direct)" notes are the agent's paraphrases (21). They are counted in the
-  reconciliation but are not a source for `interventions` (97 from the transcript).
+  reconciliation but are not a source for `interventions` (99 from the transcript).
 - Crowd scores for v2, v4, v5, v7 and v17 exist only as prose in PROGRESS.md and are transcribed
   into `ingest/crowd_scores_progress.csv`. Watch-to-end was first scored at v18.
 - The Fable editor re-scored v17 as 7.0 when it reviewed v18, after giving it 8.0 in its own
@@ -279,9 +280,13 @@ of these. It reports, without failing, the ledger-against-transcript differences
   `qc_dialogue` keeps the Whisper recall for those versions and leaves the ratio NULL.
 - From v23 the blind judge gives an integer confidence with no rubric totals; it is stored as
   `confidence_raw` and the word-scale `confidence` stays NULL for those rows.
-- The version tables go to v28, but the Fable editor has no review of its own for v25, v27 and v28
-  (v25 was re-scored inside the v26 review; v27 and v28 had no fresh critic pass). Codex and the
-  crowd were last run on v22.
+- The version tables go to v28. The Fable editor has no review of its own for v25 and v27 (v25 was
+  re-scored inside the v26 review, v27 inside the v28 review); v28 has the final review. Codex and
+  the crowd were last run on v22.
+- The final review's baseline block scored v1 and v28 on the same ten categories in one sitting
+  (v1 5.0, v28 9.5). It lands in `baseline_to_final.csv`, and the v1 score also enters
+  `critic_scores` as a `fable_editor_rescored` row (the v1 review's own score was 5.5). Only scores
+  are stored; the review's prose is not.
 - `director_picks` is a hand-written table (`ingest/director_picks.csv`): five picks, three of them
   mapped through a key file (the v24 blind audio audition) and two (the v25 hero clip, the v27
   slow-mo) recorded from PROGRESS.md because no key file was kept.

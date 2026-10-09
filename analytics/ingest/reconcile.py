@@ -44,7 +44,7 @@ TABLES = [
     "agent_messages.csv", "agent_spawns.csv", "subagents.csv", "session_parts.csv",
     "session_events.csv", "interventions.csv", "codex_requests.csv", "versions.csv",
     "critic_scores.csv", "ab_votes.csv", "qc_sections.csv", "qc_dialogue.csv", "loop_segments.csv",
-    "director_picks.csv",
+    "director_picks.csv", "baseline_to_final.csv",
 ]
 GRAIN = {
     "agent_messages.csv": ["message_id"],
@@ -57,6 +57,7 @@ GRAIN = {
     "critic_scores.csv": ["version", "critic", "category"],
     "loop_segments.csv": ["segment_id"],
     "director_picks.csv": ["pick_id"],
+    "baseline_to_final.csv": ["review_version", "baseline_version", "category"],
     "ab_votes.csv": ["evaluation_id", "repeat_no", "section_no"],
     "qc_sections.csv": ["version", "section_no"],
     "qc_dialogue.csv": ["version", "line_no"],

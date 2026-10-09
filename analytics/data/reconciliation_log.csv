@@ -103,3 +103,53 @@ run_at_local,check_name,source_count,target_count,delta,status
 2026-10-09T01:23:21-04:00,A/B: ab_votes rows vs 7 sections per key file,161,161,0,PASS
 2026-10-09T01:23:21-04:00,versions: exported mp4 files vs versions with an export time,28,28,0,PASS
 2026-10-09T01:23:21-04:00,loop_segments rows vs run_ledger.csv rows,7,7,0,PASS
+2026-10-09T03:13:37-04:00,agent_messages rows vs unique message ids in source,5101,5101,0,PASS
+2026-10-09T03:13:37-04:00,subagents rows vs subagent transcript files,107,107,0,PASS
+2026-10-09T03:13:37-04:00,agent_spawns rows vs Agent tool calls in the main transcript,107,107,0,PASS
+2026-10-09T03:13:37-04:00,claude-fable-5-1 cache_creation_tokens (money column: recount vs table),5477434,5477434,0,PASS
+2026-10-09T03:13:37-04:00,claude-fable-5-1 cache_read_tokens (money column: recount vs table),26447949,26447949,0,PASS
+2026-10-09T03:13:37-04:00,claude-fable-5-1 input_tokens (money column: recount vs table),6282,6282,0,PASS
+2026-10-09T03:13:37-04:00,claude-fable-5-1 output_tokens (money column: recount vs table),222507,222507,0,PASS
+2026-10-09T03:13:37-04:00,claude-opus-5-5 cache_creation_tokens (money column: recount vs table),23535681,23535681,0,PASS
+2026-10-09T03:13:37-04:00,claude-opus-5-5 cache_read_tokens (money column: recount vs table),1117689888,1117689888,0,PASS
+2026-10-09T03:13:37-04:00,claude-opus-5-5 input_tokens (money column: recount vs table),6940,6940,0,PASS
+2026-10-09T03:13:37-04:00,claude-opus-5-5 output_tokens (money column: recount vs table),1645874,1645874,0,PASS
+2026-10-09T03:13:37-04:00,claude-sonnet-5-5 cache_creation_tokens (money column: recount vs table),8063490,8063490,0,PASS
+2026-10-09T03:13:37-04:00,claude-sonnet-5-5 cache_read_tokens (money column: recount vs table),246810322,246810322,0,PASS
+2026-10-09T03:13:37-04:00,claude-sonnet-5-5 input_tokens (money column: recount vs table),2828,2828,0,PASS
+2026-10-09T03:13:37-04:00,claude-sonnet-5-5 output_tokens (money column: recount vs table),232825,232825,0,PASS
+2026-10-09T03:13:37-04:00,fable_editor: score files vs score rows / 10,9,9,0,PASS
+2026-10-09T03:13:37-04:00,codex_critic: score files vs score rows / 10,7,7,0,PASS
+2026-10-09T03:13:37-04:00,gemini_pro_web: score files vs score rows / 10,1,1,0,PASS
+2026-10-09T03:13:37-04:00,gemini_flash: score files vs score rows / 10,2,2,0,PASS
+2026-10-09T03:13:37-04:00,twelvelabs: score files vs score rows / 10,2,2,0,PASS
+2026-10-09T03:13:37-04:00,crowd_ftv: score files vs score rows / 3,5,5,0,PASS
+2026-10-09T03:13:37-04:00,A/B: key files vs comparisons in ab_votes,23,23,0,PASS
+2026-10-09T03:13:37-04:00,A/B: ab_votes rows vs 7 sections per key file,161,161,0,PASS
+2026-10-09T03:13:37-04:00,versions: exported mp4 files vs versions with an export time,28,28,0,PASS
+2026-10-09T03:13:37-04:00,loop_segments rows vs run_ledger.csv rows,7,7,0,PASS
+2026-10-09T03:17:13-04:00,agent_messages rows vs unique message ids in source,5114,5114,0,PASS
+2026-10-09T03:17:13-04:00,subagents rows vs subagent transcript files,107,107,0,PASS
+2026-10-09T03:17:13-04:00,agent_spawns rows vs Agent tool calls in the main transcript,107,107,0,PASS
+2026-10-09T03:17:13-04:00,claude-fable-5-1 cache_creation_tokens (money column: recount vs table),5477434,5477434,0,PASS
+2026-10-09T03:17:13-04:00,claude-fable-5-1 cache_read_tokens (money column: recount vs table),26447949,26447949,0,PASS
+2026-10-09T03:17:13-04:00,claude-fable-5-1 input_tokens (money column: recount vs table),6282,6282,0,PASS
+2026-10-09T03:17:13-04:00,claude-fable-5-1 output_tokens (money column: recount vs table),222507,222507,0,PASS
+2026-10-09T03:17:13-04:00,claude-opus-5-5 cache_creation_tokens (money column: recount vs table),23535681,23535681,0,PASS
+2026-10-09T03:17:13-04:00,claude-opus-5-5 cache_read_tokens (money column: recount vs table),1117689888,1117689888,0,PASS
+2026-10-09T03:17:13-04:00,claude-opus-5-5 input_tokens (money column: recount vs table),6940,6940,0,PASS
+2026-10-09T03:17:13-04:00,claude-opus-5-5 output_tokens (money column: recount vs table),1645874,1645874,0,PASS
+2026-10-09T03:17:13-04:00,claude-sonnet-5-5 cache_creation_tokens (money column: recount vs table),8077551,8077551,0,PASS
+2026-10-09T03:17:13-04:00,claude-sonnet-5-5 cache_read_tokens (money column: recount vs table),254278729,254278729,0,PASS
+2026-10-09T03:17:13-04:00,claude-sonnet-5-5 input_tokens (money column: recount vs table),2854,2854,0,PASS
+2026-10-09T03:17:13-04:00,claude-sonnet-5-5 output_tokens (money column: recount vs table),232917,232917,0,PASS
+2026-10-09T03:17:13-04:00,fable_editor: score files vs score rows / 10,9,9,0,PASS
+2026-10-09T03:17:13-04:00,codex_critic: score files vs score rows / 10,7,7,0,PASS
+2026-10-09T03:17:13-04:00,gemini_pro_web: score files vs score rows / 10,1,1,0,PASS
+2026-10-09T03:17:13-04:00,gemini_flash: score files vs score rows / 10,2,2,0,PASS
+2026-10-09T03:17:13-04:00,twelvelabs: score files vs score rows / 10,2,2,0,PASS
+2026-10-09T03:17:13-04:00,crowd_ftv: score files vs score rows / 3,5,5,0,PASS
+2026-10-09T03:17:13-04:00,A/B: key files vs comparisons in ab_votes,23,23,0,PASS
+2026-10-09T03:17:13-04:00,A/B: ab_votes rows vs 7 sections per key file,161,161,0,PASS
+2026-10-09T03:17:13-04:00,versions: exported mp4 files vs versions with an export time,28,28,0,PASS
+2026-10-09T03:17:13-04:00,loop_segments rows vs run_ledger.csv rows,7,7,0,PASS

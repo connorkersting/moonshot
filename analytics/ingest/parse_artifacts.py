@@ -13,7 +13,7 @@ Reads (read-only):
 
 Writes to analytics/data/raw/:
   versions.csv, critic_scores.csv, ab_votes.csv, qc_sections.csv, qc_dialogue.csv,
-  loop_segments.csv, director_picks.csv
+  loop_segments.csv, director_picks.csv, baseline_to_final.csv
 """
 
 from __future__ import annotations
@@ -62,6 +62,7 @@ LEDGER_HEADER = ["segment", "start_local_edt", "end_local_edt", "end_reason", "n
 LOOP_SEGMENT_COLUMNS = ["segment_id", "start_local", "end_local", "start_utc", "end_utc", "end_reason"]
 CROWD_CATEGORIES = ["shareability", "ai_slop_perception", "would_watch_to_end"]
 CROWD_PROGRESS_FILE = Path(__file__).resolve().parent / "crowd_scores_progress.csv"
+BASELINE_COLUMNS = ["review_version", "baseline_version", "category", "baseline_score", "final_score", "delta"]
 DIRECTOR_PICKS_FILE = Path(__file__).resolve().parent / "director_picks.csv"
 DIRECTOR_PICKS_HEADER = ["pick_id", "decided_at_local", "subject", "key_file", "clip_key", "side_picked",
                          "option_text", "adopted", "version_effect", "source_ref"]
@@ -756,12 +757,59 @@ def fable_rescore_rows(qc_root: Path) -> list[dict]:
                 raise SchemaDriftError(f"{vdir.name}/fable_editor.json", key, "number in 0..10", repr(value)[:20])
             if baseline not in first:
                 first[baseline] = (reviewed, float(value))
-    return [{
+    rows = [{
         "version": baseline, "critic": "fable_editor_rescored", "category": "overall", "score": value,
         "critic_model": "claude-fable", "evaluation_id": f"fable_editor_v{reviewed}_rescore", "source_kind": "qc_json",
         "progress_md_score": None, "progress_md_flagged": False,
         "note": f"v{baseline} re-scored by the Fable editor inside its review of v{reviewed}",
     } for baseline, (reviewed, value) in sorted(first.items())]
+    # the baseline-to-final block re-scores its older version too (v1 as 5.0 against its own review's 5.5)
+    for reviewed, base_v, base, _final in baseline_blocks(qc_root):
+        if base_v not in first:
+            rows.append({
+                "version": base_v, "critic": "fable_editor_rescored", "category": "overall", "score": base["overall"],
+                "critic_model": "claude-fable", "evaluation_id": f"fable_editor_v{reviewed}_baseline", "source_kind": "qc_json",
+                "progress_md_score": None, "progress_md_flagged": False,
+                "note": f"v{base_v} scored again inside the v{reviewed} review's baseline block, in one sitting with v{reviewed}",
+            })
+    return rows
+
+
+def baseline_blocks(qc_root: Path) -> list[tuple[int, int, dict[str, float], dict[str, float]]]:
+    """Baseline-to-final blocks inside a Fable review: (reviewed version, baseline version, baseline scores, final scores).
+
+    The final review (v28) scored v1 and v28 on the same ten categories in one sitting and wrote them as
+    ``baseline.v1_scores`` and ``baseline.v28_scores``. Both are checked like any critic score dict; a block
+    whose version keys do not match the reviewed version stops the run.
+    """
+    out = []
+    for vdir in sorted(qc_root.glob("v[0-9]*"), key=lambda p: int(p.name[1:])):
+        path = vdir / "fable_editor.json"
+        if not path.exists():
+            continue
+        block = load_json(path).get("baseline")
+        if not isinstance(block, dict):
+            continue
+        reviewed = int(vdir.name[1:])
+        keys = sorted(k for k in block if re.fullmatch(r"v\d+_scores", k))
+        versions = sorted(int(k[1:-7]) for k in keys)
+        if len(versions) != 2 or versions[1] != reviewed:
+            raise SchemaDriftError(f"{vdir.name}/fable_editor.json", "baseline", f"two vN_scores blocks, the newer being v{reviewed}", str(keys))
+        base_v, final_v = versions
+        out.append((reviewed, base_v,
+                    canonical_scores(block[f"v{base_v}_scores"], f"{vdir.name}/fable_editor.json baseline v{base_v}"),
+                    canonical_scores(block[f"v{final_v}_scores"], f"{vdir.name}/fable_editor.json baseline v{final_v}")))
+    return out
+
+
+def baseline_rows(qc_root: Path) -> list[dict]:
+    rows = []
+    for reviewed, base_v, base, final in baseline_blocks(qc_root):
+        for cat, _ in CATEGORIES:
+            rows.append({"review_version": reviewed, "baseline_version": base_v, "category": cat,
+                         "baseline_score": base[cat], "final_score": final[cat],
+                         "delta": round(final[cat] - base[cat], 2)})
+    return rows
 
 
 def crowd_progress_rows(covered: set[int]) -> list[dict]:
@@ -914,7 +962,7 @@ def main() -> None:
             pm = pscores.get(version, {}).get(cat, (None, False))
             score_rows.append({
                 "version": version, "critic": "fable_editor", "category": cat, "score": scores[cat],
-                "critic_model": "", "evaluation_id": f"fable_editor_v{version}_json", "source_kind": "qc_json",
+                "critic_model": "claude-fable", "evaluation_id": f"fable_editor_v{version}_json", "source_kind": "qc_json",
                 "progress_md_score": pm[0], "progress_md_flagged": pm[1], "note": "no matching subagent transcript",
             })
 
@@ -952,6 +1000,8 @@ def main() -> None:
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     (RAW_DIR / "_ab_crosscheck.txt").write_text("\n".join(crosscheck) + "\n", encoding="utf-8")
     segment_rows = loop_segments(exports)
+    base_rows = baseline_rows(qc_root)
+    write_csv(base_rows, BASELINE_COLUMNS, "baseline_to_final.csv")
     pick_rows = director_picks(work)
     write_csv(pick_rows, DIRECTOR_PICK_COLUMNS, "director_picks.csv")
     write_csv(segment_rows, LOOP_SEGMENT_COLUMNS, "loop_segments.csv")
@@ -960,6 +1010,7 @@ def main() -> None:
     write_csv(vote_rows, AB_COLUMNS, "ab_votes.csv")
     write_csv(sec_rows, QC_SECTION_COLUMNS, "qc_sections.csv")
     write_csv(dlg_rows, QC_DIALOGUE_COLUMNS, "qc_dialogue.csv")
+    print(f"baseline_to_final: {len(base_rows)} rows")
     print(f"director_picks: {len(pick_rows)} rows")
     print(f"loop_segments: {len(segment_rows)} rows")
     print(f"versions:      {len(version_rows)} rows")

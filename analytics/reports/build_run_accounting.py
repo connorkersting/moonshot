@@ -424,11 +424,11 @@ def main() -> int:
     out.append(
         f"\nFable editor: {v14['fable_editor_overall']:.1f} at v14 ({v14['loop_hours_at_export']:.1f} ledger hours, "
         f"{mtok(v14['project_tokens_known_at_export'])} project tokens) against {vl['fable_editor_overall']:.1f} at {vl['version_id']} "
-        f"({vl['loop_hours_at_export']:.1f} hours, {mtok(vl['project_tokens_known_at_export'])}), the last version it scored. The "
+        f"({vl['loop_hours_at_export']:.1f} hours, {mtok(vl['project_tokens_known_at_export'])}), the last version it scored (its final review). The "
         f"{vl['loop_hours_at_export'] - v14['loop_hours_at_export']:.1f} hours and "
         f"{(vl['project_tokens_known_at_export'] - v14['project_tokens_known_at_export']) / 1e6:,.0f}M tokens in between bought {gain:+.1f} points, on a scale "
         "that moved between reviews (the same critic gave v17 an 8.0 in its own review and 7.0 when re-scoring it). "
-        "v27 and v28, exported after that review, had no fresh critic pass. "
+        "The v28 review also scored v1 again (5.0 against 9.5 for v28, one sitting). "
         "'Project tokens' is every Claude request up to the export, so it includes research, tooling and analytics work as well as trailer builds, "
         "and it is mostly cache reads.\n"
     )

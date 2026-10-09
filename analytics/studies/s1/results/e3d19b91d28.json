@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 8.0,
+    "pacing": 7.0,
+    "variety": 8.0,
+    "motion": 7.0,
+    "type": 5.5,
+    "color": 6.0,
+    "sound": 4.0,
+    "captions": 7.5,
+    "story": 7.5,
+    "overall": 6.5
+  },
+  "top_fixes": [
+    "Radio dialogue from 47s to 58s (1202 alarm, '60 seconds', '40 feet') is inaudible: Whisper recall 0.0-0.3. Lift stems or duck music/sfx.",
+    "Click spikes at joins: 9x at 47.0 (riser and computer sfx), 7.7x at 68.6, 5.1x at 10.6. Add short fades at each cut.",
+    "MOONSHOT title at 13.4s sits across the rocket and tower in a near-matching beige on pale teal sky; reposition or darken the plate behind it."
+  ]
+}
+```

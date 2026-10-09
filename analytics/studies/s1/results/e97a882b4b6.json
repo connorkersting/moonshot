@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.5,
+    "pacing": 7.0,
+    "variety": 8.0,
+    "motion": 6.5,
+    "type": 7.0,
+    "color": 6.0,
+    "sound": 7.5,
+    "captions": 7.0,
+    "story": 8.0,
+    "overall": 7.0
+  },
+  "top_fixes": [
+    "Replace the bevelled 3D chrome MOONSHOT title (10.6-19s); it looks dated and heavy against the grainy archive footage behind it.",
+    "The 'one small step' shot (~67-73s) is a smeared, blown-out upscale at the climax; find cleaner source or cut it shorter.",
+    "Merge the 'Houston, ...' fragment caption at 56.7s (Whisper recall 0.00) into 'Tranquility Base here' instead of holding an ellipsis for two seconds."
+  ]
+}
+```

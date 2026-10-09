@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 8.0,
+    "pacing": 7.0,
+    "variety": 8.0,
+    "motion": 7.0,
+    "type": 6.5,
+    "color": 7.0,
+    "sound": 6.0,
+    "captions": 7.5,
+    "story": 8.0,
+    "overall": 7.5
+  },
+  "top_fixes": [
+    "Remove the 7x click at 47.08 s on the retro-computer SFX join and the 3.4x spike at the 68.6 s cut to silence.",
+    "Duck the bed under 'All engines running' (10.6 s, +6.9 dB) and lift 'Houston, Tranquility Base here' (63.25 s, 50% recall).",
+    "Move the MOONSHOT title off the pole cutting through the M, and enlarge the tiny chart disclaimer and 'TIME-COMPRESSED' sublabels for phone."
+  ]
+}
+```

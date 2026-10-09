@@ -1,0 +1,12 @@
+```json
+{
+  "decisions": [
+    {"sheet": "sheet_1", "a_total": 5, "b_total": 7, "winner": "B", "confidence": "low", "reason": "B cuts between pad, moon, lander, astronaut and Earthrise before the launch, so the cold open has more varied, clearer shots. A stays on control-room faces and has a black frame mid-sequence."},
+    {"sheet": "sheet_2", "a_total": 5, "b_total": 6, "winner": "B", "confidence": "low", "reason": "B puts the credits last and uses a clearer astronaut frame for the 'giant leap' line. A's credits appear then drop to black. The two are otherwise near-identical."},
+    {"sheet": "sheet_3", "a_total": 6, "b_total": 5, "winner": "A", "confidence": "low", "reason": "A keeps the countdown going to 18.0 with an ENGINE STOP tag at the contact beat. B loses the counter at that frame."},
+    {"sheet": "sheet_4", "a_total": 5, "b_total": 6, "winner": "B", "confidence": "low", "reason": "B's captions advance to 'Liftoff on Apollo 11' at 6.3 s. A's caption lags on 'thirty-two minutes past the hour'. The title treatment is the same."},
+    {"sheet": "sheet_5", "a_total": 4, "b_total": 6, "winner": "B", "confidence": "med", "reason": "B's counter reads 30.0 where the caption says '30 seconds'. A reads 27.3 under the same caption, so it contradicts it."},
+    {"sheet": "sheet_6", "a_total": 4, "b_total": 7, "winner": "B", "confidence": "med", "reason": "B has a larger chart that animates a growing curve with a rocket marker over two frames, plus a '240,000 miles to the moon' stat. A shows a small chart for one frame and then drops it."}
+  ]
+}
+```

@@ -1,0 +1,12 @@
+```json
+{
+  "decisions": [
+    {"sheet": "sheet_1", "a_total": 4, "b_total": 6, "winner": "B", "confidence": "low", "reason": "B's lunar-surface frames are a little brighter and its countdown readout carries an extra sub-label; the shots and the Lunar Contact card are otherwise the same."},
+    {"sheet": "sheet_2", "a_total": 5, "b_total": 5, "winner": "TIE", "confidence": "low", "reason": "A's MOONSHOT title sits over lander footage but its credits are tiny and left-set; B's title is on plain black but its credits are centred and easier to read."},
+    {"sheet": "sheet_3", "a_total": 6, "b_total": 4, "winner": "A", "confidence": "med", "reason": "A's ascent header is larger and cleaner and the sequence ends on a moon reveal; B's header is tiny and a ghost of the 24,200 MPH text lingers over the Earth frame."},
+    {"sheet": "sheet_4", "a_total": 5, "b_total": 5, "winner": "TIE", "confidence": "low", "reason": "A keeps the fuel countdown (18.0 ENGINE STOP) running beside the Lunar Contact card, which adds continuity but crowds the frame; B drops it and looks cleaner."},
+    {"sheet": "sheet_5", "a_total": 5, "b_total": 5, "winner": "TIE", "confidence": "med", "reason": "The footage and the MOONSHOT title are the same in both; only the subtitle wording differs (32 vs thirty-two minutes)."},
+    {"sheet": "sheet_6", "a_total": 4, "b_total": 6, "winner": "B", "confidence": "low", "reason": "B's subtitles name the speaker (EAGLE · ARMSTRONG, HOUSTON · DUKE) and the control-room cutaway matches the line about the 1202 alarm; A shows a lunar-surface frame there."}
+  ]
+}
+```

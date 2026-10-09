@@ -6,6 +6,12 @@ No critic or judge has been run.
 
 Written 2026-10-07. Everything below describes the harness as built on that date.
 
+**Status, 2026-10-09:** both studies have been run (24 of 24 evaluations, 48 of 48 decisions). Results, deviations and
+limits are in `s1/RESULTS.md` and `s2/RESULTS.md`. Raw critic output is in `s1/results/` and `s2/results/`.
+`run_log.csv` records each call (model alias, batch, tokens, duration), and `run_audit.csv` lists the resolved
+model and the tool calls made outside the critic's own folder (none). The sentence above, "No critic or judge has
+been run", describes the harness as frozen.
+
 ## Study 1: same-model repeatability of the editor critic
 
 **Question.** If the same critic model is shown the same evidence twice in fresh contexts, how much do its scores

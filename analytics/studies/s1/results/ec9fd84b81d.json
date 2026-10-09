@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.5,
+    "pacing": 7.0,
+    "variety": 8.0,
+    "motion": 6.5,
+    "type": 7.0,
+    "color": 6.5,
+    "sound": 7.0,
+    "captions": 8.0,
+    "story": 8.0,
+    "overall": 7.5
+  },
+  "top_fixes": [
+    "Replace the beveled brown 3D MOONSHOT title; it clashes with the restrained slate typography used everywhere else in the cut.",
+    "Blank white frames at 54.5s and 57.8s land on the touchdown climax; keep contact footage on screen under the 'Houston...' line.",
+    "Remove the 4.3x click at the 40.30s riser join and lift 'Liftoff on Apollo 11' (0.50 recall) above the bed."
+  ]
+}
+```

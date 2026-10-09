@@ -1,0 +1,12 @@
+```json
+{
+  "decisions": [
+    {"sheet": "sheet_1", "a_total": 8, "b_total": 5, "winner": "A", "confidence": "med", "reason": "A cuts through launch tower, moon, lander, astronaut, Earth and control room, so the story is clear. B stays on near-identical control-room shots with only a dark flame frame, so it explains less."},
+    {"sheet": "sheet_2", "a_total": 5, "b_total": 5, "winner": "TIE", "confidence": "high", "reason": "The title, picture and layout are the same. Only the caption wording differs ('32 minutes' vs 'thirty-two minutes')."},
+    {"sheet": "sheet_3", "a_total": 6, "b_total": 4, "winner": "A", "confidence": "low", "reason": "A's countdown readout is cleaner. B adds a tiny extra status line under the readout that is unreadable at phone size."},
+    {"sheet": "sheet_4", "a_total": 7, "b_total": 5, "winner": "A", "confidence": "low", "reason": "A's ascent chart is large with a clear curve and a three-stat panel. B's chart is small and thin, and its ticker text is too small to read at phone size, though B has strong Earth imagery."},
+    {"sheet": "sheet_5", "a_total": 4, "b_total": 6, "winner": "B", "confidence": "low", "reason": "B shows a second 18.0 'ENGINE STOP' readout at lunar contact, which adds story and is legible. Otherwise the two are identical."},
+    {"sheet": "sheet_6", "a_total": 5, "b_total": 5, "winner": "TIE", "confidence": "low", "reason": "Footage, captions and title card are the same. B's credits appear slightly earlier and B has a tiny extra caption on the first frame, which roughly cancel out."}
+  ]
+}
+```

@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 6.0,
+    "pacing": 5.5,
+    "variety": 7.0,
+    "motion": 7.0,
+    "type": 6.0,
+    "color": 5.0,
+    "sound": 7.0,
+    "captions": 6.5,
+    "story": 7.5,
+    "overall": 6.0
+  },
+  "top_fixes": [
+    "Dead hole at the payoff: black at 67.5s then a flat grey noise frame at 68.7s right after 'Tranquility Base here'; fill or cut it.",
+    "Orange speaker labels and the top-left mission slug vanish on bright plates (1.0s, 11.5s, 13.4s, 76s); add backing or darken the plate.",
+    "'24,200 MPH' at 34.6s sits on the blown-out nozzle disc; number and label are illegible at phone size, reposition or add a scrim."
+  ]
+}
+```

@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.0,
+    "pacing": 6.5,
+    "variety": 8.0,
+    "motion": 7.0,
+    "type": 6.5,
+    "color": 6.0,
+    "sound": 7.0,
+    "captions": 6.5,
+    "story": 7.5,
+    "overall": 7.0
+  },
+  "top_fixes": [
+    "Flat grey grain slug at 62.0s after 'The Eagle has landed' reads as a missing frame; make it a true white hit or cut to black.",
+    "At 44.3s the 1202 HUD and 'Give us a reading' caption dim mid-line inside the picture dissolve; keep overlays on their own layer.",
+    "Bingo counter shows 54.5 while Duke's caption says '60 seconds' at 49.8s; sync the time-compressed counter to the callouts."
+  ]
+}
+```

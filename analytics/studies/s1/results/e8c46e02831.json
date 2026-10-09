@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.0,
+    "pacing": 6.0,
+    "variety": 7.5,
+    "motion": 6.5,
+    "type": 6.0,
+    "color": 6.0,
+    "sound": 4.0,
+    "captions": 7.5,
+    "story": 7.0,
+    "overall": 6.0
+  },
+  "top_fixes": [
+    "Re-balance dialogue over bed: 14 of 20 lines sit under +10 dB, liftoff calls go negative, and 'Houston, Tranquility Base here' scores 0.25 recall.",
+    "Replace the missing-glyph boxes in the ascent chart legend ('☐ = value called out live') and the 'TIME-COMPRESSED ☒☒' tag on the bingo-fuel card.",
+    "De-click the joins: 8.9x spike at 47.0 (riser + computer SFX) and 6.5x at the 68.6 flash-cut to silence will pop on speakers."
+  ]
+}
+```

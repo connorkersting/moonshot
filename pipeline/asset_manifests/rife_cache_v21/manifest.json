@@ -1,0 +1,104 @@
+{
+ "what": "MOONSHOT ignition ramp (s11) RIFE in-betweens; build.py render_ramp_shot",
+ "how": "seeded from rife_v20 (rife-v4.6 outputs of an earlier run; inputs verified pixel-equal)",
+ "frames": {
+  "4": {
+   "k": 3,
+   "w": 0.96,
+   "in0": "5b59c47b1e50c982ad22b3b81fd70a34cea599e1c0fb273164228d5fbeffd88e",
+   "in1": "9b30925773d86863e140f3e8548db3b3c6b481532d9c2a0773d7e1fc23fae0f7",
+   "out": "bb20aeb7c8902da52261dc3a6dae24b230787fc4894ef45c87ea58e9ea533246"
+  },
+  "5": {
+   "k": 4,
+   "w": 0.84,
+   "in0": "9b30925773d86863e140f3e8548db3b3c6b481532d9c2a0773d7e1fc23fae0f7",
+   "in1": "37e2a718218104150b774d3ed536c3c3012058941f3a904c6e8b1b72629febd4",
+   "out": "955d9f5b820538dbccc8a2d33edffce227ca49c2344960bd3184b729e2b23278"
+  },
+  "6": {
+   "k": 5,
+   "w": 0.64,
+   "in0": "37e2a718218104150b774d3ed536c3c3012058941f3a904c6e8b1b72629febd4",
+   "in1": "bbb5c5358198da7a551a4bf1ef206feb4b88d7dc124d12b37f9dbe95a2ab89b1",
+   "out": "bf84179567e29d34cc51f443ea896e632e16afcc8f0c2847c47c783557f245b5"
+  },
+  "7": {
+   "k": 6,
+   "w": 0.36,
+   "in0": "bbb5c5358198da7a551a4bf1ef206feb4b88d7dc124d12b37f9dbe95a2ab89b1",
+   "in1": "82fc7ed5127c33dc2bf239400b1111f1ec83a827a2710794048143224353d20c",
+   "out": "287c66e31e6251461a81fb4ec57f53ebc8e1ad7406dbbb7407c7c054ee8d5ac1"
+  },
+  "9": {
+   "k": 7,
+   "w": 0.56,
+   "in0": "82fc7ed5127c33dc2bf239400b1111f1ec83a827a2710794048143224353d20c",
+   "in1": "215c17f0462521e501b37ef11fd013ff9fc13872c648839c07878dc0e0976a7e",
+   "out": "d79e18e67e212d5c3868c0f9c4595cab1bd1915ba8535483189d79efcbbda05f"
+  },
+  "10": {
+   "k": 8,
+   "w": 0.04,
+   "in0": "215c17f0462521e501b37ef11fd013ff9fc13872c648839c07878dc0e0976a7e",
+   "in1": "260ad5f62c335bbeda76c661683c85b763f3a1848669baad1f4d7f6731006ce9",
+   "out": "7160e64d87ec1566ac3fbadd869e388428a8194224cffbe2ecdbce78bfcc4954"
+  },
+  "11": {
+   "k": 8,
+   "w": 0.48,
+   "in0": "215c17f0462521e501b37ef11fd013ff9fc13872c648839c07878dc0e0976a7e",
+   "in1": "260ad5f62c335bbeda76c661683c85b763f3a1848669baad1f4d7f6731006ce9",
+   "out": "3a402ba5b6b22902e33f611f5c72eade83911140158b82a03ccb04f26189f0b7"
+  },
+  "12": {
+   "k": 8,
+   "w": 0.92,
+   "in0": "215c17f0462521e501b37ef11fd013ff9fc13872c648839c07878dc0e0976a7e",
+   "in1": "260ad5f62c335bbeda76c661683c85b763f3a1848669baad1f4d7f6731006ce9",
+   "out": "8eaf3805e5585f6a96477855bc93c4262b084439b231a3b9a37c8febba8639b3"
+  },
+  "13": {
+   "k": 9,
+   "w": 0.36,
+   "in0": "260ad5f62c335bbeda76c661683c85b763f3a1848669baad1f4d7f6731006ce9",
+   "in1": "d0b7e24184cfcc314f093ea216bf1acd3c5fcb610beaed580b4985b0161c5a5c",
+   "out": "ef62320e952cbaf89faaa66f5bb053c80070ea46b5b18fe746df7462f8b92eeb"
+  },
+  "14": {
+   "k": 9,
+   "w": 0.8,
+   "in0": "260ad5f62c335bbeda76c661683c85b763f3a1848669baad1f4d7f6731006ce9",
+   "in1": "d0b7e24184cfcc314f093ea216bf1acd3c5fcb610beaed580b4985b0161c5a5c",
+   "out": "a20dabe4ce2ce15be2fb23acaf82a2533509697ea662b6986e51b2be04f7fce9"
+  },
+  "15": {
+   "k": 10,
+   "w": 0.24,
+   "in0": "d0b7e24184cfcc314f093ea216bf1acd3c5fcb610beaed580b4985b0161c5a5c",
+   "in1": "cef2971d97413a3a1403725e6a900f61f182a08ccb7f3a49db1823c52421afa8",
+   "out": "c7701ed4ab7a7bce2e44f6285addb60286cafcf0868d982f77c57ecf2cda80af"
+  },
+  "16": {
+   "k": 10,
+   "w": 0.68,
+   "in0": "d0b7e24184cfcc314f093ea216bf1acd3c5fcb610beaed580b4985b0161c5a5c",
+   "in1": "cef2971d97413a3a1403725e6a900f61f182a08ccb7f3a49db1823c52421afa8",
+   "out": "ce4e4ef8a5cafe74b65663169cb5f78d911982179d699bb6a9d080e5ed90b00d"
+  },
+  "17": {
+   "k": 11,
+   "w": 0.12,
+   "in0": "cef2971d97413a3a1403725e6a900f61f182a08ccb7f3a49db1823c52421afa8",
+   "in1": "9df7ab92ffcd8a5b457046436915e1167ffcf7c17ef8c95f0c36d95d942818e0",
+   "out": "c4363c699effd778b2eef8a7d318e068e356a06f6610d06b3cd5323992b8e2f6"
+  },
+  "18": {
+   "k": 11,
+   "w": 0.56,
+   "in0": "cef2971d97413a3a1403725e6a900f61f182a08ccb7f3a49db1823c52421afa8",
+   "in1": "9df7ab92ffcd8a5b457046436915e1167ffcf7c17ef8c95f0c36d95d942818e0",
+   "out": "8b5bf44f6023b6007c86956430dac8dc06f51c93fb773ebfc47e1df09169fa97"
+  }
+ }
+}

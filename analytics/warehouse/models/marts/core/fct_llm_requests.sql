@@ -1,0 +1,77 @@
+WITH llm_requests AS (
+    SELECT
+        message_id,
+        request_id,
+        agent_id,
+        is_subagent,
+        agent_role,
+        model_id,
+        session_part,
+        requested_at_utc,
+        requested_at_local,
+        input_tokens,
+        cache_creation_tokens,
+        cache_read_tokens,
+        output_tokens,
+        output_tokens_lower_bound,
+        thinking_tokens,
+        is_usage_final,
+        stop_reason,
+        n_tool_calls,
+    FROM {{ ref('stg_moonshot__agent_messages') }}
+),
+
+measured_requests AS (
+    SELECT
+        message_id,
+        request_id,
+        agent_id,
+        CASE WHEN is_subagent THEN agent_id END AS subagent_id,
+        is_subagent,
+        agent_role,
+        model_id,
+        session_part,
+        requested_at_utc,
+        requested_at_local,
+        input_tokens,
+        cache_creation_tokens,
+        cache_read_tokens,
+        output_tokens,
+        output_tokens_lower_bound,
+        thinking_tokens,
+        is_usage_final,
+        -- Input-side counts are complete for every request; output is known only
+        -- when the closing usage line was written. The two totals below never mix
+        -- the lower bound into the known figure.
+        input_tokens + cache_creation_tokens + cache_read_tokens AS input_side_tokens,
+        input_tokens + cache_creation_tokens + cache_read_tokens + COALESCE(output_tokens, 0) AS total_tokens_known,
+        CASE WHEN NOT is_usage_final THEN output_tokens_lower_bound ELSE 0 END AS output_tokens_unfinalised_lower_bound,
+        stop_reason,
+        n_tool_calls,
+    FROM llm_requests
+)
+
+SELECT
+    message_id,
+    request_id,
+    agent_id,
+    subagent_id,
+    is_subagent,
+    agent_role,
+    model_id,
+    session_part,
+    requested_at_utc,
+    requested_at_local,
+    input_tokens,
+    cache_creation_tokens,
+    cache_read_tokens,
+    output_tokens,
+    output_tokens_lower_bound,
+    output_tokens_unfinalised_lower_bound,
+    thinking_tokens,
+    is_usage_final,
+    input_side_tokens,
+    total_tokens_known,
+    stop_reason,
+    n_tool_calls,
+FROM measured_requests

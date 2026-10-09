@@ -38,7 +38,7 @@ SECTIONS = [("cold open", 0.0, 10.6), ("drop + title", 10.6, 19.0), ("act 2 stat
 if N >= 8:   # v8: act 2 is 6.7 s shorter
     SECTIONS = [("cold open", 0.0, 10.6), ("drop + title", 10.6, 19.0), ("act 2 stats/ascent", 19.0, 33.3),
                 ("lunar transition", 33.3, 40.3), ("1202 alarm", 40.3, 48.9), ("bingo fuel", 48.9, 56.3),
-                ("landing", 56.3, 61.9), ("silence", 61.9, 62.9), ("outro", 62.9, 79.0), ("credits", 79.0, 81.8)]
+                ("landing", 56.3, 61.9), ("silence", 61.9, 62.9), ("outro", 62.9, 79.0), ("credits", 79.0, float(build.TOTAL))]
 ACT2_D = 6.7   # v8+: captions and the v7 times below are logical; real() maps them onto this version's timeline
 
 

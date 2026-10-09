@@ -1,0 +1,92 @@
+version: 2
+
+# Staging: one model per raw table. Renames, casts, timestamp parsing and key
+# building only; no joins, no filters, no aggregation, so every model keeps its
+# source's grain and row count. Tests here cover the grain only (not_null + unique
+# on the key as staging names it). Enum, range and relationship tests live on the
+# fct_/dim_ models so a bad value fails once, not twice.
+
+models:
+  - name: stg_moonshot__agent_messages
+    description: One row per provider request (LLM call) by the main agent or a subagent. Timestamps parsed to naive UTC and naive local (America/New_York) TIMESTAMPs.
+    columns:
+      - name: message_id
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__agent_spawns
+    description: One row per Agent tool call in the main transcript. The "(default)" suffix on subagent_type is split into its own flag.
+    columns:
+      - name: spawn_id
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__subagents
+    description: One row per subagent invocation (one subagent transcript file), with the ingest's own per-run token totals kept for reconciliation.
+    columns:
+      - name: subagent_id
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__session_parts
+    description: One row per session part (1 = overnight run, 2 = 24-hour extension).
+    columns:
+      - name: session_part
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__session_events
+    description: One row per session event (compaction or session-part start). session_event_id = event type + UTC timestamp, the raw table's declared key.
+    columns:
+      - name: session_event_id
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__interventions
+    description: One row per human message or answer to the agent.
+    columns:
+      - name: intervention_id
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__codex_requests
+    description: One row per Codex CLI request. codex_request_id = codex_session_id + zero-padded request_seq.
+    columns:
+      - name: codex_request_id
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__versions
+    description: One row per trailer version. version_id is the text key ("v12"); version_number keeps the integer for ordering.
+    columns:
+      - name: version_id
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__critic_scores
+    description: One row per version x critic x score category. critic_score_id = version_id + critic_id + category.
+    columns:
+      - name: critic_score_id
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__loop_segments
+    description: One row per segment of the run ledger (the agent's own record of loop time), with local and UTC bounds. An open segment has no end.
+    columns:
+      - name: loop_segment_id
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__ab_votes
+    description: One row per blind A/B judge pick for one section of one comparison (evaluation x repeat x section). ab_vote_id joins the three.
+    columns:
+      - name: ab_vote_id
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__qc_sections
+    description: One row per loudness section of one version's audio QC (version x section).
+    columns:
+      - name: version_section_id
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__qc_dialogue
+    description: One row per dialogue line of one version's audio QC (version x line).
+    columns:
+      - name: dialogue_line_id
+        data_tests: [not_null, unique]
+
+  - name: stg_moonshot__director_picks
+    description: One row per director pick on a blind audition or side-by-side clip.
+    columns:
+      - name: director_pick_id
+        data_tests: [not_null, unique]

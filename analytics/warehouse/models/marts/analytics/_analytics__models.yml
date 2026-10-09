@@ -1,0 +1,326 @@
+version: 2
+
+# Analysis-ready marts. Same standard as the core facts: grain key unique and not
+# null, relationships to the dimensions, accepted_values on enums, range tests on
+# scores and shares. Cross-model reconciliation lives in tests/ as singular tests.
+
+models:
+  - name: mart_version_scorecard
+    description: >
+      One row per version: editor overall and category scores, change in the
+      editor's overall score against the previous scored version, the blind A/B
+      result against the version it was compared with (the BEST at that time),
+      whether that A/B tally agrees with the recorded keep decision, loudness and
+      dialogue clarity.
+    columns:
+      - name: version_id
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: outcome
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [kept, reverted, not_best, final, in_progress]
+      - name: editor_overall_score
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 10
+      - name: hook_score
+        data_tests: [{value_in_range: {arguments: {min_value: 1, max_value: 10}}}]
+      - name: pacing_score
+        data_tests: [{value_in_range: {arguments: {min_value: 1, max_value: 10}}}]
+      - name: variety_score
+        data_tests: [{value_in_range: {arguments: {min_value: 1, max_value: 10}}}]
+      - name: motion_score
+        data_tests: [{value_in_range: {arguments: {min_value: 1, max_value: 10}}}]
+      - name: type_score
+        data_tests: [{value_in_range: {arguments: {min_value: 1, max_value: 10}}}]
+      - name: color_score
+        data_tests: [{value_in_range: {arguments: {min_value: 1, max_value: 10}}}]
+      - name: sound_score
+        data_tests: [{value_in_range: {arguments: {min_value: 1, max_value: 10}}}]
+      - name: captions_score
+        data_tests: [{value_in_range: {arguments: {min_value: 1, max_value: 10}}}]
+      - name: story_score
+        data_tests: [{value_in_range: {arguments: {min_value: 1, max_value: 10}}}]
+      - name: ab_compared_with_version_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: ab_result
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [win, loss, draw]
+      - name: ab_tie_rate
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+      - name: mean_whisper_recall
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+  - name: mart_token_usage_by_role_session
+    description: >
+      One row per agent role x session part x model: Claude request counts, the
+      share of requests with a final usage record, each token type, the known total,
+      and shares of the session part's and the run's known tokens.
+    data_tests:
+      - unique_combination:
+          arguments:
+            combination_of_columns: [agent_role, session_part, model_id]
+    columns:
+      - name: role_session_model_id
+        data_tests: [not_null, unique]
+      - name: agent_role
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_agent_role')
+                field: agent_role
+      - name: session_part
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_session_part')
+                field: session_part
+      - name: model_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_model')
+                field: model_id
+      - name: model_family
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [opus, sonnet, fable, haiku]
+      - name: request_count
+        data_tests: [not_null, non_negative]
+      - name: input_tokens
+        data_tests: [not_null, non_negative]
+      - name: cache_creation_tokens
+        data_tests: [not_null, non_negative]
+      - name: cache_read_tokens
+        data_tests: [not_null, non_negative]
+      - name: output_tokens_final
+        description: NULL when no request in the group has a final usage record.
+        data_tests:
+          - non_negative
+          - not_null:
+              config:
+                where: "requests_usage_final > 0"
+      - name: total_tokens_known
+        data_tests: [not_null, non_negative]
+      - name: usage_final_share
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+      - name: share_of_session_part_tokens
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+  - name: mart_run_timeline
+    description: >
+      One row per 15-minute bucket (UTC-aligned) from the first to the last recorded
+      activity, including idle buckets between session parts. Counts Claude
+      requests, known tokens, agents with a request in the bucket, subagents whose
+      run spans the bucket, Codex requests, human interventions and compactions.
+    columns:
+      - name: bucket_start_utc
+        data_tests: [not_null, unique]
+      - name: bucket_start_local
+        data_tests: [not_null, unique]
+      - name: session_part
+        description: NULL for buckets outside both session parts (the idle gap).
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_session_part')
+                field: session_part
+      - name: llm_requests
+        data_tests: [not_null, non_negative]
+      - name: llm_tokens_known
+        data_tests: [not_null, non_negative]
+      - name: active_agents
+        data_tests: [not_null, non_negative]
+      - name: running_subagents
+        data_tests: [not_null, non_negative]
+      - name: codex_requests
+        data_tests: [not_null, non_negative]
+      - name: interventions
+        data_tests: [not_null, non_negative]
+
+  - name: mart_critic_plateau
+    description: >
+      Grain: one row per version x critic x headline score category (overall for the rubric
+      critics; shareability, AI-slop perception and watch-to-end for the crowd). The table
+      behind the plateau chart: promotion and director's-note marks, loop hours and project
+      tokens spent by the version's export, and the move from the critic's previous scored
+      version. Loop hours count ledger segments only; tokens are every Claude request in the
+      project up to the export.
+    columns:
+      - name: plateau_point_id
+        data_tests: [not_null, unique]
+      - name: version_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: critic_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_critic')
+                field: critic_id
+      - name: score_category
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_score_category')
+                field: score_category
+      - name: score
+        data_tests:
+          - not_null
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 10
+      - name: outcome
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [kept, reverted, not_best, final, in_progress]
+      - name: is_promoted
+        data_tests: [not_null]
+      - name: loop_hours_at_export
+        data_tests: [not_null, non_negative]
+      - name: project_tokens_known_at_export
+        data_tests: [non_negative]
+
+  - name: mart_critic_reliability
+    description: >
+      Grain: one row per critic. How far each critic's scores move between versions, whether
+      two different versions got an identical score vector, and how well the critic tracks the
+      Fable editor. The reliability finding for Gemini and TwelveLabs is read from here.
+    columns:
+      - name: critic_id
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_critic')
+                field: critic_id
+      - name: n_versions_scored
+        data_tests: [not_null, non_negative]
+      - name: n_distinct_vectors
+        data_tests: [not_null, non_negative]
+      - name: categories_per_version
+        description: Most score categories the critic gave one version (10 for the rubric critics, 1 for the Fable re-score, 2 or 3 for the crowd).
+        data_tests: [not_null, non_negative]
+      - name: observed_identical_vectors
+        data_tests: [not_null]
+      - name: corr_with_fable_overall
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: -1
+                max_value: 1
+
+  - name: mart_run_accounting_by_phase
+    description: >
+      Grain: one row per loop phase (a ledger segment or the gap between two). Project-only
+      Claude and Codex usage in tokens, ledger hours against transcript active hours,
+      human messages, and versions exported and promoted. Output tokens are final-only with a
+      separate floor for unfinalised requests. The account-wide plan percentage is not used.
+    columns:
+      - name: loop_phase_id
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_loop_phase')
+                field: loop_phase_id
+      - name: phase_kind
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [ledger_segment, gap]
+      - name: claude_requests
+        data_tests: [not_null, non_negative]
+      - name: requests_without_final_usage
+        description: Requests whose closing usage record was never written, so output tokens are unknown.
+        data_tests: [not_null, non_negative]
+      - name: active_hours
+        data_tests: [not_null, non_negative]
+      - name: human_messages
+        data_tests: [not_null, non_negative]
+      - name: versions_exported
+        data_tests: [not_null, non_negative]
+      - name: total_tokens_known
+        data_tests: [non_negative]
+
+  - name: mart_run_accounting_by_role
+    description: >
+      Grain: one row per loop phase x agent role x model. The token columns of
+      mart_run_accounting_by_phase split by who spent them.
+    columns:
+      - name: phase_role_model_id
+        data_tests: [not_null, unique]
+      - name: loop_phase_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_loop_phase')
+                field: loop_phase_id
+      - name: agent_role
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_agent_role')
+                field: agent_role
+      - name: model_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_model')
+                field: model_id
+      - name: request_count
+        data_tests: [not_null, non_negative]
+      - name: total_tokens_known
+        data_tests: [not_null, non_negative]

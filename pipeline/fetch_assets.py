@@ -46,7 +46,8 @@ AUDIO = {
     "audio/commons_small_step.ogg": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Armstrong_Small_Step.ogg",
 }
 MUSIC = {
-    "music/holst_mars_usaf_band.ogg": "https://commons.wikimedia.org/wiki/Special:FilePath/Holst-_mars.ogg",
+    # Beethoven, Egmont Overture: Czech National Symphony Orchestra for Musopen, public domain worldwide (v13+)
+    "music/beethoven_egmont_overture_musopen.flac": "https://commons.wikimedia.org/wiki/Special:FilePath/Beethoven_-_Egmont_Overture,_Op._84_(Musopen_Symphony).flac",
     "music/dvorak9_iv_allegro_con_fuoco.ogg": "https://commons.wikimedia.org/wiki/Special:FilePath/Antonin_Dvorak_-_symphony_no._9_in_e_minor_'from_the_new_world',_op._95_-_iv._allegro_con_fuoco.ogg",
     "music/dvorak9_ii_largo.ogg": "https://commons.wikimedia.org/wiki/Special:FilePath/Antonin_Dvorak_-_symphony_no._9_in_e_minor_'from_the_new_world',_op._95_-_ii._largo.ogg",
 }

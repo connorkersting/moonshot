@@ -1,0 +1,22 @@
+{
+ "what": "v27 RIFE half-speed of the smoke-under-the-title shot (13.00-17.6667 s, frames 312-423)",
+ "sha256": "46296d26a2a8f11a691abce451cdf1d56bbfd9536214d2a78e788bb02c38450b",
+ "frames": 112,
+ "size": [
+  1220,
+  686
+ ],
+ "fps": 24,
+ "pix_fmt": "yuv444p",
+ "source": {
+  "file": "inbox/moonshot/video/launch_70mm.mp4",
+  "sha256": "c804bcdd9c07c3e75f1597b4d353fff439054b1dfefbf847a3584d8eb393033b",
+  "frames": "432-491 (src 18.0 s)"
+ },
+ "recipe": [
+  "ffmpeg select between(n,432,491) -> PNG",
+  "rife-ncnn-vulkan 20221029 -m rife-v4.6 -n 119 (frame k = source time k/2)",
+  "frames 1-112, crop 1220:686:520:980, x264 crf 4 preset slow yuv444p"
+ ],
+ "approved": "Connor 2026-10-08 ~22:15, side-by-side A/B: 'i like righ more'"
+}

@@ -1,0 +1,564 @@
+version: 2
+
+# Raw CSVs written by analytics/ingest (reconcile.py). They are read in place with
+# DuckDB read_csv and an explicit, positional column list (csv_columns), so nothing
+# is type-sniffed. Two guards make schema drift fail loudly instead of coercing:
+#   1. read_csv runs with auto_detect off and strict parsing, so an added or dropped
+#      column changes the field count and the read errors out.
+#   2. csv_header_matches compares the file's header line with csv_columns and with
+#      the documented columns below, and names the source, what was expected and
+#      what arrived. It catches renames and reorders that keep the field count.
+# Every ID is read as VARCHAR. Timestamps are read as VARCHAR and parsed in staging,
+# because the files mix "Z" UTC strings, offset strings and naive local strings.
+
+sources:
+  - name: moonshot_raw
+    description: Metadata-only tables parsed from the MOONSHOT run's transcripts, PROGRESS.md, QC files and judge reports.
+    config:
+      meta:
+        formatter: template
+        raw_dir: "{{ var('raw_data_dir') }}"
+        external_location: "read_csv('${raw_dir}/${name}.csv', header = true, auto_detect = false, delim = ',', quote = '\"', escape = '\"', strict_mode = true, columns = ${csv_columns})"
+    tables:
+      - name: agent_messages
+        description: One row per provider request (LLM call) by the main agent or a subagent, after de-duplicating streamed repeat chunks on message id.
+        config:
+          meta:
+            csv_columns:
+              message_id: VARCHAR
+              request_id: VARCHAR
+              session_id: VARCHAR
+              agent_id: VARCHAR
+              is_subagent: BOOLEAN
+              agent_role: VARCHAR
+              model: VARCHAR
+              ts_utc: VARCHAR
+              ts_local: VARCHAR
+              session_part: VARCHAR
+              input_tokens: BIGINT
+              output_tokens: BIGINT
+              output_tokens_lower_bound: BIGINT
+              usage_final: BOOLEAN
+              cache_creation_tokens: BIGINT
+              cache_read_tokens: BIGINT
+              thinking_tokens: BIGINT
+              stop_reason: VARCHAR
+              tool_names: VARCHAR
+              n_tool_calls: INTEGER
+              n_jsonl_lines: INTEGER
+        data_tests:
+          - csv_header_matches
+        columns:
+          - name: message_id
+            description: Provider message id. Primary key.
+            data_tests: [not_null, unique]
+          - name: request_id
+          - name: session_id
+          - name: agent_id
+          - name: is_subagent
+          - name: agent_role
+          - name: model
+          - name: ts_utc
+          - name: ts_local
+          - name: session_part
+          - name: input_tokens
+          - name: output_tokens
+            description: NULL when the closing usage line was never written (usage_final = false).
+          - name: output_tokens_lower_bound
+          - name: usage_final
+          - name: cache_creation_tokens
+          - name: cache_read_tokens
+          - name: thinking_tokens
+          - name: stop_reason
+          - name: tool_names
+          - name: n_tool_calls
+          - name: n_jsonl_lines
+
+      - name: agent_spawns
+        description: One row per Agent tool call in the main transcript.
+        config:
+          meta:
+            csv_columns:
+              spawn_id: VARCHAR
+              parent_agent_id: VARCHAR
+              parent_message_id: VARCHAR
+              ts_utc: VARCHAR
+              ts_local: VARCHAR
+              session_part: VARCHAR
+              description: VARCHAR
+              agent_role: VARCHAR
+              subagent_type: VARCHAR
+              requested_model: VARCHAR
+              run_in_background: BOOLEAN
+              linked_subagent_id: VARCHAR
+        data_tests:
+          - csv_header_matches
+        columns:
+          - name: spawn_id
+            description: Tool-use id of the Agent call. Primary key.
+            data_tests: [not_null, unique]
+          - name: parent_agent_id
+          - name: parent_message_id
+          - name: ts_utc
+          - name: ts_local
+          - name: session_part
+          - name: description
+          - name: agent_role
+          - name: subagent_type
+          - name: requested_model
+          - name: run_in_background
+          - name: linked_subagent_id
+
+      - name: subagents
+        description: One row per subagent invocation (one subagent transcript file).
+        config:
+          meta:
+            csv_columns:
+              subagent_id: VARCHAR
+              description: VARCHAR
+              agent_role: VARCHAR
+              agent_type: VARCHAR
+              requested_model: VARCHAR
+              actual_models: VARCHAR
+              spawn_id: VARCHAR
+              spawn_linked: BOOLEAN
+              spawn_depth: INTEGER
+              first_ts_utc: VARCHAR
+              last_ts_utc: VARCHAR
+              duration_s: DOUBLE
+              session_part: VARCHAR
+              n_messages: INTEGER
+              n_jsonl_lines: INTEGER
+              n_tool_calls: INTEGER
+              n_messages_usage_final: INTEGER
+              input_tokens: BIGINT
+              output_tokens_final_only: BIGINT
+              output_tokens_lower_bound: BIGINT
+              cache_creation_tokens: BIGINT
+              cache_read_tokens: BIGINT
+        data_tests:
+          - csv_header_matches
+        columns:
+          - name: subagent_id
+            description: Subagent id (transcript file name). Primary key.
+            data_tests: [not_null, unique]
+          - name: description
+          - name: agent_role
+          - name: agent_type
+          - name: requested_model
+          - name: actual_models
+          - name: spawn_id
+          - name: spawn_linked
+          - name: spawn_depth
+          - name: first_ts_utc
+          - name: last_ts_utc
+          - name: duration_s
+          - name: session_part
+          - name: n_messages
+          - name: n_jsonl_lines
+          - name: n_tool_calls
+          - name: n_messages_usage_final
+          - name: input_tokens
+          - name: output_tokens_final_only
+          - name: output_tokens_lower_bound
+          - name: cache_creation_tokens
+          - name: cache_read_tokens
+
+      - name: session_parts
+        description: One row per session part (1 = overnight run, 2 = 24-hour extension).
+        config:
+          meta:
+            csv_columns:
+              session_part: VARCHAR
+              wall_start_utc: VARCHAR
+              wall_end_utc: VARCHAR
+              wall_start_local: VARCHAR
+              wall_end_local: VARCHAR
+              wall_hours: DOUBLE
+              active_hours: DOUBLE
+              n_active_intervals: INTEGER
+              n_requests: INTEGER
+              n_subagent_requests: INTEGER
+        data_tests:
+          - csv_header_matches
+        columns:
+          - name: session_part
+            description: Primary key.
+            data_tests: [not_null, unique]
+          - name: wall_start_utc
+          - name: wall_end_utc
+          - name: wall_start_local
+          - name: wall_end_local
+          - name: wall_hours
+          - name: active_hours
+          - name: n_active_intervals
+          - name: n_requests
+          - name: n_subagent_requests
+
+      - name: session_events
+        description: One row per compaction or session-part start. Key is ts_utc + event.
+        config:
+          meta:
+            csv_columns:
+              ts_utc: VARCHAR
+              ts_local: VARCHAR
+              session_part: VARCHAR
+              event: VARCHAR
+              trigger: VARCHAR
+              pre_tokens: BIGINT
+              post_tokens: BIGINT
+              duration_ms: BIGINT
+        data_tests:
+          - csv_header_matches
+          - unique_combination:
+              arguments:
+                combination_of_columns: [ts_utc, event]
+        columns:
+          - name: ts_utc
+            data_tests: [not_null]
+          - name: ts_local
+          - name: session_part
+          - name: event
+            data_tests: [not_null]
+          - name: trigger
+          - name: pre_tokens
+          - name: post_tokens
+          - name: duration_ms
+
+      - name: interventions
+        description: One row per human message or answer to the agent.
+        config:
+          meta:
+            csv_columns:
+              intervention_id: VARCHAR
+              ts_utc: VARCHAR
+              ts_local: VARCHAR
+              session_part: VARCHAR
+              kind: VARCHAR
+              label: VARCHAR
+              source: VARCHAR
+              n_chars: INTEGER
+        data_tests:
+          - csv_header_matches
+        columns:
+          - name: intervention_id
+            description: Primary key (h001, h002, ...).
+            data_tests: [not_null, unique]
+          - name: ts_utc
+          - name: ts_local
+          - name: session_part
+          - name: kind
+          - name: label
+          - name: source
+          - name: n_chars
+
+      - name: codex_requests
+        description: One row per Codex CLI request attributed to the run. Key is codex_session_id + request_seq.
+        config:
+          meta:
+            csv_columns:
+              codex_session_id: VARCHAR
+              request_seq: INTEGER
+              ts_utc: VARCHAR
+              ts_local: VARCHAR
+              model: VARCHAR
+              workdir: VARCHAR
+              attribution: VARCHAR
+              input_tokens: BIGINT
+              cached_input_tokens: BIGINT
+              output_tokens: BIGINT
+              reasoning_output_tokens: BIGINT
+              primary_used_pct: DOUBLE
+              secondary_used_pct: DOUBLE
+        data_tests:
+          - csv_header_matches
+          - unique_combination:
+              arguments:
+                combination_of_columns: [codex_session_id, request_seq]
+        columns:
+          - name: codex_session_id
+            data_tests: [not_null]
+          - name: request_seq
+            data_tests: [not_null]
+          - name: ts_utc
+          - name: ts_local
+          - name: model
+          - name: workdir
+          - name: attribution
+          - name: input_tokens
+          - name: cached_input_tokens
+          - name: output_tokens
+          - name: reasoning_output_tokens
+          - name: primary_used_pct
+          - name: secondary_used_pct
+
+      - name: versions
+        description: One row per exported (or in-progress) trailer version.
+        config:
+          meta:
+            csv_columns:
+              version: VARCHAR
+              version_label: VARCHAR
+              src_tag_time: VARCHAR
+              final_tag_time: VARCHAR
+              export_time: VARCHAR
+              progress_logged_time: VARCHAR
+              is_best_final: BOOLEAN
+              duration_s: DOUBLE
+              integrated_lufs: DOUBLE
+              lra_lu: DOUBLE
+              true_peak_dbtp: DOUBLE
+              tqc_verdict: VARCHAR
+              tqc_black_runs: INTEGER
+              tqc_freeze_runs: INTEGER
+              tqc_click_candidates: INTEGER
+              tqc_flag_count: INTEGER
+              has_qc: BOOLEAN
+              has_aqc: BOOLEAN
+              has_tqc: BOOLEAN
+        data_tests:
+          - csv_header_matches
+        columns:
+          - name: version
+            description: Version number as text. Primary key.
+            data_tests: [not_null, unique]
+          - name: version_label
+          - name: src_tag_time
+          - name: final_tag_time
+          - name: export_time
+          - name: progress_logged_time
+          - name: is_best_final
+          - name: duration_s
+          - name: integrated_lufs
+          - name: lra_lu
+          - name: true_peak_dbtp
+          - name: tqc_verdict
+          - name: tqc_black_runs
+          - name: tqc_freeze_runs
+          - name: tqc_click_candidates
+          - name: tqc_flag_count
+          - name: has_qc
+          - name: has_aqc
+          - name: has_tqc
+
+      - name: critic_scores
+        description: One row per version x critic x score category. Critics are the Fable editor, Codex, Gemini, TwelveLabs and the crowd personas.
+        config:
+          meta:
+            csv_columns:
+              version: VARCHAR
+              critic: VARCHAR
+              category: VARCHAR
+              score: DOUBLE
+              critic_model: VARCHAR
+              evaluation_id: VARCHAR
+              source_kind: VARCHAR
+              progress_md_score: DOUBLE
+              progress_md_flagged: BOOLEAN
+              note: VARCHAR
+        data_tests:
+          - csv_header_matches
+          - unique_combination:
+              arguments:
+                combination_of_columns: [version, critic, category]
+        columns:
+          - name: version
+            data_tests: [not_null]
+          - name: critic
+            data_tests: [not_null]
+          - name: category
+            data_tests: [not_null]
+          - name: score
+          - name: critic_model
+          - name: evaluation_id
+            data_tests: [not_null]
+          - name: source_kind
+            description: Where the score was read from (qc_json, subagent_report, progress_md_table, progress_md_prose).
+          - name: progress_md_score
+          - name: progress_md_flagged
+          - name: note
+
+      - name: ab_votes
+        description: One row per blind A/B judge pick for one section of one comparison.
+        config:
+          meta:
+            csv_columns:
+              evaluation_id: VARCHAR
+              comparison: VARCHAR
+              repeat_no: INTEGER
+              newer_version: VARCHAR
+              older_version: VARCHAR
+              section_no: INTEGER
+              section: VARCHAR
+              side_A_version: VARCHAR
+              side_B_version: VARCHAR
+              side_picked: VARCHAR
+              is_tie: BOOLEAN
+              version_picked: VARCHAR
+              newer_outcome: VARCHAR
+              is_marginal: BOOLEAN
+              confidence: VARCHAR
+              confidence_rank: DOUBLE
+              confidence_raw: INTEGER
+              score_A: DOUBLE
+              score_B: DOUBLE
+              judge_model: VARCHAR
+        data_tests:
+          - csv_header_matches
+          - unique_combination:
+              arguments:
+                combination_of_columns: [evaluation_id, repeat_no, section_no]
+        columns:
+          - name: evaluation_id
+            data_tests: [not_null]
+          - name: comparison
+          - name: repeat_no
+            data_tests: [not_null]
+          - name: newer_version
+          - name: older_version
+          - name: section_no
+            data_tests: [not_null]
+          - name: section
+          - name: side_A_version
+          - name: side_B_version
+          - name: side_picked
+          - name: is_tie
+          - name: version_picked
+          - name: newer_outcome
+          - name: is_marginal
+          - name: confidence
+          - name: confidence_rank
+          - name: confidence_raw
+            description: The judge's integer confidence (1 to 5) in the layout used from v23 on. Its scale is not documented, so it is kept as given and the word-scale columns stay NULL for those rows.
+          - name: score_A
+          - name: score_B
+          - name: judge_model
+
+      - name: qc_sections
+        description: One row per loudness section of one version's audio QC.
+        config:
+          meta:
+            csv_columns:
+              version: VARCHAR
+              section_no: INTEGER
+              section: VARCHAR
+              t0: DOUBLE
+              t1: DOUBLE
+              lufs: DOUBLE
+              lra: DOUBLE
+              tp: DOUBLE
+        data_tests:
+          - csv_header_matches
+          - unique_combination:
+              arguments:
+                combination_of_columns: [version, section_no]
+        columns:
+          - name: version
+            data_tests: [not_null]
+          - name: section_no
+            data_tests: [not_null]
+          - name: section
+          - name: t0
+          - name: t1
+          - name: lufs
+          - name: lra
+          - name: tp
+
+      - name: qc_dialogue
+        description: One row per dialogue line of one version's audio QC (line text left out).
+        config:
+          meta:
+            csv_columns:
+              version: VARCHAR
+              line_no: INTEGER
+              t: DOUBLE
+              speaker: VARCHAR
+              dialog_db: DOUBLE
+              bed_db: DOUBLE
+              ratio_db: DOUBLE
+              ratio_low_flag: BOOLEAN
+              whisper_recall: DOUBLE
+              recall_low_flag: BOOLEAN
+        data_tests:
+          - csv_header_matches
+          - unique_combination:
+              arguments:
+                combination_of_columns: [version, line_no]
+        columns:
+          - name: version
+            data_tests: [not_null]
+          - name: line_no
+            data_tests: [not_null]
+          - name: t
+          - name: speaker
+          - name: dialog_db
+          - name: bed_db
+          - name: ratio_db
+          - name: ratio_low_flag
+          - name: whisper_recall
+          - name: recall_low_flag
+
+      - name: loop_segments
+        description: One row per segment of the run ledger (run_ledger.csv), the agent's own record of loop time. Times are given in New York local time and in UTC; an open segment has no end.
+        config:
+          meta:
+            csv_columns:
+              segment_id: VARCHAR
+              start_local: VARCHAR
+              end_local: VARCHAR
+              start_utc: VARCHAR
+              end_utc: VARCHAR
+              end_reason: VARCHAR
+        data_tests:
+          - csv_header_matches
+        columns:
+          - name: segment_id
+            description: Ledger segment number. Primary key.
+            data_tests: [not_null, unique]
+          - name: start_local
+            data_tests: [not_null]
+          - name: end_local
+          - name: start_utc
+            data_tests: [not_null]
+          - name: end_utc
+          - name: end_reason
+            data_tests: [not_null]
+
+      - name: director_picks
+        description: One row per pick the director made on a blind audition or side-by-side clip, written by hand into ingest/director_picks.csv. Audio auditions are mapped through their key file (which side was the baseline), so the option picked is known, not just the side.
+        config:
+          meta:
+            csv_columns:
+              pick_id: VARCHAR
+              decided_at_local: VARCHAR
+              decided_at_utc: VARCHAR
+              subject: VARCHAR
+              key_file: VARCHAR
+              clip_key: VARCHAR
+              side_picked: VARCHAR
+              option_picked: VARCHAR
+              mapped_through_key: BOOLEAN
+              adopted: BOOLEAN
+              version_effect: VARCHAR
+              source_ref: VARCHAR
+        data_tests:
+          - csv_header_matches
+        columns:
+          - name: pick_id
+            description: Primary key.
+            data_tests: [not_null, unique]
+          - name: decided_at_local
+            data_tests: [not_null]
+          - name: decided_at_utc
+            data_tests: [not_null]
+          - name: subject
+          - name: key_file
+          - name: clip_key
+          - name: side_picked
+            data_tests: [not_null]
+          - name: option_picked
+            data_tests: [not_null]
+          - name: mapped_through_key
+          - name: adopted
+          - name: version_effect
+          - name: source_ref

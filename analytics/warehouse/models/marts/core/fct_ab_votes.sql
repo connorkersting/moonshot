@@ -1,0 +1,81 @@
+WITH ab_votes AS (
+    SELECT
+        ab_vote_id,
+        evaluation_id,
+        comparison_label,
+        repeat_no,
+        newer_version_id,
+        older_version_id,
+        section_no,
+        section_name,
+        side_a_version_id,
+        side_b_version_id,
+        side_picked,
+        is_tie,
+        picked_version_id,
+        newer_outcome,
+        is_marginal,
+        confidence,
+        confidence_rank,
+        confidence_raw,
+        score_a,
+        score_b,
+        judge_model_id,
+    FROM {{ ref('stg_moonshot__ab_votes') }}
+),
+
+sided_votes AS (
+    SELECT
+        ab_vote_id,
+        evaluation_id,
+        comparison_label,
+        repeat_no,
+        section_no,
+        section_name,
+        newer_version_id,
+        older_version_id,
+        side_a_version_id,
+        side_b_version_id,
+        -- Which side the newer version was shown on; the key file randomises it.
+        CASE
+            WHEN side_a_version_id = newer_version_id THEN 'A'
+            WHEN side_b_version_id = newer_version_id THEN 'B'
+        END AS newer_version_side,
+        side_picked,
+        is_tie,
+        picked_version_id,
+        newer_outcome,
+        is_marginal,
+        confidence,
+        confidence_rank,
+        confidence_raw,
+        score_a,
+        score_b,
+        judge_model_id,
+    FROM ab_votes
+)
+
+SELECT
+    ab_vote_id,
+    evaluation_id,
+    comparison_label,
+    repeat_no,
+    section_no,
+    section_name,
+    newer_version_id,
+    older_version_id,
+    side_a_version_id,
+    side_b_version_id,
+    newer_version_side,
+    side_picked,
+    is_tie,
+    picked_version_id,
+    newer_outcome,
+    is_marginal,
+    confidence,
+    confidence_rank,
+    confidence_raw,
+    score_a,
+    score_b,
+    judge_model_id,
+FROM sided_votes

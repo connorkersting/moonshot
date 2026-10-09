@@ -1,0 +1,12 @@
+.env
+.venv/
+.tmp/
+__pycache__/
+
+# dbt warehouse build output
+warehouse/target/
+warehouse/logs/
+warehouse/dbt_packages/
+warehouse/.user.yml
+*.duckdb
+*.duckdb.wal

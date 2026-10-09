@@ -1,0 +1,9 @@
+v18_v17: judge_sonnet.json vs hand-back, 7 of 7 section picks agree
+v19_v18: judge_sonnet.json only (hand-back has no verdict lines)
+v20_v19: judge_sonnet.json vs hand-back, 7 of 7 section picks agree
+v21_v19: judge_sonnet.json vs hand-back, 7 of 7 section picks agree
+v22_v21: judge_sonnet.json vs hand-back, 7 of 7 section picks agree
+v23_v22: judge_sonnet.json only (hand-back has no verdict lines)
+v24_v23: judge_sonnet.json only (hand-back has no verdict lines)
+v26_v25: judge_sonnet.json only (hand-back has no verdict lines)
+v28_v27: judge_sonnet.json only (hand-back has no verdict lines)

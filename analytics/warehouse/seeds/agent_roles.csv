@@ -1,0 +1,8 @@
+agent_role,role_group,role_description
+main,orchestrator,"The main Claude Code agent loop that planned, built and exported every version and spawned the subagents."
+builder,worker,"Patch writers, the score composer and the v13 builder: subagents that write code the main agent then reviews and applies."
+critic-editor,evaluator,"Senior-editor critic: watches one version and scores it on ten categories. The primary quality score."
+ab-judge,evaluator,"Blind A/B judge: compares two versions section by section on a fixed rubric without knowing which is newer."
+crowd,evaluator,"Crowd reactions: the mean-commenter and first-time-viewer critiques of one version."
+researcher,worker,"Fact-check, tool research and report triage."
+other,support,"Support agents that are not builders, evaluators or researchers: thumbnails, dashboards, tool installs and vetting, reaction corpora, the project audit and this analytics work. Not part of the trailer edit."

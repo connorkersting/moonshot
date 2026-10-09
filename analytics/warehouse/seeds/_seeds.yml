@@ -1,0 +1,105 @@
+version: 2
+
+seeds:
+  - name: version_outcomes
+    description: >
+      One row per decided version: the keep/revert decision recorded in PROGRESS.md
+      (the run's own log), which is the only place the decision exists, plus the reason
+      and, where there was one, the director's note that shaped the version. Everything
+      else about a version (scores, A/B tallies, loudness) is derived from the raw
+      tables, and mart_version_scorecard compares this decision with the A/B tally
+      it can compute, so overrides are visible rather than hidden. A version with no
+      row here is treated as in_progress until it has been exported; an exported
+      version with no row fails the not_null test on dim_version.outcome, which is
+      the prompt to record the decision. The FINAL version is the one BEST.json names.
+    config:
+      column_types:
+        version_id: VARCHAR
+        outcome: VARCHAR
+        decision_basis: VARCHAR
+        decided_at_local: TIMESTAMP
+        decision_reason: VARCHAR
+        director_input: VARCHAR
+    columns:
+      - name: version_id
+        data_tests: [not_null, unique]
+      - name: outcome
+        description: kept (became BEST), reverted, not_best (lost but its changes were carried forward), final (the BEST at the end of the run).
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [kept, reverted, not_best, final]
+      - name: decision_basis
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [baseline, editor_only, ab_win, ab_draw_editor, ab_loss, override_verified_misread, required_fix, override_logged, director_pick, gated_fix]
+      - name: decision_reason
+        description: One sentence on why the version was kept or not, from PROGRESS.md.
+        data_tests: [not_null]
+
+  - name: agent_roles
+    description: One row per agent role. Role labels come from the ingest's bucketing of spawn descriptions; this seed adds the group and a description.
+    config:
+      column_types:
+        agent_role: VARCHAR
+        role_group: VARCHAR
+        role_description: VARCHAR
+    columns:
+      - name: agent_role
+        data_tests: [not_null, unique]
+
+  - name: score_categories
+    description: One row per score category, with display order and group. Ten rubric categories scored by the editor-style critics, three crowd categories.
+    config:
+      column_types:
+        score_category: VARCHAR
+        category_order: INTEGER
+        category_group: VARCHAR
+        is_overall: BOOLEAN
+        higher_is_better: BOOLEAN
+        category_description: VARCHAR
+    columns:
+      - name: score_category
+        data_tests: [not_null, unique]
+      - name: category_group
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [rubric, crowd]
+
+  - name: critics
+    description: >
+      One row per critic that scored versions, with what it can perceive and whether it
+      separates one version from another. discriminates_between_versions = false is the
+      reliability finding: the critic's scores did not move with visible changes, so
+      they are kept as data but never used for a promotion decision.
+    config:
+      column_types:
+        critic_id: VARCHAR
+        critic_label: VARCHAR
+        critic_kind: VARCHAR
+        provider: VARCHAR
+        can_hear_audio: BOOLEAN
+        used_for_promotion: BOOLEAN
+        discriminates_between_versions: BOOLEAN
+        reliability_note: VARCHAR
+    columns:
+      - name: critic_id
+        data_tests: [not_null, unique]
+      - name: critic_kind
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [llm_editor, llm_video, llm_persona]
+      - name: provider
+        data_tests: [not_null]
+      - name: discriminates_between_versions
+        data_tests: [not_null]
+      - name: reliability_note
+        description: The evidence behind the flag. Required for every critic flagged as non-discriminating (tested).
+        data_tests: [not_null]

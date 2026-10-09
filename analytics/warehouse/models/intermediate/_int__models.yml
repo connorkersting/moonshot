@@ -1,0 +1,83 @@
+version: 2
+
+# Intermediate models change grain (aggregate or pivot), so each one tests its new grain.
+
+models:
+  - name: int_llm_requests_by_agent
+    description: >
+      One row per agent (main or subagent id): request counts and token sums rolled
+      up from stg_moonshot__agent_messages. Exists so fct_agent_runs joins tokens at
+      agent grain and cannot fan out.
+    columns:
+      - name: agent_id
+        data_tests: [not_null, unique]
+      - name: n_models
+        description: Distinct models the agent called. Expected 1; fct_agent_runs tests it.
+
+  - name: int_ab_comparison_results
+    description: >
+      One row per blind A/B comparison (judge evaluation): section wins, losses and
+      ties from the newer version's side, the tie rate and the overall result.
+    columns:
+      - name: evaluation_id
+        data_tests: [not_null, unique]
+      - name: newer_version_id
+        description: Each version was A/B-tested at most once as the newer side; a rerun that appended a second comparison would fail here.
+        data_tests: [not_null, unique]
+      - name: newer_ab_result
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [win, loss, draw]
+
+  - name: int_editor_scores_pivoted
+    description: One row per version with an editor critique, one column per score category.
+    columns:
+      - name: version_id
+        data_tests: [not_null, unique]
+      - name: n_editor_evaluations
+        description: Expected 1. More than one would make the pivot pick a max across critics.
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 1
+
+  - name: int_version_audio_summary
+    description: "One row per version with audio QC (aqc file): section loudness extremes and dialogue clarity."
+    columns:
+      - name: version_id
+        data_tests: [not_null, unique]
+
+  - name: int_critic_scores_by_version
+    description: "Grain: one row per version that any critic scored, with each critic's headline score in its own column (NULL where it did not score)."
+    columns:
+      - name: version_id
+        data_tests: [not_null, unique]
+      - name: n_critics_scoring
+        data_tests: [not_null, non_negative]
+
+  - name: int_requests_in_loop_segments
+    description: "Grain: one row per Claude request, placed in the ledger segment open when it ran or in the gap before the next segment. Segments do not overlap, so a request matching two would fan out and fail the unique test."
+    columns:
+      - name: message_id
+        data_tests: [not_null, unique]
+      - name: loop_phase_id
+        data_tests: [not_null]
+
+  - name: int_loop_phase_activity
+    description: "Grain: one row per loop phase that has requests: active intervals and active hours under the 5-minute rule."
+    columns:
+      - name: loop_phase_id
+        data_tests: [not_null, unique]
+      - name: active_hours
+        data_tests: [not_null, non_negative]
+
+  - name: int_version_effort_at_export
+    description: "Grain: one row per exported version: ledger loop hours and project tokens spent by its export."
+    columns:
+      - name: version_id
+        data_tests: [not_null, unique]
+      - name: loop_hours_at_export
+        data_tests: [not_null, non_negative]

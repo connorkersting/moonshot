@@ -29,6 +29,10 @@ uv run python dashboard/build_dashboard.py                 # site/index.html, si
 uv run python reports/build_run_accounting.py              # run_accounting.md
 ```
 
+CI (`.github/workflows/ci.yml`) runs only the `dbt build` step, against the committed CSVs, with
+the dbt packages pinned in `requirements-ci.txt` (a subset of `uv.lock`). The ingest, dashboard
+and report steps need the local transcripts and run folders, so CI only byte-compiles them.
+
 `reconcile.py` is the entry point. It copies the live transcripts into a temp folder (the main
 transcript keeps growing while a session is open), runs both parsers on that snapshot into
 `data/raw/`, runs them again into a temp folder and requires byte-identical output, recounts

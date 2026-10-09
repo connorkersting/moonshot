@@ -1,0 +1,723 @@
+{
+ "what": "MOONSHOT v25 hero beat: one continuous Earth-to-Moon move, trajectory schematic (not to scale), build.py SHOTS SEQ 29.80-33.30 = frames 715-798; the last camera is the locked portrait's (frame 799)",
+ "sources": {
+  "blender/hero_v25.py": "1ed373c2cf59aed5ab6a819b8a941809778ca407baf2b2789af989146dc6d652",
+  "blender/hero_path_v25.py": "dece20b539ec5c6bd9cb6f7e13c8988df79a3ccfd428128b2c7693bfb768e52c",
+  "blender/hero_post_v25.py": "ff280e2f05c1b4a3c99a08e621ca487111dc4994b4998fbc9180f94041c11703",
+  "blender/stars.png": "56e7e6339efd605845ec3e5f395c804dc02b7b357904e0d85681782edbb500c5"
+ },
+ "commands": [
+  "blender.exe -b --factory-startup --python blender/hero_v25.py -- <render_dir> 1920 1080 1 84",
+  "py blender/hero_post_v25.py <render_dir> work/hero_v25"
+ ],
+ "inputs": {
+  "bluemarble_8k.jpg": "3972425e2f5038cbd6533c834203088e35bcbfcc98ed637ae1270c07e1ebb8c6",
+  "cloud_combined_8192.tif": "d137775d8966ab8d443fd5126dc6e7ad72072bc1ed50555c5818d221735daf0f",
+  "lroc_color_16bit_srgb_4k.tif": "9731fa8af425b6c2f88f277ecca82bf8c603f3743894f64ed7b25c5bfefa22ff",
+  "ldem_16.tif": "1ea42bf44f7e9d694f79c3afa7145f97fbf06cc67372067d9fe73dce43bad796"
+ },
+ "input_provenance": {
+  "bluemarble_8k.jpg": "NASA Blue Marble Next Generation, December topo+bathy (CREDITS.md, as the ascent)",
+  "cloud_combined_8192.tif": "NASA Visible Earth #57747 'Blue Marble: Clouds' (public domain), downloaded 2026-10-08 by the v25 builder from https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif",
+  "lroc/ldem": "NASA SVS #4720 CGI Moon Kit (CREDITS.md, as the Moon portrait)"
+ },
+ "renderer": {
+  "blender": "5.2.2 LTS (hash d13f752e3b9c, built 2026-09-15)",
+  "blender_exe_sha256": "c9f9c33e538dd3e195ccb8dcc5986721f49df795e91288d4f6e82295a028e1c1",
+  "engine": "EEVEE, view transform Standard, film transparent, motion blur shutter 0.35, PNG RGBA; post: alpha over blender/stars.png through the camera-rotation homography"
+ },
+ "format": {
+  "size": [
+   1920,
+   1080
+  ],
+  "fps": 24,
+  "numbering": "hv_####.png, 1-based, contiguous",
+  "range": [
+   1,
+   84
+  ],
+  "alpha": "opaque RGB (stars composited by alpha in post; render_seq must not colour-key it)"
+ },
+ "shot": {
+  "first_output_frame": 715,
+  "n": 84,
+  "speed": 1.0,
+  "display": "asset frame k = output frame 714 + k (ffmpeg -framerate 24 -i hv_%04d.png, no fps filter)"
+ },
+ "geometry_sha256": "f804768ff33291ebf4f06e86c3afb7aa82e1d5d28e1519135c2b6784500a56fd",
+ "frames": {
+  "hv_0001.png": {
+   "sha256": "670d47c0f99527e48756d547d2b35b36158b6de5eb2b6dccf440a00e87a2084f",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0002.png": {
+   "sha256": "cfb4710ffc4b31cd28c4cd546939e606b762c7f95e295dda4074ef3f4a8cbe89",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0003.png": {
+   "sha256": "d4af181645a0b963c6d07797ac1c98c3d30574f905489e5e4addf4e7a08e6b66",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0004.png": {
+   "sha256": "c8587aa80bf6a3e68c5a35892ce367304be1c4d69691f18259803188416ab438",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0005.png": {
+   "sha256": "d34a370a34687ab513ac182c7e04073952b93faedbfc48802e881a0f50fbf7c6",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0006.png": {
+   "sha256": "5f68b5e242eb0e8b82af9119f311f5655c3130008f7482e24deed1f6261c02a8",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0007.png": {
+   "sha256": "ce7054ca6f50daa513cd865dbb6202d64d729d77947a30f09f5cbc82e8bc7abe",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0008.png": {
+   "sha256": "985062c2f5596af9e96297f8fb47481c276a01dcce3b4ece829bbef39196ee91",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0009.png": {
+   "sha256": "85d18122fc5b75ebc6d5aba91f2e15855e7f8ba60c3541716243b9f80ce48202",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0010.png": {
+   "sha256": "0fc8ce5c1dda1e9510f6642687676376c5205e483db612d93c51484cb8e1fee6",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0011.png": {
+   "sha256": "6e014b31cf130f0afe48dc2e3404957ec91186f46d8be1d0bc361446a520fb56",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0012.png": {
+   "sha256": "bff90a06f72821ae7f339df38f01da7d6cbb45f226e024103c10c00013bc49ee",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0013.png": {
+   "sha256": "09b511d3b6f9c36cd9c85ee6f9b630f90c5092ef80452f35e26c2dee7f7c1f2d",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0014.png": {
+   "sha256": "ec5bf1039582362ceb8a6ca7492c6d98681a792c0ba76420b1540fdff5ca30ea",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0015.png": {
+   "sha256": "8ac7d351b5776907b8616a13f1beadf2825b277ca41a056156fc1a6616b94a1f",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0016.png": {
+   "sha256": "f15c9300c749b1c632db7ea707ccca351df79de6c591484d3b47d244c73062cf",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0017.png": {
+   "sha256": "399b99ec2a54a6f7e2ae0a7860adf15273dc778a323aa3da8b14041fcf0ee420",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0018.png": {
+   "sha256": "2325e97072ae8bd6eee152618eaa9c4b303af283aa677093c668fbd4d55ebd9a",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0019.png": {
+   "sha256": "926e01364e2ea33dffac183ea1a448252a3f7137ea45732f301b2d8cbfa52280",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0020.png": {
+   "sha256": "cc137fd4262e2e3be9b0a04239c6b2f393548e75d9f7543d62321885630ac25c",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0021.png": {
+   "sha256": "b854e94c3edfb2ccb70cd6e1547b0b593f9326d6a1e62481f68ef36d3ed4b9f8",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0022.png": {
+   "sha256": "153a4ba2a63f2e5d868d34cd36dba4c2c50a18ba3eca51c507db221bffee8dce",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0023.png": {
+   "sha256": "9c93e28f8e9030ade5db5c169c3ae63f2964485b773fc9dd01b19a24fc7ebca9",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0024.png": {
+   "sha256": "b9e7e817c13a371bd985e16c39d47a78c8e7f909774964d200897b9dae13875c",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0025.png": {
+   "sha256": "2b3f5ae2ac005970bd25090dc846d60512ad1d183de0aa53a2c4ae7adf627e2d",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0026.png": {
+   "sha256": "7a8fd65abb55ac664c5873b078833e1c64496ac1775c08e9929df200f8793a31",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0027.png": {
+   "sha256": "acd345dc7b2ec34ae6032087f326b46461343f49f9cde3403c7c5f14912c181d",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0028.png": {
+   "sha256": "f04007444b956493a87f4720da8b085c529c564704a78cc129d02ac0c7764173",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0029.png": {
+   "sha256": "dba564f4da723e8ba6bfe84aaec057532da29556d6d55f60e9670e32af181d79",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0030.png": {
+   "sha256": "a6818d1ae5cfcb1a6d3e6989ba58ac329ff6f08b00270beed134d810bbf89962",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0031.png": {
+   "sha256": "0e28da10d46368571f07b232601e2432eac8fbe15235fe11d677f0045b51e7bb",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0032.png": {
+   "sha256": "65ddbb509792f373c952bead6aae37b55ee9572ece48fed1a5220254c3e6639e",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0033.png": {
+   "sha256": "089a10311e64789ec20470c9ec5d995fd4e862a4db30ab8da2277da90c48324b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0034.png": {
+   "sha256": "78043286b3865d0902cc54db200f2d0fd494adb9ea26112515e27f01b73ce384",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0035.png": {
+   "sha256": "f36fe67d6bb5edbdd08de7aa6a20e31bcee7289cdb2b05161c6bca51a53dca14",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0036.png": {
+   "sha256": "d8b47b80a34b05a0e2eeb343c4291288e07eabd618e7b04af13e09c0a9d7bcd3",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0037.png": {
+   "sha256": "62266a69117244346803a588ae0e3202190f94c32a4eb427522a709444533273",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0038.png": {
+   "sha256": "4f67cb48f4f9eaead6a8395a4eeb36c41310f3a1fa03a80c73e97ceb9ad07805",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0039.png": {
+   "sha256": "a0ed32037b4cc50f29d718b159eff8411e53bbbb45ca8c6b5104ebc020fbb490",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0040.png": {
+   "sha256": "8c803f314a167aca5d8f7359b6eb692e5e7d206a6ed6d5c761a4118ec61847e0",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0041.png": {
+   "sha256": "f957c2559b5423871c2f5238a5aae9740f1f7f13b69126be34922073ab12b91e",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0042.png": {
+   "sha256": "8c8e6e73bb4954a0d8b8719fddb451e2aa090fe1e26fdae9150c3483d42cba3b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0043.png": {
+   "sha256": "45d9944edec6263d3d1554b7ca6d3a78738f14ed59a7a63745e55dc95fd15c71",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0044.png": {
+   "sha256": "172a3b3de4e5d512f9985c6853a0d2018caea02b26f26327412412832b66f5ba",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0045.png": {
+   "sha256": "cd4548986fdef33fb6b57c8b2b30366aeff64b415fbf5c9a497cf224e452e09b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0046.png": {
+   "sha256": "cf46d16cc26f164430b95f839eaad5e8902c313e4c0b8863354ec7f03a13a9ee",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0047.png": {
+   "sha256": "ab38cbf23f078d19d5992d1418e5d1a61a6e0c2c6554c51eed55ed664668dce9",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0048.png": {
+   "sha256": "4d5f5c8b68d64ad7a19d83b65f2959d768105ee2dac16bf8f3b355c71a4f1bda",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0049.png": {
+   "sha256": "bc65eb84be7140dbc9af6b972752d9be011a64661165b9ed5c70877f25ff8954",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0050.png": {
+   "sha256": "4826ec11e0540a5949940ec032d984591433db9d5b265eb71134404dc16f02b3",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0051.png": {
+   "sha256": "dbef1aa0b071cb0e84c46495da1342ca2bced4c5d717beff287452dd3530dfff",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0052.png": {
+   "sha256": "2665bfa7e61b3f28c03ab5e6ac56e8155198eb8ce398bc03d322c90ee70dcf14",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0053.png": {
+   "sha256": "ff45d5d81bdc54d6cde285b6f8a932fa7caff8a8650c16d9c51d536854a03e98",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0054.png": {
+   "sha256": "b9ea0ecd4495319ae7d0a53959cbd12b06405938fc311018257056bd7c70a30a",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0055.png": {
+   "sha256": "e0d6e300e46ecceadd8ee3b6082c7d4edc7d9f2611adfa29e5ab4bb5c87d4fe7",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0056.png": {
+   "sha256": "7815b8cc2ff413025c3119ee083aee83dac42fe6268d93fc075e7052e23430c5",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0057.png": {
+   "sha256": "2d5c40b026b2d190d3f40179408745ad155094989224650d65ac9f24fe4e3cf4",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0058.png": {
+   "sha256": "beb2e416b2ddf24f52543d1dfcc06c9d7a5511170ec026fd20dcd341a83bfe07",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0059.png": {
+   "sha256": "7b4ce7528b9b5ec8699e573227cc37b6f4a078afcba3b55965fb90e3096a480a",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0060.png": {
+   "sha256": "d22fcf70e717698abbbfd24adc15541e023f4d8781cd075341b1fda7b26c0561",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0061.png": {
+   "sha256": "c733101c498ed1bda72f3f26f781e9285d6bd58b52fcc37e1d9157f580b64ca6",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0062.png": {
+   "sha256": "5b4cfd55803407f7b5d77091f9b08ef8f4b300f6965c4c2ab449834b71f2e3b1",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0063.png": {
+   "sha256": "8ce287929b7b5552ccd11c4a1b66e916c24a7e22dbe6af59dabecc39dd7159e2",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0064.png": {
+   "sha256": "90242d7af727f71b93a039be41b6720f0fb099838474da8b9d7643a0b85c3fa7",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0065.png": {
+   "sha256": "1b30c1c1a38d5fcbc6eb1090b55f5a2ba415dfb51fa47b63824966a4230efde7",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0066.png": {
+   "sha256": "41be9918744e5825d16dab8918be5935a708183900ad89476c943f7563f5f45c",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0067.png": {
+   "sha256": "ae7bbaa3061adfb9e289e28f22283888dc11f380a41fdd40f5685eb42d936aae",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0068.png": {
+   "sha256": "bfd89dfb2afdadd8b68274f012c92825f9cb3cbd8ebef8ffaa95590c2874f1b8",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0069.png": {
+   "sha256": "6f8e2d1e9e5e770aeac4841e7c4ee345a2b60dd9ae8e25ab324e88beb0493b20",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0070.png": {
+   "sha256": "4c06e9b4252ca62a899622064ea2f10bd0044d053670d07d93d7d8487e38cbcc",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0071.png": {
+   "sha256": "4de29efcd6bae0c065ed9d7c79b98f14c8de7e92dc5858e848a09984bd3053c9",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0072.png": {
+   "sha256": "c8259f9c1e0c3c67b41d9db882693aa062b868664c6707a111c526ebd5135618",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0073.png": {
+   "sha256": "ec55608cda1d0a6cb2652b5f25f43e72628aad830576587c43412bc6b98e72c7",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0074.png": {
+   "sha256": "4e93e6e7c29b59417faf14cba00454f3a7665a99452e28698f4f5f964c1b4950",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0075.png": {
+   "sha256": "06f207903a1a32815df82287596bded02062e9a6a6c9cf686b5fd47c84fb1390",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0076.png": {
+   "sha256": "eb2fc291808d55ea02a00c0d0a4d94b1d06436892a07fadf1dfb453b15d7ea9a",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0077.png": {
+   "sha256": "f636c847092d320aad0d226145aa74a48cec2089ccf57eb48894c316c61e18e7",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0078.png": {
+   "sha256": "7c7270bc537263809af7ff7d3ddf1a7060d51b8a243a1914ebc053a5e5504f02",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0079.png": {
+   "sha256": "6002077eed464e13306b0efee7d92f92bef1e3304200ed83687037582c61bd08",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0080.png": {
+   "sha256": "fb347d95d088abfc35df48bbeef360d9d47e82cfbada6dd0d1405ab7ce0aaab7",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0081.png": {
+   "sha256": "13c1ee1d1d39136de62098fc07a4989454cfa6e4a94e88ef21e27b002a8a42fc",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0082.png": {
+   "sha256": "268f3d609c9380f340115c16989d371c97c1452b2dae1abaf81784590a15562a",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0083.png": {
+   "sha256": "7c45f3e13384388c8a45dbec99e9fb46469b063a22706dfac2daf7b0b66651e4",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  },
+  "hv_0084.png": {
+   "sha256": "8dbe4d8ed866659d4756c5c5c6ac918fad0717f2cf3899d900f28747248797a2",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGB"
+  }
+ }
+}

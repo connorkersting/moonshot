@@ -1,0 +1,100 @@
+intervention_id,ts_utc,ts_local,session_part,kind,label,source,n_chars
+h001,2026-10-07T06:43:31.676Z,2026-10-07T02:43:31-04:00,1,instruction,kickoff brief (8-hour /loop run),queued_message,8102
+h002,2026-10-07T07:46:50.955Z,2026-10-07T03:46:50-04:00,1,approval,approved plan update relayed by a second session,queued_message,42
+h003,2026-10-07T07:48:52.451Z,2026-10-07T03:48:52-04:00,1,approval,approved relaxed usage-limit rule,queued_message,37
+h004,2026-10-07T08:13:13.151Z,2026-10-07T04:13:13-04:00,1,instruction,add crowd (mean-commenter) critic,queued_message,156
+h005,2026-10-07T08:15:36.904Z,2026-10-07T04:15:36-04:00,1,instruction,add measured reviewer roles (audio QC / fact-check),queued_message,3206
+h006,2026-10-07T08:33:20.160Z,2026-10-07T04:33:20-04:00,1,instruction,Blender upgrade moved to top of backlog,queued_message,3024
+h007,2026-10-07T08:39:15.776Z,2026-10-07T04:39:15-04:00,1,instruction,overnight safeguards and free upgrades,queued_message,2268
+h008,2026-10-07T08:56:40.448Z,2026-10-07T04:56:40-04:00,1,instruction,related-work check before README,queued_message,1721
+h009,2026-10-07T09:04:30.002Z,2026-10-07T05:04:30-04:00,1,question,asked about context-window management,queued_message,79
+h010,2026-10-07T09:06:14.233Z,2026-10-07T05:06:14-04:00,1,instruction,use Codex more (feedback; agent pushed back),queued_message,113
+h011,2026-10-07T09:09:40.221Z,2026-10-07T05:09:40-04:00,1,question,asked whether Codex may edit files,queued_message,79
+h012,2026-10-07T09:10:12.538Z,2026-10-07T05:10:12-04:00,1,approval,approved Codex write for new files,queued_message,3
+h013,2026-10-07T21:09:30.210Z,2026-10-07T17:09:30-04:00,2,instruction,24-hour extension and production-grade push,queued_message,642
+h014,2026-10-07T21:13:15.521Z,2026-10-07T17:13:15-04:00,2,instruction,add analytics showcase emphasis,queued_message,285
+h015,2026-10-07T21:25:01.568Z,2026-10-07T17:25:01-04:00,2,approval,answered extension setup questions (installs / schedule / framing),ask_user_answer,797
+h016,2026-10-07T22:50:44.211Z,2026-10-07T18:50:44-04:00,2,instruction,"plan flexibility, plateau rule and delivery time for the 24h run",queued_message,2727
+h017,2026-10-07T22:56:31.530Z,2026-10-07T18:56:31-04:00,2,question,asked whether to switch Gemini accounts (edu vs personal plan),queued_message,78
+h018,2026-10-07T23:03:22.933Z,2026-10-07T19:03:22-04:00,2,instruction,said the personal Gemini plan is open in the browser,queued_message,73
+h019,2026-10-07T23:25:52.389Z,2026-10-07T19:25:52-04:00,2,instruction,accepted Gemini terms; handed over three deep-research reports to fold in,queued_message,2256
+h020,2026-10-07T23:38:02.849Z,2026-10-07T19:38:02-04:00,2,approval,"answered three setup questions (open file for upload, licence ok, get it if useful)",queued_message,150
+h021,2026-10-07T23:39:44.804Z,2026-10-07T19:39:44-04:00,2,question,asked whether to set up an API key to avoid manual uploads,queued_message,112
+h022,2026-10-07T23:40:21.228Z,2026-10-07T19:40:21-04:00,2,approval,approved the agent entering the API key; try the Gemini desktop app,queued_message,147
+h023,2026-10-07T23:42:59.073Z,2026-10-07T19:42:59-04:00,2,question,asked how to set up the API project,queued_message,98
+h024,2026-10-07T23:45:21.932Z,2026-10-07T19:45:21-04:00,2,instruction,"key added; stop at the next milestone for the usage limit, resume at reset",queued_message,103
+h025,2026-10-07T23:47:02.513Z,2026-10-07T19:47:02-04:00,2,question,asked for a predicted final score and whether to start a fresh thread,queued_message,178
+h026,2026-10-07T23:48:19.925Z,2026-10-07T19:48:19-04:00,2,question,asked how good the repo will be and which deliverables are planned,queued_message,102
+h027,2026-10-07T23:53:22.758Z,2026-10-07T19:53:22-04:00,2,question,asked whether to add a hiring-side critic and whether critics are redundant,queued_message,269
+h028,2026-10-07T23:57:45.482Z,2026-10-07T19:57:45-04:00,2,question,asked why crowd critics stopped and whether real replies could back them,queued_message,318
+h029,2026-10-08T00:01:13.740Z,2026-10-07T20:01:13-04:00,2,approval,approved X research after the v16 panel; asked about a small decision model,queued_message,246
+h030,2026-10-08T00:06:38.886Z,2026-10-07T20:06:38-04:00,2,approval,approved adding the reply corpus; asked about scale and portfolio add-ons,queued_message,2832
+h031,2026-10-08T00:08:44.542Z,2026-10-07T20:08:44-04:00,2,question,asked whether to cap video generation at 24h and let repo work run longer,queued_message,169
+h032,2026-10-08T00:10:29.458Z,2026-10-07T20:10:29-04:00,2,question,asked whether Blender is used as much as it should be,queued_message,194
+h033,2026-10-08T00:16:47.020Z,2026-10-07T20:16:47-04:00,2,approval,queued the Blender title version after v16; asked why ideas were not surfaced,queued_message,241
+h034,2026-10-08T00:19:46.615Z,2026-10-07T20:19:46-04:00,2,question,asked about using course materials in the project,queued_message,301
+h035,2026-10-08T00:21:11.199Z,2026-10-07T20:21:11-04:00,2,question,asked how actual autonomous loop time is measured,queued_message,103
+h036,2026-10-08T00:22:09.674Z,2026-10-07T20:22:09-04:00,2,instruction,said the 24h may be spread over several days,queued_message,136
+h037,2026-10-08T00:43:34.255Z,2026-10-07T20:43:34-04:00,2,approval,approved auto-resume after reset; asked about craftapps updates and missing tools,queued_message,242
+h038,2026-10-08T00:51:52.901Z,2026-10-07T20:51:52-04:00,2,approval,approved building tools and checking changelogs; asked about usefulness and lessons,queued_message,251
+h039,2026-10-08T00:54:58.871Z,2026-10-07T20:54:58-04:00,2,question,asked what is on the list after the limit resets,queued_message,88
+h040,2026-10-08T00:57:04.144Z,2026-10-07T20:57:04-04:00,2,question,asked for a plain explanation of the items waiting on him,queued_message,58
+h041,2026-10-08T00:58:26.658Z,2026-10-07T20:58:26-04:00,2,instruction,asked the agent to open two audio options for him,queued_message,45
+h042,2026-10-08T01:01:20.132Z,2026-10-07T21:01:20-04:00,2,instruction,"listening feedback on the two options (first more authentic, second hard to follow)",queued_message,222
+h043,2026-10-08T01:03:03.536Z,2026-10-07T21:03:03-04:00,2,instruction,further listening feedback: leans toward being able to understand option 1,queued_message,67
+h044,2026-10-08T01:14:24.179Z,2026-10-07T21:14:24-04:00,2,instruction,"v16 watch notes (0:33 music and scene change, 0:45 box side switch, 1:02 abrupt stop)",queued_message,1084
+h045,2026-10-08T01:17:58.242Z,2026-10-07T21:17:58-04:00,2,question,asked about running viewer surveys with friends and family,queued_message,299
+h046,2026-10-08T01:22:08.262Z,2026-10-07T21:22:08-04:00,2,instruction,asked for an audit and ordering of the addition list; noted usage,queued_message,569
+h047,2026-10-08T01:27:58.027Z,2026-10-07T21:27:58-04:00,2,question,"asked what a LinkedIn post would look like (honest, casual)",queued_message,341
+h048,2026-10-08T01:50:56.831Z,2026-10-07T21:50:56-04:00,2,instruction,reported the limit reset and context at 82%,queued_message,34
+h049,2026-10-08T02:15:12.305Z,2026-10-07T22:15:12-04:00,2,question,asked whether a high context window costs more usage,queued_message,153
+h050,2026-10-08T03:03:55.218Z,2026-10-07T23:03:55-04:00,2,question,asked whether to do anything before running a command,queued_message,55
+h051,2026-10-08T03:04:14.586Z,2026-10-07T23:04:14-04:00,2,instruction,ran /compact,queued_message,8
+h052,2026-10-08T03:13:31.925Z,2026-10-07T23:13:31-04:00,2,instruction,v17 watch notes (0:32 cut still awkward; 1:02 better),queued_message,285
+h053,2026-10-08T03:28:44.953Z,2026-10-07T23:28:44-04:00,2,approval,chose option B for both; ideas for the 0:32 transition,queued_message,407
+h054,2026-10-08T03:36:38.871Z,2026-10-07T23:36:38-04:00,2,approval,liked the previewed variant; suggested a slow zoom on a still,queued_message,171
+h055,2026-10-08T03:38:06.576Z,2026-10-07T23:38:06-04:00,2,approval,approved the previewed variant,queued_message,15
+h056,2026-10-08T04:30:34.224Z,2026-10-08T00:30:34-04:00,2,instruction,said the edit could be much more impressive,queued_message,178
+h057,2026-10-08T04:32:08.646Z,2026-10-08T00:32:08-04:00,2,approval,answered recut questions (music-locked montage; agent picks references),ask_user_answer,386
+h058,2026-10-08T05:10:46.621Z,2026-10-08T01:10:46-04:00,2,question,asked how different the next version will be,queued_message,52
+h059,2026-10-08T05:16:05.273Z,2026-10-08T01:16:05-04:00,2,question,"asked about free better footage, motion-graphics tooling, Gemini hearing, DaVinci",queued_message,306
+h060,2026-10-08T05:26:32.705Z,2026-10-08T01:26:32-04:00,2,approval,approved the plan; Gemini key in place; approved vetted installs,queued_message,243
+h061,2026-10-08T05:28:51.222Z,2026-10-08T01:28:51-04:00,2,instruction,asked the agent to open the credentials file,queued_message,139
+h062,2026-10-08T05:30:45.731Z,2026-10-08T01:30:45-04:00,2,instruction,said the key was already in the file,queued_message,37
+h063,2026-10-08T05:42:35.636Z,2026-10-08T01:42:35-04:00,2,instruction,v19 watch notes (0:33 odd again; overlays look cheap),queued_message,274
+h064,2026-10-08T05:49:19.525Z,2026-10-08T01:49:19-04:00,2,approval,answered 0:33 and HUD questions (no review while asleep; authentic 1969 hardware),ask_user_answer,553
+h065,2026-10-08T06:19:06.531Z,2026-10-08T02:19:06-04:00,2,instruction,going to bed; liked the updated 0:33 and 1:02,queued_message,113
+h066,2026-10-08T06:49:16.999Z,2026-10-08T02:49:16-04:00,2,question,asked what the biggest differences in v20 will be,queued_message,51
+h067,2026-10-08T07:44:39.511Z,2026-10-08T03:44:39-04:00,2,question,asked how much of the 24h clock is left,queued_message,66
+h068,2026-10-08T08:00:23.782Z,2026-10-08T04:00:23-04:00,2,instruction,asked for one more overnight polish loop to produce v21,queued_message,256
+h069,2026-10-08T15:33:07.531Z,2026-10-08T11:33:07-04:00,3,instruction,asked to open v21 and stop all processes,queued_message,84
+h070,2026-10-08T15:40:22.263Z,2026-10-08T11:40:22-04:00,3,question,asked to rank previously rejected tools by impact,queued_message,139
+h071,2026-10-08T15:46:14.317Z,2026-10-08T11:46:14-04:00,3,approval,"approved TwelveLabs, Remotion, EffectCraft and adopt-if-time items; no spending",queued_message,245
+h072,2026-10-08T16:18:22.273Z,2026-10-08T12:18:22-04:00,3,instruction,created the TwelveLabs account; asked the agent to open the credentials file,queued_message,177
+h073,2026-10-08T16:20:03.702Z,2026-10-08T12:20:03-04:00,3,instruction,reported the wrong file was opened,queued_message,64
+h074,2026-10-08T16:20:14.628Z,2026-10-08T12:20:14-04:00,3,instruction,asked to open the file again,queued_message,23
+h075,2026-10-08T16:20:49.809Z,2026-10-08T12:20:49-04:00,3,instruction,confirmed the file is saved,queued_message,15
+h076,2026-10-08T16:23:00.995Z,2026-10-08T12:23:00-04:00,3,instruction,asked for another run with the new tools and critiques while in class,queued_message,120
+h077,2026-10-08T16:24:38.705Z,2026-10-08T12:24:38-04:00,3,instruction,asked for a project audit and a tool audit; fold if-time items into future runs,queued_message,345
+h078,2026-10-08T20:11:39.170Z,2026-10-08T16:11:39-04:00,3,question,back from class after a sign-out; asked what to know and do,queued_message,92
+h079,2026-10-08T20:12:05.778Z,2026-10-08T16:12:05-04:00,3,question,asked whether to compact the session,queued_message,16
+h080,2026-10-08T20:19:52.720Z,2026-10-08T16:19:52-04:00,3,instruction,answered the audit questions; asked for a table of every tool's impact,queued_message,469
+h081,2026-10-08T20:33:05.218Z,2026-10-08T16:33:05-04:00,3,approval,approved the new card style; asked for the TwelveLabs data setting to be changed in a browser; relaxed the 10 GB disk cap within reason,queued_message,695
+h082,2026-10-08T20:35:11.788Z,2026-10-08T16:35:11-04:00,3,instruction,ran /compact,queued_message,8
+h083,2026-10-08T20:41:58.436Z,2026-10-08T16:41:58-04:00,3,instruction,continue,queued_message,8
+h084,2026-10-08T21:49:55.681Z,2026-10-08T17:49:55-04:00,3,instruction,"blind audio audition picks: no preference on the countdown, B on staging, A on alarm and descent",queued_message,315
+h085,2026-10-08T22:55:22.254Z,2026-10-08T18:55:22-04:00,3,instruction,asked for files to be opened whenever his call is needed,queued_message,86
+h086,2026-10-08T22:57:34.122Z,2026-10-08T18:57:34-04:00,3,instruction,picked the hero-beat clip (bottom); asked for smaller disclosure tags,queued_message,195
+h087,2026-10-08T23:03:01.449Z,2026-10-08T19:03:01-04:00,3,question,asked about rendering a footstep video; said the v24 outro felt rushed and shaky,queued_message,385
+h088,2026-10-08T23:16:49.705Z,2026-10-08T19:16:49-04:00,3,question,asked whether the cloud credit could be used here,queued_message,154
+h089,2026-10-08T23:31:37.914Z,2026-10-08T19:31:37-04:00,3,instruction,asked to stop after the current run and finish the 24 hours later,queued_message,69
+h090,2026-10-09T02:02:14.908Z,2026-10-08T22:02:14-04:00,3,question,asked how much time is left on the 24-hour clock,queued_message,34
+h091,2026-10-09T02:08:21.923Z,2026-10-08T22:08:21-04:00,3,question,asked for the boldest thing doable in the remaining time,queued_message,62
+h092,2026-10-09T02:09:48.828Z,2026-10-08T22:09:48-04:00,3,instruction,continue,queued_message,8
+h093,2026-10-09T02:15:08.413Z,2026-10-08T22:15:08-04:00,3,instruction,picked the right-hand slow-mo in a side-by-side,queued_message,16
+h094,2026-10-09T03:23:14.441Z,2026-10-08T23:23:14-04:00,3,instruction,asked to stop cleanly because the laptop battery was low,queued_message,60
+h095,2026-10-09T03:30:00.072Z,2026-10-08T23:30:00-04:00,3,instruction,continue,queued_message,8
+h096,2026-10-09T04:11:05.178Z,2026-10-09T00:11:05-04:00,3,question,asked whether to still run the critique review on v28,queued_message,136
+h097,2026-10-09T04:12:19.131Z,2026-10-09T00:12:19-04:00,3,approval,approved running everything that would not fit the cloud credit budget,queued_message,67
+h098,2026-10-09T05:26:17.631Z,2026-10-09T01:26:17-04:00,3,instruction,asked for the teaser to be opened so he could watch it,queued_message,31
+h099,2026-10-09T07:09:13.462Z,2026-10-09T03:09:13-04:00,3,instruction,asked to try again,queued_message,9

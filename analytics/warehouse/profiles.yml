@@ -1,0 +1,10 @@
+moonshot:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      # Relative to the folder dbt is run from (analytics/warehouse). Git-ignored.
+      path: moonshot.duckdb
+      threads: 2
+      settings:
+        threads: 2

@@ -1,0 +1,866 @@
+version: 2
+
+# Core dimensions and facts. Full coverage: unique + not_null on the grain key,
+# relationships on every foreign key, accepted_values on every enum, and range
+# tests on scores, shares and token counts.
+
+models:
+  # ---------------------------------------------------------------- dimensions
+  - name: dim_version
+    description: >
+      Grain: one row per trailer version (v1 to the latest, including an in-progress one).
+      Tags, export time, length, loudness and tech-QC from the raw tables; the promote or
+      keep decision, its reason and the director's note from the version_outcomes seed
+      (PROGRESS.md); each critic's headline score (NULL where the critic did not score the
+      version); and the blind A/B result against the version it was compared with. A version
+      without a recorded decision is in_progress until exported.
+    columns:
+      - name: version_id
+        description: Text key, "v1" to "vN".
+        data_tests: [not_null, unique]
+      - name: version_number
+        data_tests: [not_null, unique]
+      - name: previous_version_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: outcome
+        description: kept (became BEST), reverted, not_best, final, in_progress. NULL (a test failure) means exported but no decision recorded.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [kept, reverted, not_best, final, in_progress]
+      - name: is_promoted
+        description: True when the version became BEST (outcome kept or final).
+        data_tests: [not_null]
+      - name: decision_basis
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [baseline, editor_only, ab_win, ab_draw_editor, ab_loss, override_verified_misread, required_fix, override_logged, director_pick, gated_fix]
+      - name: decision_reason
+        description: One sentence on why the version was or was not promoted.
+        data_tests:
+          - not_null:
+              config:
+                where: "outcome <> 'in_progress'"
+      - name: has_director_input
+        description: True when a note from the director shaped this version (v17, v19, v20, v21).
+        data_tests: [not_null]
+      - name: is_final
+        data_tests: [not_null]
+      - name: is_best_final
+        description: From BEST.json (promote.py), not from the BEST line in PROGRESS.md.
+        data_tests: [not_null]
+      - name: fable_editor_overall
+        data_tests: &score_range
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 10
+      - name: fable_editor_rescored_overall
+        description: The Fable editor's score for this version when it re-scored it inside the next review. Differs from fable_editor_overall because the scale shifts between reviews.
+        data_tests: *score_range
+      - name: codex_critic_overall
+        data_tests: *score_range
+      - name: gemini_flash_overall
+        data_tests: *score_range
+      - name: gemini_pro_web_overall
+        data_tests: *score_range
+      - name: twelvelabs_overall
+        data_tests: *score_range
+      - name: crowd_shareability
+        data_tests: *score_range
+      - name: crowd_ai_slop_perception
+        description: 1 to 10 where HIGHER IS WORSE.
+        data_tests: *score_range
+      - name: crowd_would_watch_to_end
+        data_tests: *score_range
+      - name: n_critics_scoring
+        data_tests: [not_null, non_negative]
+      - name: ab_compared_with_version_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: ab_result
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [win, loss, draw]
+      - name: loop_hours_at_export
+        description: Ledger loop hours (run_ledger.csv) spent when the version was exported. Gaps between segments are not counted.
+        data_tests: [non_negative]
+      - name: project_tokens_known_at_export
+        description: Every Claude request in the project up to the export (all agents; input + cache + known output).
+        data_tests: [non_negative]
+      - name: duration_s
+        data_tests: [non_negative]
+      - name: tqc_verdict
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [PASS, FAIL]
+
+  - name: dim_agent_role
+    description: One row per agent role (main plus six subagent roles), with its group and the number of subagent runs.
+    columns:
+      - name: agent_role
+        data_tests:
+          - not_null
+          - unique
+          - accepted_values:
+              arguments:
+                values: [main, builder, critic-editor, ab-judge, crowd, researcher, other]
+      - name: role_group
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [orchestrator, worker, evaluator, support]
+      - name: n_subagent_runs
+        data_tests: [not_null, non_negative]
+
+  - name: dim_model
+    description: One row per model id seen in any table (Claude requests, Codex requests, critics, judges), with provider and family parsed from the id.
+    columns:
+      - name: model_id
+        data_tests: [not_null, unique]
+      - name: provider
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [anthropic, openai]
+      - name: model_family
+        description: NULL for an id that matches no known pattern, which fails not_null.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [opus, sonnet, fable, haiku, gpt]
+
+  - name: dim_score_category
+    description: One row per score category - ten rubric categories scored by the editor-style critics (nine craft categories plus overall) and three crowd categories.
+    columns:
+      - name: score_category
+        data_tests:
+          - not_null
+          - unique
+          - accepted_values:
+              arguments:
+                values: [hook, pacing, variety, motion, type, color, sound, captions, story, overall, shareability, ai_slop_perception, would_watch_to_end]
+      - name: category_order
+        data_tests: [not_null, unique]
+      - name: category_group
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [rubric, crowd]
+      - name: higher_is_better
+        description: False only for ai_slop_perception, where 10 means it reads as slop.
+        data_tests: [not_null]
+
+  - name: dim_session_part
+    description: One row per session part (1 = overnight run, 2 = 24-hour extension, 3 = tool expansion and v22) with wall-clock and active hours as the ingest computed them.
+    columns:
+      - name: session_part
+        data_tests:
+          - not_null
+          - unique
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+                quote: false
+      - name: wall_hours
+        data_tests: [not_null, non_negative]
+      - name: active_hours
+        data_tests: [not_null, non_negative]
+      - name: active_share_of_wall
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+  - name: dim_critic
+    description: >
+      Grain: one row per critic that scored versions (Fable editor and its re-scores, Codex,
+      Gemini Flash, Gemini Pro app, TwelveLabs, the crowd personas). discriminates_between_versions
+      is the hand-recorded reliability flag; mart_critic_reliability measures the same thing.
+    columns:
+      - name: critic_id
+        data_tests: [not_null, unique]
+      - name: critic_kind
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [llm_editor, llm_video, llm_persona]
+      - name: discriminates_between_versions
+        data_tests: [not_null]
+      - name: reliability_note
+        description: The evidence behind the flag. A critic flagged non-discriminating must have one.
+        data_tests: [not_null]
+      - name: n_versions_scored
+        data_tests: [not_null, non_negative]
+
+  - name: dim_loop_phase
+    description: >
+      Grain: one row per loop phase. A phase is a ledger segment (the agent's own record of loop
+      time) or the gap between two segments. Gaps are kept because the transcript shows work in
+      them. ledger_hours is the claim; active_hours is what the transcript supports under the
+      5-minute rule; both are NULL or 0 for gaps as appropriate.
+    columns:
+      - name: loop_phase_id
+        data_tests: [not_null, unique]
+      - name: phase_kind
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [ledger_segment, gap]
+      - name: phase_order
+        data_tests: [not_null, unique]
+      - name: ledger_hours
+        data_tests: [non_negative]
+      - name: active_hours
+        data_tests: [not_null, non_negative]
+      - name: transcript_wall_hours
+        data_tests: [non_negative]
+
+  # --------------------------------------------------------------------- facts
+  - name: fct_llm_requests
+    description: >
+      One row per Claude provider request (deduplicated message id) by the main
+      agent or a subagent. Token types are separate columns. output_tokens is NULL
+      when the closing usage line was never written (is_usage_final = false); its
+      streamed placeholder is in output_tokens_unfinalised_lower_bound and is never
+      added to total_tokens_known.
+    columns:
+      - name: message_id
+        data_tests: [not_null, unique]
+      - name: request_id
+        description: Asserted 1:1 with message_id by the ingest; tested again here.
+        data_tests: [not_null, unique]
+      - name: agent_id
+        data_tests: [not_null]
+      - name: subagent_id
+        description: The subagent run that made the request; NULL for the main agent.
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('fct_agent_runs')
+                field: subagent_id
+      - name: agent_role
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [main, builder, critic-editor, ab-judge, crowd, researcher, other]
+          - relationships:
+              arguments:
+                to: ref('dim_agent_role')
+                field: agent_role
+      - name: model_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_model')
+                field: model_id
+      - name: session_part
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+                quote: false
+          - relationships:
+              arguments:
+                to: ref('dim_session_part')
+                field: session_part
+      - name: requested_at_utc
+        data_tests: [not_null]
+      - name: input_tokens
+        data_tests: [not_null, non_negative]
+      - name: cache_creation_tokens
+        data_tests: [not_null, non_negative]
+      - name: cache_read_tokens
+        data_tests: [not_null, non_negative]
+      - name: output_tokens
+        description: NULL when is_usage_final is false (missing closing usage line).
+        data_tests:
+          - non_negative
+          - not_null:
+              config:
+                where: "is_usage_final"
+      - name: output_tokens_lower_bound
+        data_tests: [not_null, non_negative]
+      - name: thinking_tokens
+        data_tests: [non_negative]
+      - name: is_usage_final
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+                quote: false
+      - name: total_tokens_known
+        data_tests: [not_null, non_negative]
+      - name: stop_reason
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [end_turn, tool_use, max_tokens, stop_sequence]
+
+  - name: fct_agent_runs
+    description: >
+      One row per subagent run: spawn time, first request, end time (last request),
+      durations, and request and token totals aggregated to agent grain before the
+      join (int_llm_requests_by_agent).
+    columns:
+      - name: subagent_id
+        data_tests: [not_null, unique]
+      - name: spawn_id
+        data_tests: [not_null, unique]
+      - name: agent_role
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [builder, critic-editor, ab-judge, crowd, researcher, other]
+          - relationships:
+              arguments:
+                to: ref('dim_agent_role')
+                field: agent_role
+      - name: requested_model_alias
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [opus, sonnet, fable, haiku, inherit]
+      - name: model_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_model')
+                field: model_id
+      - name: n_models
+        description: Models the run called. A run that switched model would need a different grain.
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 1
+      - name: session_part
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+                quote: false
+          - relationships:
+              arguments:
+                to: ref('dim_session_part')
+                field: session_part
+      - name: spawned_at_utc
+        data_tests: [not_null]
+      - name: ended_at_utc
+        data_tests: [not_null]
+      - name: spawn_to_first_request_s
+        data_tests: [not_null, non_negative]
+      - name: active_duration_s
+        data_tests: [not_null, non_negative]
+      - name: spawn_to_end_s
+        data_tests: [not_null, non_negative]
+      - name: request_count
+        data_tests:
+          - not_null
+          - value_in_range:
+              arguments:
+                min_value: 1
+      - name: input_tokens
+        data_tests: [not_null, non_negative]
+      - name: cache_creation_tokens
+        data_tests: [not_null, non_negative]
+      - name: cache_read_tokens
+        data_tests: [not_null, non_negative]
+      - name: output_tokens_final
+        description: Sum of finalised output counts. NULL when none of the run's requests has a final usage record (output unknown, not zero).
+        data_tests:
+          - non_negative
+          - not_null:
+              config:
+                where: "requests_usage_final > 0"
+      - name: total_tokens_known
+        data_tests: [not_null, non_negative]
+
+  - name: fct_critic_scores
+    description: >
+      Grain: one row per version x critic x score category. critic_score_id joins the three.
+      A critic that did not score a version has no rows for it (never a zero). Rubric critics
+      have ten categories per version, the crowd has two or three, a Fable re-score has one.
+    columns:
+      - name: critic_score_id
+        data_tests: [not_null, unique]
+      - name: version_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: critic_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_critic')
+                field: critic_id
+      - name: score_category
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [hook, pacing, variety, motion, type, color, sound, captions, story, overall, shareability, ai_slop_perception, would_watch_to_end]
+          - relationships:
+              arguments:
+                to: ref('dim_score_category')
+                field: score_category
+      - name: evaluation_id
+        description: The critic subagent's id for transcript-sourced scores; a file-derived id for JSON-sourced ones.
+        data_tests: [not_null]
+      - name: source_kind
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [qc_json, subagent_report, progress_md_table, progress_md_prose]
+      - name: critic_model_id
+        description: The model that produced the score. Claude critics must exist in dim_model.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_model')
+                field: model_id
+              config:
+                where: "critic_id = 'fable_editor'"
+      - name: score
+        data_tests:
+          - not_null
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 10
+      - name: progress_md_score
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 10
+      - name: differs_from_progress_md
+        description: True where PROGRESS.md transcribed a different number than the critic's own report.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [false]
+                quote: false
+
+  - name: fct_ab_votes
+    description: >
+      One row per blind A/B judge pick for one section of one comparison
+      (evaluation x repeat x section). Records which version sat on side A and B
+      (randomised per section), the side picked, the picked version (NULL on a tie)
+      and the outcome for the newer version.
+    columns:
+      - name: ab_vote_id
+        data_tests: [not_null, unique]
+      - name: evaluation_id
+        description: The judge subagent's id.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('fct_agent_runs')
+                field: subagent_id
+      - name: repeat_no
+        data_tests:
+          - not_null
+          - value_in_range:
+              arguments:
+                min_value: 1
+      - name: section_no
+        data_tests:
+          - not_null
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 7
+      - name: newer_version_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: older_version_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: side_a_version_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: side_b_version_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: newer_version_side
+        description: NULL would mean the newer version was on neither side.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [A, B]
+      - name: side_picked
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [A, B, TIE]
+      - name: is_tie
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+                quote: false
+      - name: picked_version_id
+        description: NULL on a tie.
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+          - not_null:
+              config:
+                where: "NOT is_tie"
+      - name: newer_outcome
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [win, loss, tie]
+      - name: confidence
+        description: Word-scale confidence (low to high) from the judge layouts used up to v22. NULL for the v23-on layout, which gives an integer instead (confidence_raw).
+        data_tests:
+          - not_null:
+              config:
+                where: "confidence_raw IS NULL"
+          - accepted_values:
+              arguments:
+                values: [low, low-med, med, med-high, high]
+      - name: confidence_rank
+        data_tests:
+          - not_null:
+              config:
+                where: "confidence_raw IS NULL"
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 3
+      - name: confidence_raw
+        description: Integer confidence (1 to 5) in the v23-on judge layout; NULL for the older layouts. Exactly one of confidence and confidence_raw is present on every vote.
+        data_tests:
+          - not_null:
+              config:
+                where: "confidence IS NULL"
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 5
+      - name: judge_model_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_model')
+                field: model_id
+
+  - name: fct_version_audio
+    description: One row per version x loudness section from the audio QC (aqc) file.
+    columns:
+      - name: version_section_id
+        data_tests: [not_null, unique]
+      - name: version_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: section_no
+        data_tests: [not_null]
+      - name: section_duration_s
+        data_tests: [not_null, non_negative]
+      - name: section_lufs
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: -70
+                max_value: 0
+
+  - name: fct_dialogue_lines
+    description: One row per version x dialogue line from the audio QC file. Line text is not stored.
+    columns:
+      - name: dialogue_line_id
+        data_tests: [not_null, unique]
+      - name: version_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: line_no
+        data_tests: [not_null]
+      - name: line_start_s
+        data_tests: [not_null, non_negative]
+      - name: whisper_recall
+        data_tests:
+          - not_null
+          - value_in_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+      - name: meets_10db_target
+        description: Dialogue at least +10 dB over the bed. NULL for v22 on, whose audio QC saved no dialogue and bed stems (the ratio was skipped; only the Whisper recall is measured).
+        data_tests:
+          - not_null:
+              config:
+                where: "dialogue_to_bed_db IS NOT NULL"
+
+  - name: fct_codex_requests
+    description: >
+      One row per Codex CLI request attributed to the run (codex session x request
+      sequence). input_tokens includes cached_input_tokens (OpenAI convention).
+      session_part is assigned from the Claude session's wall-clock window.
+    columns:
+      - name: codex_request_id
+        data_tests: [not_null, unique]
+      - name: model_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_model')
+                field: model_id
+      - name: session_part
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+                quote: false
+          - relationships:
+              arguments:
+                to: ref('dim_session_part')
+                field: session_part
+      - name: attribution
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [workdir_moonshot, craftapps_during_run]
+      - name: input_tokens
+        data_tests: [not_null, non_negative]
+      - name: cached_input_tokens
+        data_tests: [not_null, non_negative]
+      - name: uncached_input_tokens
+        description: Negative would mean cached > input, which breaks the OpenAI convention the ingest assumes.
+        data_tests: [not_null, non_negative]
+      - name: output_tokens
+        data_tests: [not_null, non_negative]
+      - name: reasoning_output_tokens
+        data_tests: [not_null, non_negative]
+      - name: plan_5h_used_pct
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: 0
+                max_value: 100
+      - name: plan_weekly_used_pct
+        data_tests:
+          - value_in_range:
+              arguments:
+                min_value: 0
+                max_value: 100
+
+  - name: fct_interventions
+    description: One row per human message or answer to the agent, with minutes since its session part started.
+    columns:
+      - name: intervention_id
+        data_tests: [not_null, unique]
+      - name: session_part
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+                quote: false
+          - relationships:
+              arguments:
+                to: ref('dim_session_part')
+                field: session_part
+      - name: intervention_kind
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [instruction, approval, question]
+      - name: intervention_source
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [queued_message, user_message, ask_user_answer]
+      - name: intervention_label
+        description: Hand-written neutral summary. "unlabelled" means the label file is behind the transcript (tests/assert_interventions_are_labelled.sql).
+        data_tests: [not_null]
+      - name: minutes_into_session_part
+        data_tests: [not_null, non_negative]
+      - name: message_chars
+        data_tests: [not_null, non_negative]
+
+  - name: fct_session_events
+    description: One row per session event (session-part start or context compaction).
+    columns:
+      - name: session_event_id
+        data_tests: [not_null, unique]
+      - name: event_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [session_part_start, compaction]
+      - name: session_part
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_session_part')
+                field: session_part
+      - name: context_tokens_before
+        data_tests: [non_negative]
+      - name: context_tokens_after
+        data_tests: [non_negative]
+
+  - name: fct_director_picks
+    description: >
+      One row per pick the director made on a blind audition or side-by-side clip (grain: the pick).
+      Audio auditions are mapped through the key file, so option_picked says which stream he chose,
+      not which side he heard it on. The picture picks (hero beat, slow-mo) have no key file
+      kept; their option is the one PROGRESS.md records as adopted, and is_mapped_through_key is false.
+    columns:
+      - name: director_pick_id
+        data_tests: [not_null, unique]
+      - name: side_picked
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [A, B, NONE, TOP, BOTTOM, LEFT, RIGHT]
+      - name: option_picked
+        data_tests: [not_null]
+      - name: is_mapped_through_key
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+                quote: false
+      - name: is_adopted
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+                quote: false
+      - name: version_effect_id
+        description: The version the pick shaped (v24 staging audio, v25 hero beat, v27 slow-mo).
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: key_file_name
+        data_tests:
+          - not_null:
+              config:
+                where: "is_mapped_through_key"
+
+  - name: fct_baseline_to_final
+    description: >
+      The final Fable review scored the first version and the final version on the same ten
+      rubric categories in one sitting (grain: review x baseline version x category). It is the
+      one place the two ends of the run share a scale, unlike the per-review scores in
+      fct_critic_scores, which moved between reviews. The critic cannot hear, so the sound
+      category is scored from structure only.
+    columns:
+      - name: baseline_comparison_id
+        data_tests: [not_null, unique]
+      - name: review_version_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: baseline_version_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_version')
+                field: version_id
+      - name: score_category
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_score_category')
+                field: score_category
+      - name: baseline_score
+        data_tests:
+          - not_null
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 10
+      - name: final_score
+        data_tests:
+          - not_null
+          - value_in_range:
+              arguments:
+                min_value: 1
+                max_value: 10
+      - name: score_delta
+        description: final_score minus baseline_score.
+        data_tests: [not_null]

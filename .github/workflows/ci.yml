@@ -1,0 +1,72 @@
+name: CI
+
+# Two checks that need no media, no Blender, no ffmpeg and no secrets:
+#   python - every .py under pipeline/ and analytics/ byte-compiles
+#   dbt    - the warehouse builds from the committed CSVs in analytics/data/raw
+#            and every data test runs (seeds, models, tests)
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python compile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      # Compiling needs only the standard library. Imports such as bpy, librosa or
+      # numpy are not resolved by compileall, so nothing else is installed.
+      - name: Byte-compile pipeline/ and analytics/
+        run: python -m compileall -q pipeline analytics
+
+  dbt:
+    name: dbt build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: analytics/warehouse
+    env:
+      DO_NOT_TRACK: "1"
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: analytics/requirements-ci.txt
+
+      # dbt-core, dbt-duckdb and duckdb with every dependency pinned to uv.lock.
+      - name: Install pinned dbt-duckdb
+        run: python -m pip install -r ../requirements-ci.txt
+
+      - name: dbt version
+        run: dbt --version
+
+      # The project has no packages.yml today; this runs only if one is added.
+      - name: dbt deps
+        run: |
+          if [ -f packages.yml ] || [ -f dependencies.yml ]; then
+            dbt deps --profiles-dir .
+          else
+            echo "No dbt packages declared; skipping dbt deps."
+          fi
+
+      # profiles.yml is committed and points at a local file (moonshot.duckdb), so the
+      # build needs no credentials and no .env.
+      - name: dbt build
+        run: dbt build --full-refresh --profiles-dir .

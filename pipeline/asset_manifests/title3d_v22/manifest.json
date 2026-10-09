@@ -1,0 +1,1328 @@
+{
+ "what": "MOONSHOT 3D title, v22 light rig (build.py title_layer: open 13.0-17.25 logical, end card 83.4-85.5)",
+ "sources": {
+  "blender/title_v22.py": "d919383971f8702eff8d8b4e22b3d9cab1b163e8c59dc75f192b783f704a7e7f",
+  "blender/title_post_v18.py": "a71c7afff9307007b282b4a9c07b770b0e28b8e5f7861b1d98b9b7f0c20fe536"
+ },
+ "props": {
+  "open": "104 frames, centre (1380, 400), 44% width, rise 190 px, yaw -10 -> -5, push 1.05 -> 0.965, glow 1.0, rim 1.6 (1.0, 0.52, 0.2), fill 70",
+  "end": "56 frames, centre (960, 318), 52% width, no rise, yaw 5 -> 2.5, push 1.035 -> 0.985, glow 0.35, rim 0.9 (1.0, 0.82, 0.62), fill 70",
+  "post": "title_post_v18.py bloom GAIN open 1.0 / end 0.45, GLOW_MAX 0.55"
+ },
+ "commands": [
+  "blender.exe -b --factory-startup --python blender/title_v22.py -- <raw_dir> open",
+  "blender.exe -b --factory-startup --python blender/title_v22.py -- <raw_dir> end",
+  "py blender/title_post_v18.py <raw_dir> work/title3d_v22 open end"
+ ],
+ "inputs": {
+  "font Anton-Regular.ttf": "a4ba3a92350ebb031da0cb47630ac49eb265082ca1bc0450442f4a83ab947cab",
+  "hdri studio_small_09.hdr": "36724313c0fc66dab126ff90f081b85a0b1ef47be65eda1417bd20b033f0573f"
+ },
+ "renderer": {
+  "blender": "5.2.2 LTS (hash d13f752e3b9c, built 2026-09-15)",
+  "blender_exe_sha256": "c9f9c33e538dd3e195ccb8dcc5986721f49df795e91288d4f6e82295a028e1c1",
+  "engine": "EEVEE, 64 TAA samples, film transparent, motion blur shutter 0.5, view transform Standard, PNG RGBA 8-bit",
+  "post": "Python 3 + Pillow + numpy (title_post_v18.py)"
+ },
+ "format": {
+  "size": [
+   1920,
+   1080
+  ],
+  "fps": 24,
+  "numbering": "<mode>_####.png, 1-based, contiguous",
+  "ranges": {
+   "open": [
+    1,
+    104
+   ],
+   "end": [
+    1,
+    56
+   ]
+  },
+  "alpha": "straight (unassociated) RGBA; the bloom's glow is in alpha outside the letters"
+ },
+ "frames": {
+  "open_0001.png": {
+   "sha256": "3a1eaac4f29975bac977f6c08fa58db462c83f2b5b6700943076dfddc309caf0",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0002.png": {
+   "sha256": "8d26f73fc55fbe3e985757c0415a16a767fb061f36b851aaa3e8785339cf59a4",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0003.png": {
+   "sha256": "30a783d930410985246e8bd64d3c78dc44487066196b55d8fb8e4013162542e2",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0004.png": {
+   "sha256": "74c813185a89ad8b363b2af67bb5e64a15729ab80f4d09c053e48fc1311e9427",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0005.png": {
+   "sha256": "8af79f4ad5411906e463cb1aeea565100638275870389767ac2a34cb4c94f799",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0006.png": {
+   "sha256": "79d5ebefa11989c9debefd4530f45d919fcf0c046a8650bb3761a56e2dcbcb4b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0007.png": {
+   "sha256": "0f4315a6e22bc7fefbbf788dfbcc757e0f4e9eb230f1b4a7a18c2d6400994078",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0008.png": {
+   "sha256": "11dfb5921dd3262f664ae708d949f8c8a74fbfbc6521ac456abd66e5c6040080",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0009.png": {
+   "sha256": "11995eed1a1010df860827623b12ba6c901247aac5c18904030f73cfa800db81",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0010.png": {
+   "sha256": "55a643d7af198c14218cea3c9bb13eb8cd605ab081e5035f19363eb407dffb56",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0011.png": {
+   "sha256": "cd1d6d6655e5cf45c7fe972bdfccd56521922adc4931c538a717b98aeb845b0a",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0012.png": {
+   "sha256": "3cb195fb2f99f083a6971eeab1ac2f6defee3ea711e0d2413da67da14ed65624",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0013.png": {
+   "sha256": "60761e90660a253f72aab35cf88dc64bee1d28813126bd795df7c88c5106e1fb",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0014.png": {
+   "sha256": "022f277fa4153a81fe8cafda49bc7b2a6d7418b6e234e95f6a44f9d4bc579910",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0015.png": {
+   "sha256": "a406ad7faf2614141d965c81e12d9db232cd436baecd9324f6780ea601bc1411",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0016.png": {
+   "sha256": "8d315f53ffe5568ea3e893cd97b06b62507215ab343fb48701f5dd6d2500c613",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0017.png": {
+   "sha256": "94f4a64c4fb49874031326eb6fdf880db7f1d67aa527ab730fdf701bb75a3f10",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0018.png": {
+   "sha256": "07511fe8cfbcac76bcece185d480bb246597bc9c9e8be5ebc17b569657b66212",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0019.png": {
+   "sha256": "b55b5851f972584118c10d9c747e89ab5fe8fb22e6198a801b958609f604d9de",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0020.png": {
+   "sha256": "449d8de820aa0770367b351d8d1a6503a27279c6c4e53dac0c232a474b43c40b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0021.png": {
+   "sha256": "81922f622e3ebf6ec0d5732c99ee12b08679cd870c510cc1aef6f09b5a6e0e25",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0022.png": {
+   "sha256": "507657ae7e5c3e4cb94af2e417a6c45818eec9ee5f5ca64d52521ea2ad887873",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0023.png": {
+   "sha256": "3747e325e20d4f00941c88b6025a63389d1372cb7f69d1d081a12775dd536b52",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0024.png": {
+   "sha256": "81da158f5591094d1f9872f584a871b2e0fb48b4b7828586c7312e0495df493d",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0025.png": {
+   "sha256": "2febd2d594676d937d47b8da0ba1be296d5107b6ce52be96a25ecc76da48da4e",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0026.png": {
+   "sha256": "e7ec80a0c2b71c2c582d5269cb7156a03358dd45722c07ba3ccbb43b2fb1d87b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0027.png": {
+   "sha256": "8c0dd1758685d86568c38e8130fb20bf3d8c14212cf1ccd3088658ed3595ac95",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0028.png": {
+   "sha256": "081368097b94aac8a643dc1c4ac174758a41f1d2bf5362c167ae592be7db83b0",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0029.png": {
+   "sha256": "af014696b37b75c4e9a7b642ca8147ac545fcb3b8560c607292afba91e12b4a1",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0030.png": {
+   "sha256": "f4ed2f482f7b948cc3138e759b4ca56b51399ed49708dc8a6fb2a5e6d34b8710",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0031.png": {
+   "sha256": "4556fcae12c26a35c0604adaf31d4ed1eee4835c9f11ce1b9347235601136b52",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0032.png": {
+   "sha256": "0f251155dd2ebec06e03c9b5ac36ae407750a410595fb3ec3c36ed61fb852fc1",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0033.png": {
+   "sha256": "0a2b0c1580eedcde60211a428c200eb6c8077a3b69ffd07376a5bf481fd7f85b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0034.png": {
+   "sha256": "e2fe8cdfa55e4006dc67704cd445e724e6033f2165130c070590cb6dfd3abae5",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0035.png": {
+   "sha256": "c97ba5cbfc1e3f9abe930e609969f0d53e390546611f985abaa19dfbe6ef415c",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0036.png": {
+   "sha256": "6964c3130951bdc16c3e08652be59620f82c09fe217f189937957ec20146468a",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0037.png": {
+   "sha256": "dbe90d09fb4908d5d54eabac9c530193bc7a2a39300a142ba4068f0b8617eee5",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0038.png": {
+   "sha256": "4f3057a9a4da65de79a3b3daff705822fc8fd05afc2cee0d491858bd35fe11eb",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0039.png": {
+   "sha256": "dc510613efdc1b4472784056c4976a0f3de02f488d8410aad5a825ceb2470afb",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0040.png": {
+   "sha256": "0f0aacf42b54ae661482b848790e0de1bc60928a6f418746b3288a3367ea004b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0041.png": {
+   "sha256": "67ea2c3622415794c5a6f1bffff7d7868639e392b4ef612df98082512cdb957d",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0042.png": {
+   "sha256": "f740c77a32f4040ab26fc7b46e529e33f019f1882851eb0a087325fc14839238",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0043.png": {
+   "sha256": "3577de8eaf81a8a3b62427857b3ca6840a67ebb9cd9d85853c583aa498e1925f",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0044.png": {
+   "sha256": "f69f34e43832b4d29034d3a27b4f7fd22aff0cdc35b0c3c14e63a75ce212326b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0045.png": {
+   "sha256": "f6b2dc0dc6ecbf2db8640eee6367457213defc34b893bdf8c6a53daf9adaa2b5",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0046.png": {
+   "sha256": "227454279f5588a94e6346a802039a76f068e5b1c313d9eea839987903a17628",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0047.png": {
+   "sha256": "83bfa01b95f230516be30ff175481e656990afa817a64accc8cfe6fc6f6b1949",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0048.png": {
+   "sha256": "0fda736362fd815aef3d15a5fbda4816efb2b02a616cc06fd9bfb19a9fe31613",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0049.png": {
+   "sha256": "06b3a372f00555a5c06d665730001bfd552f6e321d408cb70ba7bab0bc062bb2",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0050.png": {
+   "sha256": "c69004fa8f3a8a7be385c5f8f9f46a7cb9a968cf402fec10ab80d0dc96208b72",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0051.png": {
+   "sha256": "dab937a44e10517ba44225d05a5563f7b54680aa93f9815f6c9d29f94bb6eeb1",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0052.png": {
+   "sha256": "106c6e3849be0571f985069ddfeb60d114c4a54bfd7a1892dd3057c7d5da332e",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0053.png": {
+   "sha256": "b3f59eb069a48d02dcec7097512212170e8cf8f5db664e1e2333a6a1b195b73e",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0054.png": {
+   "sha256": "d57ea92c13f5b2c8f2d3e1f9c43ab30bb3d9675f952829edb6c3196ddc191751",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0055.png": {
+   "sha256": "0dff9fad3d4e66dd2ec97ede842ccf71fbe07287a886b9bd49e4bf8b6d2838bd",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0056.png": {
+   "sha256": "307461b11b0cee4c8c80b0110c0053672c9087241b3b6349729fd01679d80b1f",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0057.png": {
+   "sha256": "e2fd65d0749d46e5f9fe5a6819ab38f2194aafdef2b5bddfdaa4e060c3dbbab2",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0058.png": {
+   "sha256": "04f61b8b48cb0e26f4127b33e6ce040f4b05f52672464e3ed6c24c1d5fc6afc0",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0059.png": {
+   "sha256": "0f81bae4004f744bd462b3270daee0bf662551ac4faafda328b3c9138399200d",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0060.png": {
+   "sha256": "7f3ed8ec1f8943ae5c8459b5526c1fe6ea2cf11713c1c109dfe19dc6c36da592",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0061.png": {
+   "sha256": "2480d1936de6f91b146a236aaad725d29dc281c78d09370ca26a7812424ec391",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0062.png": {
+   "sha256": "e4bb5c3c9009ad0694a36f883a5e6244affea22fe0c829de84fc6d7dfe3a65e5",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0063.png": {
+   "sha256": "c1bd4522c7fd03c0ebd1ebb8fd8a7733869a874668e3c940a994e4de16b12646",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0064.png": {
+   "sha256": "49c7a5a92b57ac1f1912c671b7d7c37b982f17c731e53be9317753a9eccba77d",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0065.png": {
+   "sha256": "61ff70ccd42f1600437f3068d7ea63597e4894fa42a513f2cef4ffc9e959dbcb",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0066.png": {
+   "sha256": "c1005d367d22f3f307f156abd479ca09b3b78720c1b930d0f3a36f0f5083970b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0067.png": {
+   "sha256": "1ffcc48ae0ad03db1b41ea3b19050ffc8ce6537f0bd71d8ac193ba55686c7d67",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0068.png": {
+   "sha256": "4987cd9a535a2507b760ba040a6260610b53f008ad97b0a339929c5b3d03bdbc",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0069.png": {
+   "sha256": "7497f1cee0c295a6abb9bb58c535c89012c0c11266e7c15ff0135bd2cfe66e82",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0070.png": {
+   "sha256": "603b65b4a0503477f4fa81842c769f86e01581fba6fe512713b228b39ada4e7c",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0071.png": {
+   "sha256": "43b5915b3bb0dd8bb380ad08acc76d1ee3c55fc5593d1d4e7e4f8a1bd54026e9",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0072.png": {
+   "sha256": "a2a23959df5470eb40a24c3b229238940ccebabcd9084cd64bcae5fbfeecf56d",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0073.png": {
+   "sha256": "2215001e4aec86c68eed25b7d26715089cf7efc00961fa024593ed750f35f2f3",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0074.png": {
+   "sha256": "374b005364f3485a56fd1c15872229ecfa6034b32f30d3c4d10a52a6238d3b83",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0075.png": {
+   "sha256": "4ff2b0f7cb76b4999c36f61e0713cc556e11148b1dc8b13478a084c8b3e95636",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0076.png": {
+   "sha256": "944d2b4b2556ff2767c3affa813f7f5e2f2752bb5e0964b86484d3f82d5fd2ea",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0077.png": {
+   "sha256": "f98045c8482d37d6a3995be6e45aa06611bfcd6d4ce2ba13e0bb44c7605a148a",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0078.png": {
+   "sha256": "38b873d5166fd53596b1aa81f07a964cd32a65b257690a68a46020d7a47cc7a8",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0079.png": {
+   "sha256": "d2e9c46fa78f04ce46675abe96494ec39f3a725f9084f72b8e331098f1266248",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0080.png": {
+   "sha256": "4283390057bcd6badff680aecbd3eab3a72a9b7711599e54df14e1bef0320df4",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0081.png": {
+   "sha256": "89736bf55c9815cc7d5dab541ba53a02a1bd1304fd1d593e06a1d1d85210775c",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0082.png": {
+   "sha256": "414b2778d30b8b2b666e11d5107ee8da2fbd48f4867d7f57ff42a28c70b202b1",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0083.png": {
+   "sha256": "476aef34c23746c3890505b09ac809f3b021dd0d64ba9f4b77d60add448a5304",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0084.png": {
+   "sha256": "d3123801b299f27dc20798e93684b443a71e88cc4f25cc733a7b4ad81e31263f",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0085.png": {
+   "sha256": "5a2b738254a838f9a27098c423d35a1b7c663aa2c72dee753b8ec2f2bb7f9564",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0086.png": {
+   "sha256": "5160b8b18a0bd09913decc011ee055046452c4b76ec4e5e154cdc8134dc89508",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0087.png": {
+   "sha256": "eed118094a4117114c1d11cfc597afb564c16897b38fe8be2ec063f56d1d64c9",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0088.png": {
+   "sha256": "eba454fb309ed0af30ec31f4d5ee475a77f99fa49c6494b2288af9c2839e6aef",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0089.png": {
+   "sha256": "c2fbbd1cdfd7484aaeed15c60ac3affbc20e4e565387ef28a674f0220e21043e",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0090.png": {
+   "sha256": "7d89f71a8802e289f49f60958319e412c65b711aca534ca6298c5992cdfb7faf",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0091.png": {
+   "sha256": "987e1306dce6652cc2a8b7080cc30ac0491ff9f102db25655d66cf5e446e9e48",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0092.png": {
+   "sha256": "76b39906cc9dbb468016dbf84c8a3ad9e9906a4c234796d44085cf3f3658f3bb",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0093.png": {
+   "sha256": "e46655b955733a25c4df177e656358f5058b1c618d4a4288804308c2c7ba735d",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0094.png": {
+   "sha256": "27c59dc6445ff447109426147d58ff5f6ef0a258437f132283c53564251d4ca7",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0095.png": {
+   "sha256": "cee41129257351a8215d9bbf20fa8f1e17e3fae08e35bf88b3f58d5252c26b1f",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0096.png": {
+   "sha256": "97ca7a4690e5b9de88378bd17c9841536d32ac8cb96de90f8ef0f87ed1a5f1aa",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0097.png": {
+   "sha256": "7a899547e121f3bc2b0161512dd06651e4465b983a6fa909d9250993112c2a52",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0098.png": {
+   "sha256": "ccb5b3276c09c3ffc67231fd7c136557696f7fb504c52e71a44c9793e34f6a41",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0099.png": {
+   "sha256": "2c91a6bde121b7f82b230b8516e2295b12147fdd96e5ae3d2b9c8c59a22f57a8",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0100.png": {
+   "sha256": "59a6f1939ab94215d151332b570d5eb7e65c96e735142d689bd6ab082f5823e1",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0101.png": {
+   "sha256": "7f5cc3a9247ba9b807eb816b2a72a225cc8748506d483587ed98594d1e7e9a18",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0102.png": {
+   "sha256": "e4936a43fa5ee8e4f340b34b224b262f0112f3b2b2c3964fa59b222490bc8a9f",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0103.png": {
+   "sha256": "33461545e57f925ce18ef58aa76c57d786cb8c9f1678788e410eb41a4a70ea07",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "open_0104.png": {
+   "sha256": "6e933bc5852d38a25feb156760b9e5a9ae4326b13776272cf790e21c268515f3",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0001.png": {
+   "sha256": "2ab760c614b69e4d4294f766f927a5abb1cac25f01bd78cdc708d0e431c9074a",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0002.png": {
+   "sha256": "70e945c2c4280b73e56aeb09a0622d61f0e1b475ea5ab69bfe4f1358804e95ca",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0003.png": {
+   "sha256": "f5792061014fda0a9a03a93b1b0c247a64307aa1100661cc5980e9311a09fe46",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0004.png": {
+   "sha256": "bad1cc52a9ed3efa536a5d25924de9df99a697f8fb66de4b465431b897c3a4f0",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0005.png": {
+   "sha256": "fcac10c9f0f5656b65532b9bfeb9d1ba762aff978ec9a6d60a384d1413118ad0",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0006.png": {
+   "sha256": "a0adf298f9f6cea6ea5886ee336ccc97d18463cdfba1a34098c5a11ae9db8cf9",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0007.png": {
+   "sha256": "c7099aa44ff3b301e4b39dc96cb945baf23c945830d031d80629f3b45c460d33",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0008.png": {
+   "sha256": "a5bd222f70c4cd90ef2dea8cc057834cd495591b91c20e14bdc8b0d3161bbc78",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0009.png": {
+   "sha256": "5fbda99ffeebde83a8eedbb8c2d6f15e517279efea2a3600db1de2a9576563b5",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0010.png": {
+   "sha256": "f6d1fed7b685d8492029caf1cd874bbd3b9c2206302d253d7466b6863c67ccd7",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0011.png": {
+   "sha256": "2bf322571d98a21de93aae5e5679373f9903d142b0cf0990c54b6cff7a150487",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0012.png": {
+   "sha256": "ce708f008a87090b3fda518bf91c67807db5bc4e4183dcd786300150b91181ac",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0013.png": {
+   "sha256": "4437fed043b3ea2a58761956337900782e7a333efc1c924f2b10036a12018108",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0014.png": {
+   "sha256": "76640b88c8ccef153b1c50872161e0a1bc32ebbe1be8db81845e092f6b8744b2",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0015.png": {
+   "sha256": "97ecdbe037411ac7c64c46caf10108fbb6f0a214dd4f904e382a9e865e356ff3",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0016.png": {
+   "sha256": "fae7c16fc0c068f78d6f19b3bf8a9590740ac33daf9ed2ac18928d0e5fdafc17",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0017.png": {
+   "sha256": "7cf35f8ab5eea01e048115aee6329164ae34bef7209f1d97929d9fdc952b55aa",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0018.png": {
+   "sha256": "c36570ed5409994b929102e7ed01deca4a4c4329a81203f1ae03b8fa5d6b041a",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0019.png": {
+   "sha256": "b8cd54dd4a6588d11c7442a0d10ac03653cb60f8630a90199b98a66e3fbc87fc",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0020.png": {
+   "sha256": "87642493e52dc084a63e5a6e4be9454dfdaab4420b58180c931fe98fff086a6d",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0021.png": {
+   "sha256": "fd60b6f10973f972185284a33f5f0072bd19d6feefa6a0458093f3fab4fd4630",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0022.png": {
+   "sha256": "8346a3eddc0937b1dd140e7d4e5abc020aff5f1b583323679d3226f5f1eb6053",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0023.png": {
+   "sha256": "c944e1630192e77ba5fefaa8a99802d3cc837656f3a0399603c8ce9e6fbda99f",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0024.png": {
+   "sha256": "b86db2af027730ce03f57dad0e03b267c31166b60dff18876e7ee4fbb4d86894",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0025.png": {
+   "sha256": "953fdf6f22dd1e2b2be819e53c2c3ab08b0a18cd7f1b9a20f8a60e5c1476b058",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0026.png": {
+   "sha256": "e2836f1d8487e96d057cc3929e87a40d3fac2a813666a8b6335c07de8ad3e4ce",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0027.png": {
+   "sha256": "3aab62fffd71372073b8a34f0fc4762a3bf7ca5415e0affa706697215347ba2f",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0028.png": {
+   "sha256": "b480a586e05da89f700c5f0ed09d1935c6f16baf359b9e55c613374d1471e55f",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0029.png": {
+   "sha256": "781cb18171f9b6a6f4525cc287aab992c2c2d9af0e67c323eeee1016aa731e94",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0030.png": {
+   "sha256": "11dea87be239afa21e8182d001e3d47c7ecc565e44e2e11cd492109544527483",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0031.png": {
+   "sha256": "cd6e4ceade5a3076a2662666bc2ba324673f3f3612eece87ff95fb4f47bf989c",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0032.png": {
+   "sha256": "1b581b9c4143e5c260fe3aaad5433be687c03e7b5a8c7b438074092e1144114a",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0033.png": {
+   "sha256": "1ab2181435515661ecf85ab138be2f924883cd6dc6cb972d8ae22add0868ccc0",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0034.png": {
+   "sha256": "34a1a56d995fd71ddeb38a1bc638b3d1a10d46536c50e1876c5c370c1a761d34",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0035.png": {
+   "sha256": "ab341b66bcdac4bee563667b6736c6ac7f7ed704600d0cb5c9b135a933259784",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0036.png": {
+   "sha256": "3f3f2c5447ddbb65155d4399a6622ef5bb0d2b6f427f49dc87b14c202a551798",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0037.png": {
+   "sha256": "a7d78356be2e1fbcd755c71ed2e7292c3ead996fc03cbc7bab53e07e2e2ed68a",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0038.png": {
+   "sha256": "937720359379595486227364d2f8f5c766a07d756d58edc2d5eb70e4d9f26433",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0039.png": {
+   "sha256": "6a7f636254bc9ff241f02c373d2d44c862d9e01e32fdfc30e61f762ece644fad",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0040.png": {
+   "sha256": "2dc698ebf71e853de6e8668aeb23d1f2f4a9710996dd3b1e9192b4c2035cdec2",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0041.png": {
+   "sha256": "2d188329d1d8bb75ed43799fc811cf32411f6faf9a0286fe6764c3e7166d71f0",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0042.png": {
+   "sha256": "86eafa2d003b04f2dcd23e95a5ef6889c4a63f7b5dd7e0700a1314c39abd7419",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0043.png": {
+   "sha256": "db4225129e207f1935d5ed2bb8d5cc11578f5e80f5fa49e60f3a73f68b032db8",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0044.png": {
+   "sha256": "bdff0d09e6cf91edbc3fec97c5a7c2bad7ca1d2839c94272446792a5a46dc169",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0045.png": {
+   "sha256": "1be1db48621cc91d2d4a5f88c8ed0ee0d123ecd346b321fd5322e338790b5099",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0046.png": {
+   "sha256": "97e444b9b27466a0978be2f9601677ce1b9ebe8b803ee752c84fdda0f433205b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0047.png": {
+   "sha256": "62400d7f6b69462c12228b309c1beda76b67dee521328fcaba312538ea6a8c25",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0048.png": {
+   "sha256": "2a8d2feec09ebd1acb7c520fc5bcf13d23f0823fa885faa8265c85c470056557",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0049.png": {
+   "sha256": "3e09c72f0279c2694be4742817e74c26dbaf4c5e672b527c3d4af15e2b65ec47",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0050.png": {
+   "sha256": "d28a7c4b7608368e3452d33457a34bd2fae5d3b2b117eed4ee27bb5ac73d03c2",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0051.png": {
+   "sha256": "813c6731ebbd4e3423fa37dcd16f3667138d01ef30818d49ba30d54e5d249bbb",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0052.png": {
+   "sha256": "99e135605a36b3c1c40d1526751b5b92aaa60f028d9e00380eb5ff76ee65b3bc",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0053.png": {
+   "sha256": "fe0aeaae7c912353f39bd31d7f84fd2d679877e1040b0fdb7bc47415a1e1c17b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0054.png": {
+   "sha256": "3160fd78b831faa559ca85b723ff96f5094ff2044fa91126550976656b68a77b",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0055.png": {
+   "sha256": "024ecf4e87d8d6c80d7d670ea5a3fa9e957df345cf0ddef8b517474de3278c57",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  },
+  "end_0056.png": {
+   "sha256": "946a18418fb956ae6b33e092335b5472dc62c3a0242228a9c22679e925f757d9",
+   "size": [
+    1920,
+    1080
+   ],
+   "mode": "RGBA"
+  }
+ }
+}

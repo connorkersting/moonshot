@@ -1,0 +1,146 @@
+{
+  "study": "s2_ab_judge_position_bias",
+  "created": "2026-10-07T18:13:43",
+  "seed": 20261008,
+  "n_items": 12,
+  "n_repeats": 2,
+  "n_decisions": 48,
+  "n_calls": 8,
+  "sheets_per_call": 6,
+  "selection_rule": {
+    "metric": "per existing sheet: of 8 frame pairs, count with mean abs grey difference > 6.0 (800x112 downscale, left 40% of each tile ignored)",
+    "min_tiles_differing": 4,
+    "max_per_pair": 3,
+    "max_per_section": 3,
+    "order": "tiles differing desc, then mean abs diff desc; greedy under the caps"
+  },
+  "prompt_sha256": "126974e4ed3f034a135a6dee11fb685243fdbbd8d1afa43a6b0231edb445aba9",
+  "rubric_sha256": "fa5e447ba44f7bfac270d46f452626e2933fdf60bd1d2ed4107b1afe5f8de1e3",
+  "run_order": [
+    "j2a381de0",
+    "j8a5df32e",
+    "j01d4a7f0",
+    "j43802c27",
+    "j1e41f806",
+    "jfc7c513f",
+    "j49b01501",
+    "jb73773ca"
+  ],
+  "fidelity_vs_original_sheets": [
+    {
+      "item_id": "i01",
+      "mad_whole_sheet": 5.64,
+      "mad_outside_labels": 2.83
+    },
+    {
+      "item_id": "i02",
+      "mad_whole_sheet": 2.67,
+      "mad_outside_labels": 2.35
+    },
+    {
+      "item_id": "i03",
+      "mad_whole_sheet": 2.67,
+      "mad_outside_labels": 2.35
+    },
+    {
+      "item_id": "i04",
+      "mad_whole_sheet": 5.2,
+      "mad_outside_labels": 2.42
+    },
+    {
+      "item_id": "i05",
+      "mad_whole_sheet": 5.5,
+      "mad_outside_labels": 2.76
+    },
+    {
+      "item_id": "i06",
+      "mad_whole_sheet": 5.48,
+      "mad_outside_labels": 2.77
+    },
+    {
+      "item_id": "i07",
+      "mad_whole_sheet": 4.47,
+      "mad_outside_labels": 1.75
+    },
+    {
+      "item_id": "i08",
+      "mad_whole_sheet": 5.53,
+      "mad_outside_labels": 2.78
+    },
+    {
+      "item_id": "i09",
+      "mad_whole_sheet": 5.1,
+      "mad_outside_labels": 2.3
+    },
+    {
+      "item_id": "i10",
+      "mad_whole_sheet": 4.69,
+      "mad_outside_labels": 1.97
+    },
+    {
+      "item_id": "i11",
+      "mad_whole_sheet": 4.73,
+      "mad_outside_labels": 2.01
+    },
+    {
+      "item_id": "i12",
+      "mad_whole_sheet": 5.8,
+      "mad_outside_labels": 2.98
+    }
+  ],
+  "sheet_sha256": {
+    "j01d4a7f0/sheet_1": "2296957a6948725b0e3d815f718da1a706581adcd6797d4185f930c1a18a180f",
+    "j01d4a7f0/sheet_2": "3fe27288a0745e1f4cdd2dd7c4e34c903a116dc199ea8d262dd2948bcf956d52",
+    "j01d4a7f0/sheet_3": "49467fe946950d5ad6108cd38ec27408f6c98b954eb491b483d39564578b1c45",
+    "j01d4a7f0/sheet_4": "1b4d3d05edff606654c0f2165bf36f4326684eedadefe4e7f37994d1100eb1b9",
+    "j01d4a7f0/sheet_5": "204a26371517bd211b266f9555eeff1a94970810f61a5663129aaa0817eba4a7",
+    "j01d4a7f0/sheet_6": "a1b1a22393a87462d63092a1f6563da55038dcbfa9cc0e9008dc3295e7c5a80a",
+    "j49b01501/sheet_1": "69588253c975b1b242a1af41f82f03b831a8f5d761b71964f32d64831c11e1be",
+    "j49b01501/sheet_2": "d7dbf9a6ed4a68b19debdc71612965137165428d3db8904910e178b52eba150c",
+    "j49b01501/sheet_3": "94261407c9c48c53d8f2f775ce561e4da7225cc3d578d86813e2043e897cf967",
+    "j49b01501/sheet_4": "8a3f29c04b71adfd44e329803a57b7547899018b5812fe50b94b0f14d939b8ad",
+    "j49b01501/sheet_5": "c5f989ca04abdc30da31ea9b61a3d9843012842c7dd7f5f895d24c7e14a6244d",
+    "j49b01501/sheet_6": "85d5e287dc70cfccf3a00a6e0ebc2ac3c62b0508d8be854095a3ccadfe4da2a6",
+    "jb73773ca/sheet_1": "aa4fa2d04e2552f5966d3ab34f6df2748470f78822c9eea1fab931297c4263c1",
+    "jb73773ca/sheet_2": "57066856259762e11b389fd6ee4baa54b609d88d1017ae94fa30e0ca682d2543",
+    "jb73773ca/sheet_3": "fa0a3bdebdcc0546c60a3eea09ecd36bf5ff7765f8c121f97e557ceee6902d7b",
+    "jb73773ca/sheet_4": "f46f9defc6db0d63c0ba937d7fbc83ee61fcf8da10e0313783ef3740397fcb13",
+    "jb73773ca/sheet_5": "c02d5a18d8bcac8861b720fbfe6076baa394ea1650a9085913dc6be091b3b7d5",
+    "jb73773ca/sheet_6": "491c579384718a3ec5e4667209ed5579e43f0c57e88efd045e08aa2a153e5d54",
+    "j43802c27/sheet_1": "4332cfcd024509f3aceb33bba48231aa46b313e6d0a99143e6d71507af95c8d3",
+    "j43802c27/sheet_2": "1f65f17d23262cbbebe088c87935eb8b169b02f2c01a2b6ed040ec5f5bb71ae2",
+    "j43802c27/sheet_3": "12bf49397cbe991add0168314ab2f11b4ec9fabbe2cd5e0fc7a22c374fda7e18",
+    "j43802c27/sheet_4": "d8ca76643cd04265b2d01968e0a391a797325012751899143de44f63e2772108",
+    "j43802c27/sheet_5": "72cefc7152d95b828fa0eaf3e051e9caa9b1206f4819a955e9cf2cf18dbc26f8",
+    "j43802c27/sheet_6": "67d41200a0521eaa75f6ba66272745ea9e30de226448e0a9b69a45509b8af7ec",
+    "j1e41f806/sheet_1": "d8ca76643cd04265b2d01968e0a391a797325012751899143de44f63e2772108",
+    "j1e41f806/sheet_2": "94261407c9c48c53d8f2f775ce561e4da7225cc3d578d86813e2043e897cf967",
+    "j1e41f806/sheet_3": "1b4d3d05edff606654c0f2165bf36f4326684eedadefe4e7f37994d1100eb1b9",
+    "j1e41f806/sheet_4": "fa0a3bdebdcc0546c60a3eea09ecd36bf5ff7765f8c121f97e557ceee6902d7b",
+    "j1e41f806/sheet_5": "f46f9defc6db0d63c0ba937d7fbc83ee61fcf8da10e0313783ef3740397fcb13",
+    "j1e41f806/sheet_6": "4332cfcd024509f3aceb33bba48231aa46b313e6d0a99143e6d71507af95c8d3",
+    "j8a5df32e/sheet_1": "67d41200a0521eaa75f6ba66272745ea9e30de226448e0a9b69a45509b8af7ec",
+    "j8a5df32e/sheet_2": "a1b1a22393a87462d63092a1f6563da55038dcbfa9cc0e9008dc3295e7c5a80a",
+    "j8a5df32e/sheet_3": "c02d5a18d8bcac8861b720fbfe6076baa394ea1650a9085913dc6be091b3b7d5",
+    "j8a5df32e/sheet_4": "d7dbf9a6ed4a68b19debdc71612965137165428d3db8904910e178b52eba150c",
+    "j8a5df32e/sheet_5": "85d5e287dc70cfccf3a00a6e0ebc2ac3c62b0508d8be854095a3ccadfe4da2a6",
+    "j8a5df32e/sheet_6": "3fe27288a0745e1f4cdd2dd7c4e34c903a116dc199ea8d262dd2948bcf956d52",
+    "j2a381de0/sheet_1": "69588253c975b1b242a1af41f82f03b831a8f5d761b71964f32d64831c11e1be",
+    "j2a381de0/sheet_2": "204a26371517bd211b266f9555eeff1a94970810f61a5663129aaa0817eba4a7",
+    "j2a381de0/sheet_3": "2296957a6948725b0e3d815f718da1a706581adcd6797d4185f930c1a18a180f",
+    "j2a381de0/sheet_4": "8a3f29c04b71adfd44e329803a57b7547899018b5812fe50b94b0f14d939b8ad",
+    "j2a381de0/sheet_5": "aa4fa2d04e2552f5966d3ab34f6df2748470f78822c9eea1fab931297c4263c1",
+    "j2a381de0/sheet_6": "72cefc7152d95b828fa0eaf3e051e9caa9b1206f4819a955e9cf2cf18dbc26f8",
+    "jfc7c513f/sheet_1": "57066856259762e11b389fd6ee4baa54b609d88d1017ae94fa30e0ca682d2543",
+    "jfc7c513f/sheet_2": "1f65f17d23262cbbebe088c87935eb8b169b02f2c01a2b6ed040ec5f5bb71ae2",
+    "jfc7c513f/sheet_3": "49467fe946950d5ad6108cd38ec27408f6c98b954eb491b483d39564578b1c45",
+    "jfc7c513f/sheet_4": "c5f989ca04abdc30da31ea9b61a3d9843012842c7dd7f5f895d24c7e14a6244d",
+    "jfc7c513f/sheet_5": "491c579384718a3ec5e4667209ed5579e43f0c57e88efd045e08aa2a153e5d54",
+    "jfc7c513f/sheet_6": "12bf49397cbe991add0168314ab2f11b4ec9fabbe2cd5e0fc7a22c374fda7e18"
+  },
+  "notes": [
+    "key.json and this manifest must never be shown to a judge.",
+    "A is always the top row, so label bias and top-position bias cannot be separated.",
+    "Flipped repeats of an item are the same two rows; only the labels and the stacking order change."
+  ]
+}

@@ -32,3 +32,7 @@ __pycache__/
 *.npy
 CraftWork/
 sonniss-gdc2024/
+.uv-cache/
+.verify-python/
+analytics/studies/s1/packs/
+analytics/studies/s2/calls/

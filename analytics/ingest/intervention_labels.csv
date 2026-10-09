@@ -1,0 +1,100 @@
+ts_utc,kind,label
+2026-10-07T06:43:31Z,instruction,kickoff brief (8-hour /loop run)
+2026-10-07T07:46:50Z,approval,approved plan update relayed by a second session
+2026-10-07T07:48:52Z,approval,approved relaxed usage-limit rule
+2026-10-07T08:13:13Z,instruction,add crowd (mean-commenter) critic
+2026-10-07T08:15:36Z,instruction,add measured reviewer roles (audio QC / fact-check)
+2026-10-07T08:33:20Z,instruction,Blender upgrade moved to top of backlog
+2026-10-07T08:39:15Z,instruction,overnight safeguards and free upgrades
+2026-10-07T08:56:40Z,instruction,related-work check before README
+2026-10-07T09:04:30Z,question,asked about context-window management
+2026-10-07T09:06:14Z,instruction,use Codex more (feedback; agent pushed back)
+2026-10-07T09:09:40Z,question,asked whether Codex may edit files
+2026-10-07T09:10:12Z,approval,approved Codex write for new files
+2026-10-07T21:09:30Z,instruction,24-hour extension and production-grade push
+2026-10-07T21:13:15Z,instruction,add analytics showcase emphasis
+2026-10-07T21:25:01Z,approval,answered extension setup questions (installs / schedule / framing)
+2026-10-07T22:50:44Z,instruction,"plan flexibility, plateau rule and delivery time for the 24h run"
+2026-10-07T22:56:31Z,question,asked whether to switch Gemini accounts (edu vs personal plan)
+2026-10-07T23:03:22Z,instruction,said the personal Gemini plan is open in the browser
+2026-10-07T23:25:52Z,instruction,accepted Gemini terms; handed over three deep-research reports to fold in
+2026-10-07T23:38:02Z,approval,"answered three setup questions (open file for upload, licence ok, get it if useful)"
+2026-10-07T23:39:44Z,question,asked whether to set up an API key to avoid manual uploads
+2026-10-07T23:40:21Z,approval,approved the agent entering the API key; try the Gemini desktop app
+2026-10-07T23:42:59Z,question,asked how to set up the API project
+2026-10-07T23:45:21Z,instruction,"key added; stop at the next milestone for the usage limit, resume at reset"
+2026-10-07T23:47:02Z,question,asked for a predicted final score and whether to start a fresh thread
+2026-10-07T23:48:19Z,question,asked how good the repo will be and which deliverables are planned
+2026-10-07T23:53:22Z,question,asked whether to add a hiring-side critic and whether critics are redundant
+2026-10-07T23:57:45Z,question,asked why crowd critics stopped and whether real replies could back them
+2026-10-08T00:01:13Z,approval,approved X research after the v16 panel; asked about a small decision model
+2026-10-08T00:06:38Z,approval,approved adding the reply corpus; asked about scale and portfolio add-ons
+2026-10-08T00:08:44Z,question,asked whether to cap video generation at 24h and let repo work run longer
+2026-10-08T00:10:29Z,question,asked whether Blender is used as much as it should be
+2026-10-08T00:16:47Z,approval,queued the Blender title version after v16; asked why ideas were not surfaced
+2026-10-08T00:19:46Z,question,asked about using course materials in the project
+2026-10-08T00:21:11Z,question,asked how actual autonomous loop time is measured
+2026-10-08T00:22:09Z,instruction,said the 24h may be spread over several days
+2026-10-08T00:43:34Z,approval,approved auto-resume after reset; asked about craftapps updates and missing tools
+2026-10-08T00:51:52Z,approval,approved building tools and checking changelogs; asked about usefulness and lessons
+2026-10-08T00:54:58Z,question,asked what is on the list after the limit resets
+2026-10-08T00:57:04Z,question,asked for a plain explanation of the items waiting on him
+2026-10-08T00:58:26Z,instruction,asked the agent to open two audio options for him
+2026-10-08T01:01:20Z,instruction,"listening feedback on the two options (first more authentic, second hard to follow)"
+2026-10-08T01:03:03Z,instruction,further listening feedback: leans toward being able to understand option 1
+2026-10-08T01:14:24Z,instruction,"v16 watch notes (0:33 music and scene change, 0:45 box side switch, 1:02 abrupt stop)"
+2026-10-08T01:17:58Z,question,asked about running viewer surveys with friends and family
+2026-10-08T01:22:08Z,instruction,asked for an audit and ordering of the addition list; noted usage
+2026-10-08T01:27:58Z,question,"asked what a LinkedIn post would look like (honest, casual)"
+2026-10-08T01:50:56Z,instruction,reported the limit reset and context at 82%
+2026-10-08T02:15:12Z,question,asked whether a high context window costs more usage
+2026-10-08T03:03:55Z,question,asked whether to do anything before running a command
+2026-10-08T03:04:14Z,instruction,ran /compact
+2026-10-08T03:13:31Z,instruction,v17 watch notes (0:32 cut still awkward; 1:02 better)
+2026-10-08T03:28:44Z,approval,chose option B for both; ideas for the 0:32 transition
+2026-10-08T03:36:38Z,approval,liked the previewed variant; suggested a slow zoom on a still
+2026-10-08T03:38:06Z,approval,approved the previewed variant
+2026-10-08T04:30:34Z,instruction,said the edit could be much more impressive
+2026-10-08T04:32:08Z,approval,answered recut questions (music-locked montage; agent picks references)
+2026-10-08T05:10:46Z,question,asked how different the next version will be
+2026-10-08T05:16:05Z,question,"asked about free better footage, motion-graphics tooling, Gemini hearing, DaVinci"
+2026-10-08T05:26:32Z,approval,approved the plan; Gemini key in place; approved vetted installs
+2026-10-08T05:28:51Z,instruction,asked the agent to open the credentials file
+2026-10-08T05:30:45Z,instruction,said the key was already in the file
+2026-10-08T05:42:35Z,instruction,v19 watch notes (0:33 odd again; overlays look cheap)
+2026-10-08T05:49:19Z,approval,answered 0:33 and HUD questions (no review while asleep; authentic 1969 hardware)
+2026-10-08T06:19:06Z,instruction,going to bed; liked the updated 0:33 and 1:02
+2026-10-08T06:49:16Z,question,asked what the biggest differences in v20 will be
+2026-10-08T07:44:39Z,question,asked how much of the 24h clock is left
+2026-10-08T08:00:23Z,instruction,asked for one more overnight polish loop to produce v21
+2026-10-08T15:33:07Z,instruction,asked to open v21 and stop all processes
+2026-10-08T15:40:22Z,question,asked to rank previously rejected tools by impact
+2026-10-08T15:46:14Z,approval,"approved TwelveLabs, Remotion, EffectCraft and adopt-if-time items; no spending"
+2026-10-08T16:18:22Z,instruction,created the TwelveLabs account; asked the agent to open the credentials file
+2026-10-08T16:20:03Z,instruction,reported the wrong file was opened
+2026-10-08T16:20:14Z,instruction,asked to open the file again
+2026-10-08T16:20:49Z,instruction,confirmed the file is saved
+2026-10-08T16:23:00Z,instruction,asked for another run with the new tools and critiques while in class
+2026-10-08T16:24:38Z,instruction,asked for a project audit and a tool audit; fold if-time items into future runs
+2026-10-08T20:11:39Z,question,back from class after a sign-out; asked what to know and do
+2026-10-08T20:12:05Z,question,asked whether to compact the session
+2026-10-08T20:19:52Z,instruction,answered the audit questions; asked for a table of every tool's impact
+2026-10-08T20:33:05Z,approval,approved the new card style; asked for the TwelveLabs data setting to be changed in a browser; relaxed the 10 GB disk cap within reason
+2026-10-08T20:35:11Z,instruction,ran /compact
+2026-10-08T20:41:58Z,instruction,continue
+2026-10-08T21:49:55Z,instruction,"blind audio audition picks: no preference on the countdown, B on staging, A on alarm and descent"
+2026-10-08T22:55:22Z,instruction,asked for files to be opened whenever his call is needed
+2026-10-08T22:57:34Z,instruction,picked the hero-beat clip (bottom); asked for smaller disclosure tags
+2026-10-08T23:03:01Z,question,asked about rendering a footstep video; said the v24 outro felt rushed and shaky
+2026-10-08T23:16:49Z,question,asked whether the cloud credit could be used here
+2026-10-08T23:31:37Z,instruction,asked to stop after the current run and finish the 24 hours later
+2026-10-09T02:02:14Z,question,asked how much time is left on the 24-hour clock
+2026-10-09T02:08:21Z,question,asked for the boldest thing doable in the remaining time
+2026-10-09T02:09:48Z,instruction,continue
+2026-10-09T02:15:08Z,instruction,picked the right-hand slow-mo in a side-by-side
+2026-10-09T03:23:14Z,instruction,asked to stop cleanly because the laptop battery was low
+2026-10-09T03:30:00Z,instruction,continue
+2026-10-09T04:11:05Z,question,asked whether to still run the critique review on v28
+2026-10-09T04:12:19Z,approval,approved running everything that would not fit the cloud credit budget
+2026-10-09T05:26:17Z,instruction,asked for the teaser to be opened so he could watch it
+2026-10-09T07:09:13Z,instruction,asked to try again

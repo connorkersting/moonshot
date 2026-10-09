@@ -1,0 +1,14 @@
+score_category,category_order,category_group,is_overall,higher_is_better,category_description
+hook,1,rubric,false,true,How well the opening seconds grab attention.
+pacing,2,rubric,false,true,Rhythm of cuts and how well the edit holds momentum.
+variety,3,rubric,false,true,Range of shots and visual material.
+motion,4,rubric,false,true,Camera and graphic movement.
+type,5,rubric,false,true,Typography of titles and on-screen text.
+color,6,rubric,false,true,Grade and colour consistency.
+sound,7,rubric,false,true,Music and sound design. Measured from audio QC from v4 on.
+captions,8,rubric,false,true,Caption accuracy and readability.
+story,9,rubric,false,true,Whether the trailer tells a clear story.
+overall,10,rubric,true,true,The critic's overall score. Not an average of the other nine.
+shareability,11,crowd,false,true,Crowd persona: how likely the viewer is to share it (1-10).
+ai_slop_perception,12,crowd,false,false,Crowd persona: how much it reads as AI slop (1-10; HIGHER IS WORSE).
+would_watch_to_end,13,crowd,false,true,First-time-viewer persona: would they watch to the end (1-10).

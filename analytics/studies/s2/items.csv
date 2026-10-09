@@ -1,0 +1,13 @@
+item_id,comparison,newer,older,section,same_length_stamps,mean_abs_diff,tiles_differing_of_8,original_pick,original_confidence
+i01,v5_v4,5,4,1_cold_open,True,75.54,7,TIE,low
+i02,v8_v7,8,7,3_stats_chart,False,20.05,7,v7,low-med
+i03,v9_v7,9,7,3_stats_chart,False,20.05,7,v9,low-med
+i04,v4_v3,4,3,3_stats_chart,True,18.84,5,v3,med-high
+i05,v4_v3,4,3,7_outro,True,15.63,5,v4,low
+i06,v7_v5,7,5,7_outro,True,15.56,5,TIE,low
+i07,v3_v2,3,2,6_fuel_landing,True,12.6,5,TIE,med
+i08,v3_v2,3,2,4_moon_lm,True,28.32,4,v3,high
+i09,v5_v4,5,4,5_alarm,True,22.38,4,v5,low
+i10,v7_v5,7,5,6_fuel_landing,True,20.47,4,TIE,low
+i11,v4_v3,4,3,6_fuel_landing,True,17.95,4,TIE,low
+i12,v9_v7,9,7,2_drop_title,True,7.15,4,TIE,low

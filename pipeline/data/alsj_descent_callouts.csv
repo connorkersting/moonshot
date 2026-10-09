@@ -1,0 +1,25 @@
+get,get_s_after_102_45_00,speaker,altitude_ft,descent_rate_ft_s,forward_ft_s,quote,shown_in_readout,trailer_real_s,trailer_frame,source_url
+102:43:16,-104,Aldrin,540,15,,"540 feet, down at...(LPD angle is) 30. Down at 15.",no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:43:26,-94,Aldrin,400,9,58,"400 feet, down at 9 (feet per second). 58 (feet per second) forward.",no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:43:33,-87,Aldrin,350,4,,"350 feet, down at 4.",no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:43:35,-85,Aldrin,330,3.5,,"330, three and a half down.",no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:43:46,-74,Aldrin,300,3.5,47,"300 feet (altitude), down 3 1/2 (feet per second), 47 (feet per second) forward.",no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:43:52,-68,Aldrin,270,1.5,,1 1/2 down. Ease her down. 270.,no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:44:07,-53,Aldrin,250,2.5,19,"250 (feet altitude), down at 2 1/2, 19 forward.",no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:44:16,-44,Aldrin,220,3.5,13,"3 1/2 down, 220 feet, 13 forward.",no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:44:23,-37,Aldrin,,,11,11 forward.,no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:44:24,-36,Aldrin,200,4.5,,"200 feet, 4 1/2 down.",no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:44:26,-34,Aldrin,,5.5,,5 1/2 down.,no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:44:31,-29,Aldrin,160,6.5,,"160 feet, 6 1/2 down.",no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:44:33,-27,Aldrin,,5.5,9,"5 1/2 down, 9 forward.",no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:44:40,-20,Aldrin,120,,,120 feet.,no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:44:45,-15,Aldrin,100,3.5,9,"100 feet, 3 1/2 down, 9 forward. Five percent (fuel remaining).",no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:44:54,-6,Aldrin,75,0.5,6,"75 feet. ... Down a half, 6 forward.",yes (held from the readout's first frame),49.042,1177,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:45:02,2,Duke,,,,60 seconds (of fuel left before the 'Bingo' call).,no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:45:08,8,Aldrin,60,2.5,2,"60 feet, down 2 1/2. (Pause) 2 forward. 2 forward.",yes,49.792,1195,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:45:17,17,Aldrin,40,2.5,,"40 feet, down 2 1/2. Picking up some dust.",yes,50.917,1222,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:45:21,21,Aldrin,30,2.5,,"30 feet, 2 1/2 down. (Garbled) shadow.",yes,51.667,1240,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:45:25,25,Aldrin,20,0.5,4,"4 forward. 4 forward. Drifting to the right a little. 20 feet, down a half.",yes,52.375,1257,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:45:31,31,Duke,,,,30 seconds (until the 'Bingo' call).,no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:45:32,32,Aldrin,,,,Drifting forward just a little bit; that's good.,no,,,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html
+102:45:40,40,Aldrin,,,,Contact Light.,yes (ALT reads CONTACT),55.208,1325,https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.landing.html

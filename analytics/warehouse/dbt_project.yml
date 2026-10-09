@@ -1,0 +1,42 @@
+name: moonshot
+version: "1.0.0"
+profile: moonshot
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+analysis-paths: ["analyses"]
+target-path: "target"
+clean-targets: ["target", "logs"]
+
+flags:
+  send_anonymous_usage_stats: false
+
+vars:
+  # Relative to the folder dbt is run from (analytics/warehouse). Override with
+  # --vars '{raw_data_dir: /some/other/folder}' to build against another snapshot.
+  raw_data_dir: "../data/raw"
+  # Two requests no more than this many minutes apart belong to one stretch of active work
+  # (same rule as ACTIVE_GAP_MINUTES in the ingest).
+  active_gap_minutes: 5
+
+models:
+  moonshot:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+    marts:
+      core:
+        +materialized: table
+        +schema: core
+      analytics:
+        +materialized: table
+        +schema: marts
+
+seeds:
+  moonshot:
+    +schema: seeds

@@ -1,30 +1,61 @@
 # MOONSHOT
 
-An 81.8-second Apollo 11 trailer, cut overnight by a Claude Code agent loop. Everything in it
-is real NASA footage, the real 1969 mission audio, or public-domain orchestral recordings. It ran
-on one laptop with no cloud renders and went through twelve versions, each judged by reviewers
-that didn't build it.
+An 87.5-second Apollo 11 trailer, cut by a Claude Code agent loop over 24 hours of loop time
+(2026-10-07 to 2026-10-09). Everything in it is real NASA footage, the real 1969 mission audio,
+NASA-data 3D renders, or public-domain orchestral recordings. It ran on one laptop with no cloud
+renders and went through 28 versions, each judged by reviewers that didn't build it, with a
+director who made the calls the critics couldn't.
 
-![RAW vs FINAL: the same edit points, untouched sources on the left, finished cut on the right](docs/raw_vs_final.gif)
+![Contact sheet of the final cut, v28](docs/v28_contact_sheet.jpg)
 
-*Left: the untouched NASA sources at the same edit points. Right: the finished cut.*
+*The final cut (v28), one frame every 3.6 seconds, from the run's own QC contact sheet.*
 
-## Results in numbers
+## Result: v1 to v28
 
 | | |
 |---|---|
-| Run | 2026-10-07, 02:43 to about 11:15 EDT, one self-paced agent loop |
-| Versions exported | 12 (v1–v12), none overwritten; 1 reverted after losing a blind A/B |
-| Editor critic score | 5.5 (v1) → 7.5 (v10, v11) out of 10; the final v12 was a small fix judged by blind A/B |
-| Final mix | −13.8 LUFS integrated, −1.5 dBTP true peak; every dialogue line ≥ +11 dB over the bed |
-| Blender (EEVEE, headless) | 5 shots in the cut, 1.6–7 s per 1080p frame, 0 cloud renders |
-| Defects found by a second model (Codex, read-only) | 11 in pipeline reviews + 3 in a review of the wrap-up scripts, each verified before applying |
-| Media | NASA video, photos and audio (public domain) + Commons PD music; about 4.6 GB fetched |
+| Run | 2026-10-07 02:43 to 2026-10-09 00:06 EDT, seven ledger segments adding up to 24 h 01 m of loop time (about 16 h of it active work in the transcript) |
+| Final | v28, 87.5 s, 2,100 frames at 24 fps, 1920×1080, −13.8 LUFS, −1.5 dBTP; `BEST.json` pins the file by sha256 and git tag |
+| Versions exported | 28 (v1–v28), none overwritten; 1 reverted after losing a blind A/B (v6); 4 not promoted (v8, v15, v16, v20) |
+| Senior-editor critic (Fable), overall | **v1 5.0 → v28 9.5** (same critic, same rubric, one sitting, in its final review). Across the run, each review on its own scale: 5.5 (v1) → 8.0 (v14) → 8.5 (v20, v21) → 9.0 (v22) → 9.5 (v23 to v28) |
+| Final review (v28) | hook 8.5, pacing 8, variety 9, motion 9.5, type 9.5, colour 9.5, sound 8 (by structure, it can't hear), captions 8.5, story 9.5, overall 9.5; v28 better than v27 with no material regression, final pick v28 |
+| Honest ceiling | 9.5 on "would a top YouTube editor ship this"; **7.5 against a trailer house's own standard** (see below) |
+| Other critics' last pass | v22 for Codex (7.0) and the crowd (shareability 6.5, AI-slop 3.0, would-watch-to-end 6) |
+| Blind A/B, v22 on | v22 beat v21 4-0 (3 ties); v23 beat v22 5-0 (2); v24 beat v23 1-0 (6); v26 beat v25 3-0 (4); v28 vs v27: 7 ties, no regression, and the final review picks v28. v25 and v27 were adopted on the director's own pick |
+| Blind A/B, whole run | 161 section verdicts in 23 comparisons: the newer version won 39, lost 25, tied 97 |
+| Agent effort | 5,114 Claude requests (Opus 3,461, Sonnet 1,409, Fable 244), 107 subagents, 491 Codex requests (an upper bound), 99 human messages; 97% of the tokens are cache reads, so they measure context, not work |
+| Warehouse | dbt + DuckDB: 4 seeds, 48 models, 554 tests, PASS 605, WARN 1, ERROR 0 |
+| Media | NASA video, photos and audio (public domain) + Musopen public-domain recordings; the pre-rendered 3D frames and scans are not in the repo (see `pipeline/ASSETS.md`) |
 
-![Senior-editor critic score per version](docs/score_chart.png)
+![Every critic's score per version, v1 to v28](docs/plateau_chart.png)
 
-The dip at v4 isn't a worse cut. From v4 on, the critic scored sound from measured loudness and
-dialogue ratios, where before it had guessed from frames.
+**The ceiling, in the critic's own words.** The final review closes with: "v28 is a clean,
+disciplined piece that a top YouTube editor would ship and a documentary distributor would run as a
+teaser ... It is not yet trailer-house work, and the gap is specific." It names the gap: act 3 not
+cut to the track (0.38 of cuts land on a beat), sound design that ducks a public-domain recording
+under archive audio instead of designing every hit, the soft 16 mm scans carried as they are, six
+seconds of CG explainer in an archive trailer, and 8.7 s of black credit cards at the end. "The craft
+that is here is overlay craft ... what is missing is the re-cut, the mix and the restoration that
+only come from someone sitting in a timeline with the music up." Its limits, briefly: the cut lives
+in a frame compositor, so every change is a re-render and the reviewer could not hear the result;
+the assets are public-domain scans and recordings, not a score written to the cut; and the budget
+was 24 hours and 28 versions.
+
+Two statements in that review are wrong, and are corrected here rather than in the review file:
+- It says there was "no licensed SFX library". The mix does use one: the Sonniss GDC 2024 bundle
+  (licensed for use in a production; it forbids redistribution and AI training, so the files are not
+  in this repo).
+- It says the MAX Q label strike is baked into the render and still open. It was fixed in v23: the
+  ascent was re-rendered with no text, the labels are drawn as overlays, and their clearance from
+  the rings and the trajectory line is gated.
+
+Read the chart with its caveats. The editor's scale moved between reviews: it gave v17 an 8.0 in
+its own review and 7.0 when it re-scored v17 inside the v18 review (the dotted line). The
+Gemini Flash and TwelveLabs video critics are drawn, and labelled, as scorers that did not
+separate versions: TwelveLabs gave v19 and v21 identical scores in all ten categories. The crowd
+critic is coarse. From v14 to v26 the editor's score rose 1.5 points in 14.8 loop hours; the
+last half point came after v22, in the all-out segment described in
+[MAKING-OF.md](MAKING-OF.md).
 
 ## How the agent worked
 
@@ -32,40 +63,61 @@ dialogue ratios, where before it had guessed from frames.
 flowchart LR
     P[PROGRESS.md<br/>memory file] --> I[pick top backlog items]
     I --> B[builder subagent writes a patch<br/>dry-run on copies]
-    B --> C[Codex reviews the diff<br/>read-only]
+    B --> C[Codex reviews the diff]
     C --> R[apply, git tag vN-src<br/>render vN]
-    R --> Q[measured QC<br/>loudness, dialogue ratios,<br/>whisper, frame checks]
+    R --> G[gates: protected frames identical,<br/>flash safety, audio, frame count]
+    G --> Q[measured QC<br/>loudness, dialogue ratios,<br/>whisper, frame checks]
     Q --> A[blind A/B judge<br/>vN vs BEST, fixed rubric]
-    Q --> E[senior-editor critic<br/>10 scores + 5 fixes]
-    A --> D{keep or revert}
+    Q --> E[senior-editor critic<br/>10 scores + fixes]
+    A --> D{promote or keep BEST}
     E --> D
+    H[the director's ear and picks] --> D
     D --> P
 ```
 
 - Memory lived in `PROGRESS.md`: the schedule, which version was BEST, the score table, the
   backlog, every instruction the human gave mid-run, tool traps and a resume point. The
-  conversation was compacted several times overnight, and each time the loop picked up from that
-  file. Anthropic's
+  conversation was compacted several times, and each time the loop picked up from that file.
+  Anthropic's
   [long-running harness post](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
   describes the same idea for coding agents.
 - `pipeline/build.py` turns three tables (SHOTS, DIALOG, CAPTIONS) into stems and a graded,
-  captioned 1080p24 master. Most versions after v1 are a small patch script in `pipeline/patches/`,
-  so you can read the edit's history as code.
+  captioned 1080p24 master. Most versions after v1 are a small patch script in
+  `pipeline/patches/`, so you can read the edit's history as code. The overlays are in the
+  `hud_v*.py` modules, the late versions' polish in `polish_v*.py`, and the loop's own gates and
+  bookkeeping (`panel.py`, `promote.py`, `ledger.py`, the critic scripts) in `pipeline/loop/`.
 - Each version went to several reviewers:
-  - a senior-editor critic (Fable), which gave 10 scores and the 5 fixes that would help most;
-  - a blind A/B judge (Sonnet), which saw unlabeled frame strips per section with a fixed rubric (`pipeline/ab_rubric.md`) and never the key file;
-  - "mean Twitter" commenters;
-  - a first-time viewer, asked where it would scroll away;
-  - a script that measures the audio;
-  - once, a historical fact-check against the Apollo Lunar Surface Journal.
-- The blind A/B decided keep or revert, with two logged exceptions. In v10 the judge preferred v9
-  on two sections, and both picks were misreads of intended changes it couldn't check: a caption
-  moved to match the audio, and a countdown "1" taken off the fireball. In v11 it gave v10 two
-  low-confidence picks. One was a frame-sampling artefact (the frames are identical); the other,
-  a panel placement nit, was fixed in v12, which then won its own A/B. Details in
+  - a senior-editor critic (Fable), which gave 10 scores and the fixes that would help most;
+  - a blind A/B judge (Sonnet), which saw unlabeled frame strips per section with a fixed rubric
+    (`pipeline/ab_rubric.md`) and never the key file;
+  - "mean Twitter" commenters and a first-time viewer (dropped for a stretch, reinstated at v17);
+  - Codex (OpenAI), as an adversarial reviewer of the patches (v14 to v23) and as a second critic;
+  - scripts that measure the audio, the flashes and the frames.
+- The blind A/B decided keep or revert, with logged exceptions, and from v17 on the director's own
+  picks and approvals counted too. The judge can't hear and the editor can't hear, and the
+  director's ear made the audio calls (0:33, 1:02, the v24 staging sound). Details in
   [MAKING-OF.md](MAKING-OF.md).
+- Every version had to pass the same gates before promotion: the protected sections
+  bit-identical before encoding, a WCAG 2.3.1 flash check, audio identical or changed only where
+  intended, 2,100 frames, and a sha256-pinned manifest written by `promote.py`.
 - The loop prompt is in [prompts/moonshot_loop_prompt.md](prompts/moonshot_loop_prompt.md), with
   local paths replaced by placeholders.
+
+## Who decided what
+
+From the log (`PROGRESS.md`), not from memory. The director, Connor Kersting:
+- set the 24-hour budget and what counts toward it, and approved the tools and the plateau rule;
+- caught the 0:33 digital-silence dropout and the late 1:02 music entry by ear, and approved
+  the fixes by ear;
+- rejected the overlays as looking cheap, which led to the 1969-hardware HUD;
+- listened to three blind audio pairs: no preference on the countdown, the staging change
+  chosen, the baseline kept on alarm and descent;
+- picked the Earth-to-Moon hero beat over the real footage it replaced, and the RIFE slow-mo;
+- asked for smaller, quieter on-screen disclosures, and said the outro was rushed and shaky;
+
+The AI wrote and reviewed the code and ran the critics. The critics' scores did not decide
+alone; the log marks every override. When the director asked for a CG astronaut footstep video,
+the agent declined with reasons (see MAKING-OF.md).
 
 ## What broke
 
@@ -73,13 +125,20 @@ The full list is in [MAKING-OF.md](MAKING-OF.md#what-broke-and-what-it-taught). 
 - A one-frame white flash rendered black, then went missing. The decode pipe was re-timing
   frames, which also pushed everything after 56 s one frame late.
 - For four versions the ignition "drop" measured quieter than the countdown before it.
-- One caption ran 1.7 s early for seven versions, because I'd placed it by guess.
-- A regex edited a comment instead of the code. The blind judge happened to like the result.
-- The "title in the plate" experiment lost its A/B and was reverted.
+- Stills-only critics reported one false alarm ("MILES TO THE MOON clipped") at least nine
+  times. The loop fixed it with a known-non-issues file and an adjacent-frame rule.
+- The Sonniss sound-effects licence forbids AI training, and mixes containing them had been
+  uploaded to two video critics. An audit caught it and the uploads stopped.
+- Two video critics (Gemini Flash, TwelveLabs) didn't separate versions, and the story about
+  Gemini's identical scores turned out to rest on a file a retry had overwritten. The warehouse
+  caught that.
 - The alpha craft apps barely made it into the final pipeline. EffectCraft built the v1 title over
-  MCP, and Blender replaced it in v3.
+  MCP and Blender replaced it in v3; PhotoCraft made thumbnail candidates.
 
 ## Raw vs final
+
+These pairs are from the v12 export (the raw sources at the same edit points, beside the finished
+cut). The raw-vs-final side-by-side has not been rebuilt for v28.
 
 | | |
 |---|---|
@@ -87,54 +146,73 @@ The full list is in [MAKING-OF.md](MAKING-OF.md#what-broke-and-what-it-taught). 
 | ![](docs/pair_3_alarm.jpg) | ![](docs/pair_4_reaction.jpg) |
 | ![](docs/pair_5_ladder.jpg) | |
 
+## Analytics
+
+[`analytics/`](analytics/README.md) turns the run's logs into metadata-only tables (requests,
+scores, A/B votes, audio QC, the director's picks), models them in dbt + DuckDB with a test suite
+that checks grain, orphan rows, enums and reconciliation to the source, and renders an offline
+dashboard, the plateau chart above and a run-accounting report. It was refreshed through v28 on
+2026-10-09. [`showcase/`](showcase/README.md) holds two tools (a version explorer and a supercut)
+that were built and self-tested but not run on the final.
+
 ## Reproduce
 
 This repo is a record of one run more than a turnkey tool. Rebuilding the cut takes several
-manual steps, and one of them depends on a tool that isn't included. It was built and run on
+manual steps, depends on tools that aren't included, and needs binary assets that aren't in the
+repo (`pipeline/ASSETS.md` lists them, with the recipe and hash for each). It was built and run on
 Windows 11 only. The graphics use two Windows system fonts (Bahnschrift, Consolas). You need
-Python 3.11+ with numpy, Pillow and scipy, ffmpeg 6+, and Blender 5.x.
+Python 3.11+ with numpy, Pillow and scipy, ffmpeg 6+, and Blender 5.x; the v20 and later ignition
+ramp and the v27 slow-mo come from RIFE v4.6 (rife-ncnn-vulkan), but they are tracked assets, so
+a build only needs RIFE to regenerate them.
 
 1. Set `CRAFTWORK` to an empty workspace folder and run `python pipeline/fetch_assets.py`. It
    downloads the NASA media, the Commons music and the NASA Moon Kit into the layout `build.py`
-   expects. Its docstring lists four things to get by hand: the Sonniss bundle (into
-   `$CRAFTWORK/sfx/sonniss-gdc2024`), the Blue Marble texture (downsample it to an 8K
-   `bluemarble_8k.jpg`), the Poly Haven HDRI, and the Anton and Bebas Neue fonts.
-2. Render the 3D plates with the scripts in `pipeline/blender/`
-   (`blender -b --factory-startup --python <script> -- <args>`) into the folders `build.py` names:
-   `title3d_blender`, `moon_blender`, `ascent_blender_v4`, `px_earthrise_v2` and `px_aldrin`,
-   under `$CRAFTWORK/inbox/moonshot/work/`. The parallax scripts need their plates first:
-   `split_earthrise.py` and `split_aldrin.py`. The Aldrin matte came from a BiRefNet cutout.
+   expects. Its docstring lists the things to get by hand: the Sonniss bundle (into
+   `$CRAFTWORK/sfx/sonniss-gdc2024`), the Blue Marble texture, the Poly Haven HDRI, and the Anton
+   and Bebas Neue fonts. The 16 Commons scans and the Blue Marble clouds texture are needed only
+   to rebuild the v24 and v25 assets (CREDITS.md lists them).
+2. Render or restore the pre-rendered 3D plates and clips named in `pipeline/ASSETS.md` (the
+   Blender scripts are in `pipeline/blender/`, run as
+   `blender -b --factory-startup --python <script> -- <args>`). Their manifests are in
+   `pipeline/asset_manifests/`, and `build.py` refuses to build on a mismatch.
 3. Synthesise the heartbeat, tick and alarm stem:
    `python pipeline/audio/score.py --cues pipeline/cues.json --out $CRAFTWORK/inbox/moonshot/work/audio`.
 4. Clean the mission-audio windows listed in `build.py`'s DIALOG table into
    `$CRAFTWORK/inbox/moonshot/work/restore/`. The run used `craft_tools.restore audio` (RNNoise,
    EQ, compression), which isn't in this repo. Any decent speech cleanup at 48 kHz will do, but
    the levels will differ.
-5. Build and check:
+5. Build and check (v28 shown; the version number is the argument):
 
 ```bash
-python pipeline/build.py shots 1 && python pipeline/build.py dialog 1 && python pipeline/build.py music 1
-python pipeline/build.py comp 1 && python pipeline/build.py mix 1
-python pipeline/qc.py 1 && python pipeline/audio_qc.py 1    # audio_qc's whisper pass needs CRAFT_TOOLS
-python pipeline/raw_conform.py 1                            # raw conform + side-by-side
+python pipeline/build.py shots 28 && python pipeline/build.py dialog 28 && python pipeline/build.py music 28
+python pipeline/build.py comp 28 && python pipeline/build.py mix 28
+python pipeline/qc.py 28 && python pipeline/audio_qc.py 28    # audio_qc's whisper pass needs CRAFT_TOOLS
+python pipeline/flashqc2.py <the encoded mp4>                  # flash-safety check; must pass
 ```
 
-The scripts in `pipeline/patches/` are history. Each one turned version N-1 into version N in the
-original work folder; `pipeline/build.py` is already the final v12.
+The exported pipeline was checked for syntax and for leftover personal paths, but not rebuilt from
+a clean checkout of this repo. The scripts in `pipeline/patches/` are history: each turned
+version N-1 into version N in the original work folder, and `pipeline/build.py` is already the
+final v28.
 
 ## Credits
 
 All footage, photographs and mission audio are NASA works, public domain in the US. The music is
-Dvořák (Musopen recordings, public domain) and Holst's "Mars" (US Air Force Band, public domain
-as a federal work; see the arrangement caveat in CREDITS.md). The sound effects come from the
-Sonniss GDC 2024 bundle; they're in the mix but not in this repo. Fonts: Anton and Bebas Neue
-(SIL OFL). The full list with links is in [CREDITS.md](CREDITS.md).
+three Musopen public-domain recordings: Dvořák's "New World" finale and Largo, and Beethoven's
+Egmont overture (Czech National Symphony Orchestra). Versions v2 to v12 used Holst's "Mars" in a
+US Air Force Band recording; v13 replaced it over an unconfirmed arrangement copyright, so v13 and
+later are the ones cleared on the music side. The sound effects come from the Sonniss GDC 2024
+bundle; they're in the mix but not in this repo, and the licence forbids redistributing them or
+using them to train AI. Fonts: Anton and Bebas Neue (SIL OFL). The full list with links is in
+[CREDITS.md](CREDITS.md).
 
-**Not affiliated with or endorsed by NASA.** No NASA insignia is used.
+**Not affiliated with or endorsed by NASA.** No NASA insignia is used. The trailer's end credits
+mark it as cut by an AI agent from NASA source material.
 
 ## Related work
 
-From a 15-minute search on 2026-10-07 (details in [RELATED-WORK.md](RELATED-WORK.md)):
+From a 15-minute search on 2026-10-07 (details in [RELATED-WORK.md](RELATED-WORK.md); not
+re-run since):
 - Anthropic's [long-running agent harness](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) uses the progress-file loop this run follows, for coding.
 - [Kinocut](https://github.com/KyaniteLabs/kinocut) is an ffmpeg editing MCP with quality and release checkpoints.
 - [DaVinci Resolve MCP](https://github.com/Tooflex/davinci-resolve-mcp) and a [Premiere Pro MCP](https://glama.ai/mcp/servers/@hetpatel-11/Adobe_Premiere_Pro_MCP/blob/b9fa9862ecb7be8d717cd63c4b32be594e13bd6c/README.md) each put one editor behind MCP.
@@ -145,12 +223,14 @@ In that search I didn't find another public run that pairs a multi-hour progress
 blind-A/B keep/revert and licence-logged archival footage plus a raw-vs-final cut. That's about
 one short search, not the field.
 
-## Ideas to extend
+## Not done
 
-- Fix the soft middle (26–40 s). It's the critic's top remaining note.
-- Swap Holst's "Mars" for an orchestral public-domain recording before any public release.
-- Drive the edit itself through an MCP editor instead of a script, and compare the two.
-- Make the thumbnails, vertical teaser and poster. They were gated on an editor score of 8, which the run never reached.
+- A viewer test with people (the kit exists; the director deferred it until after the 24 hours).
+- The reliability and position-bias studies (`analytics/studies/`: the harnesses are frozen, none
+  of the critic calls has been run).
+- A vertical teaser, 15 and 30 second cutdowns and a poster.
+- A rebuilt raw-vs-final video, a version-explorer page and a supercut from v28.
+- Captions: the SRT and VTT files were made on the v16 timeline and not regenerated.
 
 ## Licence
 

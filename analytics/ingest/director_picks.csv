@@ -1,0 +1,6 @@
+pick_id,decided_at_local,subject,key_file,clip_key,side_picked,option_text,adopted,version_effect,source_ref
+audio_v24_countdown,2026-10-08 17:49,v24 sound audition: countdown and ignition,ab_key_v24_sound.json,1_countdown_ignition,NONE,,false,v24,PROGRESS.md 'DIRECTOR'S EAR on v24': no preference; baseline kept
+audio_v24_staging,2026-10-08 17:49,v24 sound audition: ascent staging,ab_key_v24_sound.json,2_ascent_staging,B,,true,v24,PROGRESS.md 'DIRECTOR'S EAR on v24': B adopted (the stage-separation clunk); built as v24b
+audio_v24_alarm_descent,2026-10-08 17:49,v24 sound audition: alarm and descent,ab_key_v24_sound.json,3_alarm_descent_landing,A,,false,v24,PROGRESS.md 'DIRECTOR'S EAR on v24': A kept (baseline)
+picture_v25_hero,2026-10-08 18:57,v25 hero beat clip (Earth-to-Moon schematic vs the footage it replaces),,,BOTTOM,v25 hero beat (Blender schematic),true,v25,PROGRESS.md: hero A/B 'bottom for sure' -> v25 hero adopted. No key file kept; the option is the one PROGRESS.md records as adopted
+picture_v27_slowmo,2026-10-08 22:15,v27 slow-mo of the smoke-under-the-title shot (framerate blend vs RIFE),,,RIGHT,RIFE v4.6 in-betweens,true,v27,PROGRESS.md seg 6: director picked RIFE in a side-by-side. No key file kept; the option is the one PROGRESS.md records as adopted

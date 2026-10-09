@@ -1,0 +1,102 @@
+"""v19b: on top of patch_v19 (apply after it). Connor's 02:05 note on the 0:33 Moon beat + the Codex v19 review fixes.
+
+    py patch_v19b.py                      # the real build.py + score_pd.py in work/
+    py patch_v19b.py BUILD.py SCORE.py    # dry run on copies
+
+ 1  0:33 (Connor: "the sound drops out", "the transition is still abrupt"). Measured: v18 = v19 = the approved mock's
+    shape, but the mix sits at -31 dB from 33.5 to 34.2, ~15 dB under the music either side, which reads as a dropout
+    at full volume (the mock was auditioned 10.5 dB quieter).
+    a. The Dvorak's final E-minor chord rings out in a hall (RING_OUT[1]: last 0.30 s convolved, RT60 1.8 s, wet -8 dB,
+       1.6 s tail), the same treatment Connor approved on the Egmont stop at 1:02, so it blooms and decays through the
+       hold instead of dying at 33.35.
+    b. A low, pitchless "space air" bed under the hold: brown noise, 30-300 Hz band, fixed seed (generated here into
+       audio_assets/space_air_v19b.wav, never overwritten), fade in 0.5 s from 33.0, swell, fade out by 35.2: no key,
+       so no clash with the E-minor ring or the D-flat Egmont entry (34.0, unchanged with the picture and the stat).
+ 2  Codex v19 [P2]: the ascent whoosh keeps v18's 50 ms lead on the moved cut: 21.83 -> 21.783 (cut 21.8333).
+ 3  Codex v19 [P1] (inherited, R7): stage_comp no longer substitutes black for a short decode; it raises with the frame
+    index, so a decode underrun can't pass the 2,100-frame check.
+Not changed (logged in PROGRESS): the ramp's 8 ms source-phase offset (Codex [P2] 7) and the shared-intermediate reuse
+(Codex [P1] 4; the v18 seg/audio intermediates are snapshotted before the v19 chain instead).
+"""
+import subprocess
+import sys
+import os
+from pathlib import Path
+
+CRAFTWORK = Path(os.environ.get("CRAFTWORK", "CraftWork"))   # workspace root (media, fonts, renders)
+
+W = (CRAFTWORK / "inbox/moonshot/work")
+P = Path(sys.argv[1]) if len(sys.argv) > 1 else W / "build.py"
+S = Path(sys.argv[2]) if len(sys.argv) > 2 else W / "score_pd.py"
+BED = W / "audio_assets" / "space_air_v19b.wav"
+
+EOL: dict[Path, str] = {}
+
+
+def load(path: Path) -> str:
+    """Read with universal newlines; remember the file's own line ending (build/score are CRLF)."""
+    EOL[path] = "\r\n" if b"\r\n" in path.read_bytes() else "\n"
+    return path.read_text(encoding="utf-8")
+
+
+def save(path: Path, text: str) -> None:
+    path.write_text(text.replace("\n", EOL[path]), encoding="utf-8", newline="")
+
+
+def apply(text: str, pairs: list[tuple[str, str]], what: str) -> str:
+    for a, b in pairs:
+        n = text.count(a)
+        assert n == 1, f"{what}: {n} matches for {a[:90]!r}"
+        text = text.replace(a, b)
+    return text
+
+
+def make_bed() -> None:
+    """2.2 s of band-limited brown noise, seed 19, -20 dBFS-ish, 0.5 s fade in / 0.9 s fade out (deterministic)."""
+    if BED.exists():
+        return
+    BED.parent.mkdir(exist_ok=True)
+    subprocess.run(["ffmpeg", "-v", "error", "-n", "-f", "lavfi", "-i",
+                    "anoisesrc=color=brown:amplitude=0.35:seed=19:sample_rate=48000:duration=2.2",
+                    "-af", "highpass=f=30,lowpass=f=300,afade=t=in:d=0.5,afade=t=out:st=1.3:d=0.9,"
+                    "aformat=channel_layouts=stereo", "-c:a", "pcm_s24le", str(BED)], check=True)
+
+
+# ============================================================== build.py
+s = load(P)
+assert "ramp=IGNITION_RAMP" in s, "apply patch_v19 first"
+assert "v19b" not in s, "v19b already applied"
+R = [
+    ('''        if len(buf) < fsize:
+            fr = np.zeros((H, W, 3), np.uint8)
+        else:
+            fr = np.frombuffer(buf, np.uint8).reshape(H, W, 3)''',
+     '''        if len(buf) < fsize:     # v19b (Codex, R7): a short decode is an error, not black frames
+            raise RuntimeError(f"stage_comp: base decode ended at frame {fi} of {NFRAMES} ({len(buf)} bytes)")
+        fr = np.frombuffer(buf, np.uint8).reshape(H, W, 3)'''),
+]
+s = apply(s, R, "build")
+
+# ============================================================== score_pd.py
+sc = load(S)
+assert "v19b" not in sc, "v19b already applied"
+RS = [
+    ('''    (PD / "dvorak9_iv_allegro_con_fuoco.ogg", 31.6, 41.35, 23.6, 0.0, 0.03, 0.20),''',
+     '''    (PD / "dvorak9_iv_allegro_con_fuoco.ogg", 31.6, 41.35, 23.6, 0.0, 0.03, 0.06),   # v19b: 0.2 -> 0.06 s so RING_OUT[1] rings on the chord (the 0.2 s fade left the ring nothing)'''),
+    ('''RING_OUT = {2: (0.30, 1.6, -8.0, 1.8)}''',
+     '''RING_OUT = {1: (0.30, 1.8, -6.0, 1.6), 2: (0.30, 1.6, -8.0, 1.8)}     # v19b: the Dvorak's E-minor chord rings out through the 0:33 hold'''),
+    ('''    ("Chupapsound - Essential Scifi/WHOOSH PASS SF LOW.wav", 21.83, -10.0, "peak", 3.0),''',
+     '''    ("Chupapsound - Essential Scifi/WHOOSH PASS SF LOW.wav", 21.783, -10.0, "peak", 3.0),   # v19b: v18's 50 ms lead on the 21.8333 cut (Codex)'''),
+    ('''SONNISS = [
+''',
+     '''SONNISS = [
+    # v19b: pitchless space-air bed under the 0:33 hold (absolute path: generated by patch_v19b, not Sonniss);
+    # "attack" aligns ~0.15 s into its 0.5 s fade-in, so it starts at ~33.0
+    (str((CRAFTWORK / "inbox/moonshot/work/audio_assets/space_air_v19b.wav")), 33.15, -7.0, "attack", 2.2),
+'''),
+]
+sc = apply(sc, RS, "score")
+make_bed()
+save(P, s)
+save(S, sc)
+print(f"v19b: build {len(R)} patch, score {len(RS)}; bed {BED.name}. Re-render: shots 19, dialog 19, music 19, comp 19, mix 19.")

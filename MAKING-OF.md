@@ -307,10 +307,9 @@ in-betweens took about 0.3 to 0.5 s per frame at 1080p on the integrated GPU.
   adjacent-frame check before any "clipped" claim. A related measurement gap: the Whisper check
   never transcribed the windows for "Staging." and "And ignition.", so four versions carried a
   recall of 0.00 that said nothing about audibility. The director listened and kept the lines.
-- The Sonniss effects licence forbids AI training, and mixes containing them had gone to two video
-  critics that may train on uploads. An audit caught it, the uploads stopped, and the TwelveLabs
-  training opt-out was switched off at the director's request. Both services turned out to be poor
-  scorers anyway.
+- An audit found that mixes containing the licensed Sonniss effects had been sent to two external
+  video critics. The uploads stopped, and the TwelveLabs data setting was changed at the director's
+  request. Both services turned out to be poor scorers anyway.
 - A builder died mid-run when its login token expired. It had left new files uncommitted; the
   next segment finished the work from its gates and evidence instead of starting over.
 - Editing build.py with `sed -i` rewrote the whole CRLF file as LF. It was restored, and the rule

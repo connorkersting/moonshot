@@ -1,10 +1,12 @@
 # MOONSHOT
 
-An 87.5-second Apollo 11 trailer, cut by a Claude Code agent loop over 24 hours of loop time
-(2026-10-07 to 2026-10-09). Everything in it is real NASA footage, the real 1969 mission audio,
-NASA-data 3D renders, or public-domain orchestral recordings. It ran on one laptop with no cloud
-renders and went through 28 versions, each judged by reviewers that didn't build it, with a
-director who made the calls the critics couldn't.
+A Claude Code agent loop cut this 87.5-second Apollo 11 trailer over 24 hours of loop time, October 7
+to 9, 2026. The picture and voices are NASA footage, the 1969 mission audio and NASA-data 3D renders. The
+music is public-domain orchestral recordings, and the sound effects come from a licensed library that isn't
+in this repo. It ran on one laptop with no cloud renders. Each of its 28 versions was judged by reviewers
+that didn't build it, and a human director made the calls the critics couldn't. The critics had limits too:
+re-scored three times, the editor critic agreed with itself at an ICC of only 0.38, so small score gains
+between versions are noise ([critic studies](#how-far-to-trust-the-critic)).
 
 ![Contact sheet of the final cut, v28](docs/v28_contact_sheet.jpg)
 
@@ -15,17 +17,17 @@ director who made the calls the critics couldn't.
 | | |
 |---|---|
 | Run | 2026-10-07 02:43 to 2026-10-09 00:06 EDT, seven ledger segments adding up to 24 h 01 m of loop time |
-| Final | v28, 87.5 s, 2,100 frames at 24 fps, 1920×1080, −13.8 LUFS, −1.5 dBTP; `BEST.json` pins the file by sha256 and git tag |
+| Final | v28, 87.5 s, 2,100 frames at 24 fps, 1920×1080, −13.8 LUFS, −1.5 dBTP; `BEST.json` (in the run's work folder, not in this repo) pinned the file by sha256 and git tag |
 | Versions exported | 28 (v1–v28), none overwritten; 1 reverted after losing a blind A/B (v6); 4 not promoted (v8, v15, v16, v20) |
-| Senior-editor critic (Fable), overall | **v1 5.0 → v28 9.5** (same critic, same rubric, one sitting, in its final review). Across the run, each review on its own scale: 5.5 (v1) → 8.0 (v14) → 8.5 (v20, v21) → 9.0 (v22) → 9.5 (v23, v24, v26 and v28; v25 and v27 had no editor review) |
+| Senior-editor critic (Fable), overall | **v1 5.0 → v28 9.5** (same critic, same rubric, one sitting, in its final review). Across the run, each review on its own scale: 5.5 (v1) → 8.0 (v14) → 8.5 (v20, v21) → 9.0 (v22) → 9.5 (v23, v24, v26 and v28; v25 and v27 had no editor review). Steps of 0.5 to 1.0 are within the critic's re-ask noise ([below](#how-far-to-trust-the-critic)) |
 | Final review (v28) | hook 8.5, pacing 8, variety 9, motion 9.5, type 9.5, colour 9.5, sound 8 (by structure, it can't hear), captions 8.5, story 9.5, overall 9.5; v28 better than v27 with no material regression, final pick v28 |
-| Honest ceiling | 9.5 on "would a top YouTube editor ship this"; **7.5 against a trailer house's own standard** (see below) |
+| Honest ceiling | 9.5 on "would a top YouTube editor ship this"; **7.5 against a trailer house's own standard** (see [MAKING-OF.md](MAKING-OF.md)) |
 | Other critics' last pass | v22 for Codex (7.0) and the crowd (shareability 6.5, AI-slop 3.0, would-watch-to-end 6) |
 | Blind A/B, v22 on | v22 beat v21 4-0 (3 ties); v23 beat v22 5-0 (2); v24 beat v23 1-0 (6); v26 beat v25 3-0 (4); v28 vs v27: 7 ties, no regression, and the final review picks v28. v25 and v27 were adopted on the director's own pick |
 | Blind A/B, whole run | 161 section verdicts in 23 comparisons: the newer version won 39, lost 25, tied 97 |
 | Agent effort | 5,114 Claude requests (Opus 3,461, Sonnet 1,409, Fable 244), 107 subagents, 491 Codex requests (an upper bound), 99 human messages; 97% of the tokens are cache reads, so they measure context, not work |
 | Warehouse | dbt + DuckDB: 4 seeds, 48 models, 554 tests, PASS 605, WARN 1, ERROR 0 |
-| Media | NASA video, photos and audio (public domain) + Musopen public-domain recordings; the pre-rendered 3D frames and scans are not in the repo (see `pipeline/ASSETS.md`) |
+| Media | NASA video, photos and audio (public domain) + Musopen public-domain recordings + Sonniss GDC 2024 sound effects (licensed, not in the repo); the pre-rendered 3D frames and scans are not in the repo (see `pipeline/ASSETS.md`) |
 
 ![Every critic's score per version, v1 to v28](docs/plateau_chart.png)
 
@@ -75,7 +77,7 @@ flowchart LR
     D --> P
 ```
 
-- Memory lived in `PROGRESS.md`: the schedule, which version was BEST, the score table, the
+- Memory lived in `PROGRESS.md` (in the run's work folder, not in this repo): the schedule, which version was BEST, the score table, the
   backlog, every instruction the human gave mid-run, tool traps and a resume point. The
   conversation was compacted several times, and each time the loop picked up from that file.
   Anthropic's
@@ -130,8 +132,9 @@ The full list is in [MAKING-OF.md](MAKING-OF.md#what-broke-and-what-it-taught). 
   duck held through the launch lines. v10 put it 2.7 LU over the cold open.
 - Stills-only critics reported one false alarm ("MILES TO THE MOON clipped") at least nine
   times. The loop fixed it with a known-non-issues file and an adjacent-frame rule.
-- The Sonniss sound-effects licence forbids AI training, and mixes containing them had been
-  uploaded to two video critics. An audit caught it and the uploads stopped.
+- An audit found that mixes containing the licensed Sonniss effects had been sent to two external
+  video critics. The uploads stopped, and the TwelveLabs data setting was changed at the director's
+  request.
 - Two video critics (Gemini Flash, TwelveLabs) didn't separate versions, and the story about
   Gemini's identical scores turned out to rest on a file a retry had overwritten. The warehouse
   caught that.
@@ -226,14 +229,22 @@ In that search I didn't find another public run that pairs a multi-hour progress
 blind-A/B keep/revert and licence-logged archival footage plus a raw-vs-final cut. That's about
 one short search, not the field.
 
+## How far to trust the critic
+
+Two studies ran after the loop, on 2026-10-09. The code, raw results and write-ups are in
+[`analytics/studies/`](analytics/studies/README.md).
+- **Study 1, repeatability.** The editor critic re-scored 8 versions (v1 to v13) three times each:
+  ICC(2,1) = 0.38 (95% CI -0.20 to 0.67), well short of the 0.75 set in advance. Repeats rarely differed
+  by more than 0.5; the problem is that the critic barely told those versions apart (their means span
+  6.33 to 7.17, and v1 re-scored 6.67 against its original 5.5). A 0.5 to 1.0 move between adjacent
+  versions is within re-ask noise. v28 was not in the study, so read the score table above as the
+  critic's own reading, not a measured gain.
+- **Study 2, position bias.** The blind A/B judge picked the top strip in 18 of 38 decisive calls
+  (randomization p = 0.67): no position bias found.
+
 ## Not done
 
 - A viewer test with people (the kit exists; the director deferred it until after the 24 hours).
-- Merging the critic studies. They ran on 2026-10-09 and sit on the `studies` branch (PR #5).
-  Study 1 re-asked the editor critic to score 8 versions three times each: ICC(2,1) = 0.38 (95% CI
-  -0.20 to 0.67), well short of the pre-registered 0.75, so a 0.5 to 1.0 move between adjacent
-  versions is within re-ask noise. Study 2 found no position bias in the A/B judge (it picked the
-  top strip in 18 of 38 decisive calls; randomization p = 0.67).
 - A vertical teaser, 15 and 30 second cutdowns and a poster.
 - A rebuilt raw-vs-final video, a version-explorer page and a supercut from v28.
 - Captions: the SRT and VTT files were made on the v16 timeline and not regenerated.

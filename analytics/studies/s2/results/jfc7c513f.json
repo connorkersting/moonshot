@@ -1,0 +1,12 @@
+```json
+{
+  "decisions": [
+    {"sheet": "sheet_1", "a_total": 6, "b_total": 5, "winner": "A", "confidence": "low", "reason": "A cuts to the control room for Houston's lines. B stays on moon surface with a subtitle that doesn't match the picture. Both have a glitch frame."},
+    {"sheet": "sheet_2", "a_total": 9, "b_total": 3, "winner": "A", "confidence": "high", "reason": "A shows a clear, growing Moon globe approach. B is a dark, murky, near-static grey surface with no readable shot."},
+    {"sheet": "sheet_3", "a_total": 6, "b_total": 5, "winner": "A", "confidence": "low", "reason": "A's chart subtitle is larger and legible, its T+13 frame is informative, and it ends on the Moon. B has a dark USA close-up, tiny chart subtitle text, and a lingering ghost of the 24,200 text over Earth."},
+    {"sheet": "sheet_4", "a_total": 5, "b_total": 6, "winner": "B", "confidence": "low", "reason": "B's chart subtitle is larger and legible, its T+13 frame is informative, and it ends on the Moon. A has a dark USA close-up, tiny chart subtitle text, and a lingering ghost of the 24,200 text over Earth."},
+    {"sheet": "sheet_5", "a_total": 4, "b_total": 6, "winner": "B", "confidence": "med", "reason": "B's MOONSHOT title sits over Moon and LM footage and looks integrated. A puts the title on flat black. The credits are small in both, and B's are smaller."},
+    {"sheet": "sheet_6", "a_total": 6, "b_total": 5, "winner": "A", "confidence": "low", "reason": "A has control-room reaction cutaways at 1.75 and 7.0, including the landing relief shot. B has one tense close-up and a longer, smaller counter label."}
+  ]
+}
+```

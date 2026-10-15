@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.5,
+    "pacing": 7.0,
+    "variety": 7.5,
+    "motion": 7.0,
+    "type": 6.5,
+    "color": 6.5,
+    "sound": 7.0,
+    "captions": 7.5,
+    "story": 8.0,
+    "overall": 7.0
+  },
+  "top_fixes": [
+    "Stat numerals collide with the planets: '24,200 MPH' runs into Earth's limb (31.5s) and '240,000' into the Moon (34.8s); shift text left.",
+    "No end card: the cut ends on the credits disclaimer and black at 78.8s; add a MOONSHOT title reprise or call to action.",
+    "Caption 'Houston, ...' at 56.7s is a dead fragment (Whisper recall 0.00); fold it into 'Tranquility Base here' or drop it."
+  ]
+}
+```

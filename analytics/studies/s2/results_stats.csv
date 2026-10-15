@@ -1,0 +1,31 @@
+statistic,value,note
+n_decisions_usable,48.0,of 48 planned
+n_ties,10.0,
+tie_rate,0.20833333333333334,ties / usable decisions
+tie_rate_wilson_lo,0.11730272904178425,95% Wilson
+tie_rate_wilson_hi,0.3425890138948294,95% Wilson
+tie_rate_newer_on_top,0.20833333333333334,n=24
+tie_rate_older_on_top,0.20833333333333334,n=24
+n_decisive,38.0,non-tie decisions
+A_picks,18.0,decisions where the top/A row won
+P_pick_A_given_decisive,0.47368421052631576,0.5 = no position preference
+P_pick_A_clopper_pearson_lo,0.3098073016082079,95% exact
+P_pick_A_clopper_pearson_hi,0.6418165637394964,95% exact
+binomial_exact_p_two_sided,0.8714146793645341,"H0: P(A)=0.5; treats the decisive decisions as independent, which they are not"
+randomization_observed_A_picks,18.0,same as A_picks
+randomization_null_mean_A_picks,16.0,exact mean under the item-block null
+randomization_p_two_sided,0.6682665866706665,20000 shuffles of order labels within items
+items_with_a_version_flip,5.0,items where not every decisive pick chose the same cut
+P_pick_newer_given_decisive,0.5526315789473685,descriptive; orders are balanced so position cancels
+P_pick_newer_clopper_pearson_lo,0.3829907511642896,95% exact
+P_pick_newer_clopper_pearson_hi,0.7137585009994039,95% exact
+n_item_repeat_pairs,24.0,both orders of an item present in a repeat (24 planned)
+flip_pairs_same_version,11.0,
+flip_pairs_same_position_A,3.0,
+flip_pairs_same_position_B,1.0,
+flip_pairs_tie_involved,9.0,
+flip_consistency_same_version_rate,0.7333333333333333,"among pairs with no tie: same cut picked in both orders; 1 = content-driven, 0 = position-driven"
+flip_consistency_wilson_lo,0.48049565748447975,95% Wilson
+flip_consistency_wilson_hi,0.8910254675038264,95% Wilson
+retest_pairs_same_item_same_order,24.0,item+order shown in both repeats
+retest_agreement_rate,0.5833333333333334,same verdict (A/B/TIE) in both repeats

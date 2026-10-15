@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.5,
+    "pacing": 7.0,
+    "variety": 8.0,
+    "motion": 7.0,
+    "type": 6.5,
+    "color": 6.5,
+    "sound": 8.0,
+    "captions": 8.0,
+    "story": 8.0,
+    "overall": 7.5
+  },
+  "top_fixes": [
+    "Countdown graphic reads 9 at 0.0s, 10 at 1.0s, 8 at 3.0s, 6 at 3.4s; retime the counter to the audio count.",
+    "Chrome-bevel 3D MOONSHOT title clashes with the clean condensed-sans system used everywhere else and sits over the rocket; flatten it.",
+    "Ascent disclaimer text (exaggerated 6x, values called out live) and end credits are unreadable at phone size; enlarge or cut them."
+  ]
+}
+```

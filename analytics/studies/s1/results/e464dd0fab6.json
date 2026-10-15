@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.0,
+    "pacing": 7.0,
+    "variety": 8.0,
+    "motion": 6.5,
+    "type": 6.5,
+    "color": 6.5,
+    "sound": 7.5,
+    "captions": 7.0,
+    "story": 8.0,
+    "overall": 7.5
+  },
+  "top_fixes": [
+    "Replace the bevelled chrome 3D MOONSHOT title (13-17s); it reads as a stock preset and buries the Saturn V behind it.",
+    "Ascent telemetry overlay (20-27s): the 'exaggerated 6x' slate and four-field readout are unreadable at phone size; enlarge or cut fields.",
+    "Caption 'Houston, ...' at 56.7s has zero recall and reads as a fragment; caption the full 'Houston, Tranquility Base here' line instead."
+  ]
+}
+```

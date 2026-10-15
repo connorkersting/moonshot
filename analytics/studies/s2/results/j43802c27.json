@@ -1,0 +1,12 @@
+```json
+{
+  "decisions": [
+    {"sheet": "sheet_1", "a_total": 4, "b_total": 6, "winner": "B", "confidence": "med", "reason": "B's ascent chart is larger and fuller with bigger readouts and the rocket behind it, while A's chart is small and thin with a blank blue-sky frame; A has the better Earth shot."},
+    {"sheet": "sheet_2", "a_total": 7, "b_total": 3, "winner": "A", "confidence": "med", "reason": "A's moon is bright, detailed and visibly approaching, while B's is a flat, dim, greenish surface with no sense of motion; both lander shots are identical."},
+    {"sheet": "sheet_3", "a_total": 5, "b_total": 5, "winner": "TIE", "confidence": "low", "reason": "Both cuts have the same countdown, 'Lunar Contact' card and captions; B uses a tense close-up and a 'land or abort' label, A uses wider control-room shots, and neither is clearly better."},
+    {"sheet": "sheet_4", "a_total": 6, "b_total": 4, "winner": "A", "confidence": "low", "reason": "A runs a coherent control room, ignition, launch sequence; B has more colourful frames but cuts from the pad to moon and astronaut shots, which weakens the story."},
+    {"sheet": "sheet_5", "a_total": 5, "b_total": 5, "winner": "TIE", "confidence": "low", "reason": "The cuts are nearly identical; B shows credits a frame earlier and has a small extra caption on the opening frame, but there is no meaningful quality difference."},
+    {"sheet": "sheet_6", "a_total": 6, "b_total": 4, "winner": "A", "confidence": "low", "reason": "A's globe-map ascent chart is clearer and starts earlier with readable readouts and a moon frame leading on; B's chart text is tinier and it covers the early chart time with footage."}
+  ]
+}
+```

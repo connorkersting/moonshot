@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.0,
+    "pacing": 6.5,
+    "variety": 7.5,
+    "motion": 6.5,
+    "type": 6.0,
+    "color": 6.5,
+    "sound": 6.0,
+    "captions": 8.0,
+    "story": 7.5,
+    "overall": 7.0
+  },
+  "top_fixes": [
+    "At 63s 'Houston, Tranquility Base here' is only half intelligible (recall 0.50); duck the bed harder under the landing payoff line.",
+    "Audible 7x click at 47.08 where the 1202 computer SFX enters; add a short fade-in on that effect and soften the 68.6 cut.",
+    "The flat grey hold from 68.6 to 69.6 reads as a dropped frame on phone; cut the flash to a few frames."
+  ]
+}
+```

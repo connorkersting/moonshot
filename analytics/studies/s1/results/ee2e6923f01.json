@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.0,
+    "pacing": 6.5,
+    "variety": 8.0,
+    "motion": 7.0,
+    "type": 6.5,
+    "color": 6.0,
+    "sound": 7.0,
+    "captions": 7.5,
+    "story": 7.5,
+    "overall": 6.5
+  },
+  "top_fixes": [
+    "Replace the bevelled chrome 3D MOONSHOT title at 13-15s; it clashes with the flat condensed-sans graphic system used everywhere else.",
+    "Add an end title card after the bootprint; the cut fades to black then 3s of credits unreadable at phone size, no title reprise.",
+    "Fix the dangling 'Houston, ...' caption at 56.7s: the line is inaudible (Whisper recall 0), merge it into 'Tranquility Base here' or cut it."
+  ]
+}
+```

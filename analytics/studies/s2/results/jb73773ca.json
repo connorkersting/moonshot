@@ -1,0 +1,12 @@
+```json
+{
+  "decisions": [
+    {"sheet": "sheet_1", "a_total": 4, "b_total": 6, "winner": "B", "confidence": "low", "reason": "B keeps the fuel counter running (18.0 ENGINE STOP) at the 5.25 s Lunar Contact beat; A drops it there, otherwise the same."},
+    {"sheet": "sheet_2", "a_total": 4, "b_total": 6, "winner": "B", "confidence": "med", "reason": "B puts the Eagle line over lunar-surface footage and the Houston line over a Houston operator; A puts the Eagle 'give us a reading' line over the control room, a speaker/picture mismatch."},
+    {"sheet": "sheet_3", "a_total": 4, "b_total": 6, "winner": "B", "confidence": "low", "reason": "Titles are the same; B moves on to the 'Liftoff on Apollo 11' subtitle while A holds the 'thirty-two minutes' caption for longer."},
+    {"sheet": "sheet_4", "a_total": 6, "b_total": 4, "winner": "A", "confidence": "low", "reason": "A's counter carries a small time-compressed label and its opening frame shows more terrain; the 5.25 s Lunar Contact frame is the same in both."},
+    {"sheet": "sheet_5", "a_total": 6, "b_total": 4, "winner": "A", "confidence": "low", "reason": "A's ascent map is cleaner; B has a rocket icon colliding with the path at T+109 and a clipped 'engine cutoff' label, though B ends on the Moon."},
+    {"sheet": "sheet_6", "a_total": 5, "b_total": 5, "winner": "TIE", "confidence": "low", "reason": "A's credits on black are larger and more legible; B's title sits over moon/lander footage but has tiny credit text."}
+  ]
+}
+```

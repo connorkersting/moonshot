@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.0,
+    "pacing": 6.5,
+    "variety": 7.5,
+    "motion": 6.5,
+    "type": 6.0,
+    "color": 6.5,
+    "sound": 4.0,
+    "captions": 7.0,
+    "story": 8.0,
+    "overall": 6.5
+  },
+  "top_fixes": [
+    "Remix dialogue: 15 of 19 lines miss +10 dB; liftoff lines sit -3 dB under the bed and 'Tranquility Base here' scores 0.25 recall.",
+    "Fix missing glyphs: tofu boxes in the ascent chart footnote ('[] = VALUE CALLED OUT LIVE') and 'TIME-COMPRESSED [][]' on the bingo-fuel panel.",
+    "Clean the clicks at joins: 8.9x spike at 47.0 (riser/computer SFX), 6.5x at the 68.6 flash-to-silence, 5.2x on the 10.6 boom."
+  ]
+}
+```

@@ -1,0 +1,13 @@
+item_id,comparison,section,n_decisions,n_ties,n_decisive,newer_picked,older_picked,A_picked,B_picked,pattern
+i01,v5_v4,1_cold_open,4,0,4,3,1,3,1,mixed
+i02,v8_v7,3_stats_chart,4,0,4,3,1,3,1,mixed
+i03,v9_v7,3_stats_chart,4,0,4,3,1,3,1,mixed
+i04,v4_v3,3_stats_chart,4,0,4,0,4,2,2,same version every time
+i05,v4_v3,7_outro,4,2,2,0,2,0,2,same version every time
+i06,v7_v5,7_outro,4,3,1,1,0,0,1,one decisive pick
+i07,v3_v2,6_fuel_landing,4,1,3,0,3,1,2,same version every time
+i08,v3_v2,4_moon_lm,4,0,4,4,0,2,2,same version every time
+i09,v5_v4,5_alarm,4,0,4,3,1,1,3,mixed
+i10,v7_v5,6_fuel_landing,4,2,2,0,2,1,1,same version every time
+i11,v4_v3,6_fuel_landing,4,0,4,2,2,2,2,mixed
+i12,v9_v7,2_drop_title,4,2,2,2,0,0,2,same version every time

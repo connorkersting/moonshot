@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.0,
+    "pacing": 6.5,
+    "variety": 7.5,
+    "motion": 7.0,
+    "type": 6.0,
+    "color": 6.0,
+    "sound": 7.0,
+    "captions": 7.0,
+    "story": 8.0,
+    "overall": 7.0
+  },
+  "top_fixes": [
+    "Frame at 68.7s is a flat grey noise field with no picture; after 'Tranquility Base' the pause reads as a render fault, not a breath.",
+    "Orange speaker labels and top-left mission slate vanish at phone size over bright frames (fire at 11.5s, pad at 1s); enlarge and back them.",
+    "End card at 85.5s: 'APOLLO 11 · JULY 16-24, 1969' sits directly on the LM ascent stage; raise the line or reframe the plate."
+  ]
+}
+```

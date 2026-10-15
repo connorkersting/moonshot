@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.5,
+    "pacing": 7.0,
+    "variety": 8.0,
+    "motion": 7.0,
+    "type": 7.0,
+    "color": 7.0,
+    "sound": 6.5,
+    "captions": 8.0,
+    "story": 8.5,
+    "overall": 7.5
+  },
+  "top_fixes": [
+    "Re-duck music under 'All engines running' (+6.5 dB) and 'Liftoff' (+9.3 dB) at the drop; both sit below the +10 dB target.",
+    "Bingo counter reads 35.2 s at 51.1 then 38.2 s at 52.3: the countdown runs backwards. Fix the counter continuity.",
+    "Fix the 5.1x click on the riser join at 40.3 s, and move '1202 = COMPUTER OVERLOADED' off the controller's headset at 44.8."
+  ]
+}
+```

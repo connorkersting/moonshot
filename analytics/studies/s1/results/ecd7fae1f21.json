@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.5,
+    "pacing": 6.5,
+    "variety": 7.5,
+    "motion": 6.5,
+    "type": 6.5,
+    "color": 6.5,
+    "sound": 6.5,
+    "captions": 7.5,
+    "story": 8.0,
+    "overall": 7.0
+  },
+  "top_fixes": [
+    "Kill the 7x click at 47.08s on the 1202 alarm SFX join; lift 'All engines running' at 10.6s above +10 dB over the bed.",
+    "Credits card at 84.8s is seven lines of fine print and gone to black by 85.5s; hold it longer, set it larger, end cleanly.",
+    "The 'MOONSHOT' title at 13.4s fights the 'Liftoff!' caption directly beneath it; clear captions during the title reveal."
+  ]
+}
+```

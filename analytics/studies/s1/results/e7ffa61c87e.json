@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.0,
+    "pacing": 6.5,
+    "variety": 7.5,
+    "motion": 6.5,
+    "type": 6.5,
+    "color": 6.0,
+    "sound": 4.0,
+    "captions": 7.5,
+    "story": 8.0,
+    "overall": 6.5
+  },
+  "top_fixes": [
+    "Dialogue from 47s to 58s (1202 alarm lines, '60 seconds') is inaudible under the bed; duck music and sfx so the climax is heard.",
+    "Ascent chart at 28s: footnote marker renders as a missing-glyph box, and the data-source line is unreadable at phone size.",
+    "Flat grey grain card at 68.7s reads as a render error; make the flash-to-silence white or cut straight to Earthrise."
+  ]
+}
+```

@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.0,
+    "pacing": 7.0,
+    "variety": 8.0,
+    "motion": 6.5,
+    "type": 6.5,
+    "color": 6.5,
+    "sound": 6.5,
+    "captions": 8.0,
+    "story": 8.0,
+    "overall": 7.0
+  },
+  "top_fixes": [
+    "Restore 'Houston, Tranquility Base here' at 56.5 s: Whisper recall is 0.50, the payoff line is buried under the bed.",
+    "Duck the drop under 'All engines running' and 'Liftoff' (10.6 to 13.2 s): +6.5 and +9.3 dB ratios miss the +10 target.",
+    "Restyle the chrome bevel MOONSHOT title (13 to 15 s): it clashes with the flat condensed type system and crowds the caption beneath it."
+  ]
+}
+```

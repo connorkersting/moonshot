@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.0,
+    "pacing": 6.5,
+    "variety": 7.5,
+    "motion": 7.0,
+    "type": 6.5,
+    "color": 6.0,
+    "sound": 7.0,
+    "captions": 7.0,
+    "story": 8.0,
+    "overall": 7.0
+  },
+  "top_fixes": [
+    "Flat grey noise frame at 68.7s (black at 67.5s) leaves a dead hole between 'Tranquility Base here' and 'We're breathing again'; cut or fill it.",
+    "Ascent Profile chart holds a static dashboard from roughly 25s to 32s, stalling launch momentum; trim to one beat.",
+    "Orange speaker labels at 11.5s and 17.3s and '24,200 MPH' at 33.75s sink into bright backgrounds at phone size; add backing plates."
+  ]
+}
+```

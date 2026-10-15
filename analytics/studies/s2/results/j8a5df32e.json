@@ -1,0 +1,12 @@
+```json
+{
+  "decisions": [
+    {"sheet": "sheet_1", "a_total": 7, "b_total": 3, "winner": "A", "confidence": "med", "reason": "A has a larger, readable 'ASCENT - FIRST 3 MINUTES' header and ends on a clean moon frame. B's header and subtitle are tiny and it ends on a ghosted '24,200 MPH' overlay on the Earth."},
+    {"sheet": "sheet_2", "a_total": 4, "b_total": 6, "winner": "B", "confidence": "med", "reason": "B adds speaker labels (EAGLE - ARMSTRONG, HOUSTON - DUKE) and a control-room cutaway under the 1202 readout. A has a fully glitched frame that hides the content."},
+    {"sheet": "sheet_3", "a_total": 3, "b_total": 7, "winner": "B", "confidence": "med", "reason": "B has a larger, readable ascent header and ends on a clean moon frame. A's header is tiny and it ends on a ghosted '24,200 MPH' overlay."},
+    {"sheet": "sheet_4", "a_total": 5, "b_total": 5, "winner": "TIE", "confidence": "low", "reason": "Both have near-identical countdown HUD, 'LUNAR CONTACT' card and subtitles. They differ only in which control-room reaction shots are used and in the header wording."},
+    {"sheet": "sheet_5", "a_total": 2, "b_total": 8, "winner": "B", "confidence": "high", "reason": "B shows a bright, detailed 3D moon zooming in. A shows a flat, dull, nearly static grey moon."},
+    {"sheet": "sheet_6", "a_total": 5, "b_total": 5, "winner": "TIE", "confidence": "low", "reason": "A's MOONSHOT title sits over lunar footage with the LM, which is more integrated. B's title on black and its larger credits with a heading are slightly more legible."}
+  ]
+}
+```

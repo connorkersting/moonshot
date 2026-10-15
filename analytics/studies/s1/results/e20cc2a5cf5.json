@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 8.0,
+    "pacing": 7.5,
+    "variety": 8.5,
+    "motion": 7.5,
+    "type": 7.0,
+    "color": 7.0,
+    "sound": 7.5,
+    "captions": 7.5,
+    "story": 8.5,
+    "overall": 7.5
+  },
+  "top_fixes": [
+    "Blank flash frames at 54.5 s (white) and 57.8 s (flat grey) wipe the landing climax twice in four seconds; keep one and shorten it.",
+    "Ascent telemetry panel at 20 to 24 s: fine print and ALTITUDE/VELOCITY labels are unreadable at phone size; enlarge or drop them.",
+    "Caption 'Houston, ...' at 56.7 s shows an inaudible fragment (Whisper recall 0); cut it and let 'Tranquility Base here' land clean."
+  ]
+}
+```

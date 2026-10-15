@@ -1,0 +1,12 @@
+```json
+{
+  "decisions": [
+    {"sheet": "sheet_1", "a_total": 7, "b_total": 5, "winner": "A", "confidence": "med", "reason": "A cuts through varied clear shots (pad, moon, LM, astronaut, Earth, control room); B repeats near-identical control-room shots."},
+    {"sheet": "sheet_2", "a_total": 5, "b_total": 6, "winner": "B", "confidence": "low", "reason": "B adds a Houston reaction shot at the landing and keeps the HUD off a close-up face; A's HUD sits over the face at 3.5 s."},
+    {"sheet": "sheet_3", "a_total": 5, "b_total": 6, "winner": "B", "confidence": "low", "reason": "B shows the astronaut during 'one giant leap' and ends on a moonscape that leads into the credits; A reaches its credits earlier and then goes to black."},
+    {"sheet": "sheet_4", "a_total": 6, "b_total": 5, "winner": "A", "confidence": "low", "reason": "A keeps the chart and data panel on screen through 7.9 s; B drops to bare sky footage at 7.9 s, though its Earth at 15.75 s is stronger."},
+    {"sheet": "sheet_5", "a_total": 6, "b_total": 5, "winner": "A", "confidence": "low", "reason": "A's trajectory overlays are clean; B has a cluttered Max Q marker and an engine-cutoff label clipped at the bottom edge, though B adds a stage-separation label and a Moon ending."},
+    {"sheet": "sheet_6", "a_total": 3, "b_total": 8, "winner": "B", "confidence": "high", "reason": "B shows a vivid Moon growing across the frame; A holds a dull, near-static grey moon surface for the first four frames."}
+  ]
+}
+```

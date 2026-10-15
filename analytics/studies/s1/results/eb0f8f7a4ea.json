@@ -1,0 +1,21 @@
+```json
+{
+  "scores": {
+    "hook": 7.0,
+    "pacing": 6.5,
+    "variety": 8.0,
+    "motion": 7.0,
+    "type": 6.5,
+    "color": 6.5,
+    "sound": 4.0,
+    "captions": 7.5,
+    "story": 8.0,
+    "overall": 6.5
+  },
+  "top_fixes": [
+    "Lift landing dialogue over the bed: 57.5-65.5s lines sit at +0.5 to +3.6 dB; 'Houston, Tranquility Base here' is barely heard.",
+    "Remove click spikes at joins: 47.0s riser/computer SFX (8.9x), 68.6s flash to silence (6.5x), 10.6s boom (5.2x).",
+    "Title card at 13-15s has the 'Liftoff!' caption crowding under MOONSHOT; also fix tofu glyphs in the TIME-COMPRESSED tag."
+  ]
+}
+```

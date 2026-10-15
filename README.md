@@ -14,10 +14,10 @@ director who made the calls the critics couldn't.
 
 | | |
 |---|---|
-| Run | 2026-10-07 02:43 to 2026-10-09 00:06 EDT, seven ledger segments adding up to 24 h 01 m of loop time (about 16 h of it active work in the transcript) |
+| Run | 2026-10-07 02:43 to 2026-10-09 00:06 EDT, seven ledger segments adding up to 24 h 01 m of loop time |
 | Final | v28, 87.5 s, 2,100 frames at 24 fps, 1920×1080, −13.8 LUFS, −1.5 dBTP; `BEST.json` pins the file by sha256 and git tag |
 | Versions exported | 28 (v1–v28), none overwritten; 1 reverted after losing a blind A/B (v6); 4 not promoted (v8, v15, v16, v20) |
-| Senior-editor critic (Fable), overall | **v1 5.0 → v28 9.5** (same critic, same rubric, one sitting, in its final review). Across the run, each review on its own scale: 5.5 (v1) → 8.0 (v14) → 8.5 (v20, v21) → 9.0 (v22) → 9.5 (v23 to v28) |
+| Senior-editor critic (Fable), overall | **v1 5.0 → v28 9.5** (same critic, same rubric, one sitting, in its final review). Across the run, each review on its own scale: 5.5 (v1) → 8.0 (v14) → 8.5 (v20, v21) → 9.0 (v22) → 9.5 (v23, v24, v26 and v28; v25 and v27 had no editor review) |
 | Final review (v28) | hook 8.5, pacing 8, variety 9, motion 9.5, type 9.5, colour 9.5, sound 8 (by structure, it can't hear), captions 8.5, story 9.5, overall 9.5; v28 better than v27 with no material regression, final pick v28 |
 | Honest ceiling | 9.5 on "would a top YouTube editor ship this"; **7.5 against a trailer house's own standard** (see below) |
 | Other critics' last pass | v22 for Codex (7.0) and the crowd (shareability 6.5, AI-slop 3.0, would-watch-to-end 6) |
@@ -93,8 +93,8 @@ flowchart LR
   - "mean Twitter" commenters and a first-time viewer (dropped for a stretch, reinstated at v17);
   - Codex (OpenAI), as an adversarial reviewer of the patches (v14 to v23) and as a second critic;
   - scripts that measure the audio, the flashes and the frames.
-- The blind A/B decided keep or revert, with logged exceptions, and from v17 on the director's own
-  picks and approvals counted too. The judge can't hear and the editor can't hear, and the
+- The blind A/B and the editor's review decided keep or revert between them, with logged
+  exceptions, and from v17 on the director's own picks and approvals counted too. The judge can't hear and the editor can't hear, and the
   director's ear made the audio calls (0:33, 1:02, the v24 staging sound). Details in
   [MAKING-OF.md](MAKING-OF.md).
 - Every version had to pass the same gates before promotion: the protected sections
@@ -105,26 +105,29 @@ flowchart LR
 
 ## Who decided what
 
-From the log (`PROGRESS.md`), not from memory. The director, Connor Kersting:
-- set the 24-hour budget and what counts toward it, and approved the tools and the plateau rule;
+From the run log, not from memory; each of the director's 99 messages is labelled in
+`analytics/data/raw/interventions.csv`. The director, Connor Kersting:
+- set the 24-hour budget, what counts toward it and the plateau rule, and approved the tools;
 - caught the 0:33 digital-silence dropout and the late 1:02 music entry by ear, and approved
   the fixes by ear;
 - rejected the overlays as looking cheap, which led to the 1969-hardware HUD;
 - listened to three blind audio pairs: no preference on the countdown, the staging change
   chosen, the baseline kept on alarm and descent;
 - picked the Earth-to-Moon hero beat over the real footage it replaced, and the RIFE slow-mo;
-- asked for smaller, quieter on-screen disclosures, and said the outro was rushed and shaky;
+- asked for smaller, quieter on-screen disclosures, and said the outro was rushed and shaky.
 
-The AI wrote and reviewed the code and ran the critics. The critics' scores did not decide
-alone; the log marks every override. When the director asked for a CG astronaut footstep video,
-the agent declined with reasons (see MAKING-OF.md).
+The AI wrote and reviewed the code, ran the critics, and built the dbt warehouse in `analytics/`;
+the director wrote none of the code or SQL. The critics' scores did not decide alone; the log marks
+every override. When the director asked whether a CG astronaut footstep shot would work, the agent
+advised against it, with reasons (see MAKING-OF.md).
 
 ## What broke
 
 The full list is in [MAKING-OF.md](MAKING-OF.md#what-broke-and-what-it-taught). The short one:
 - A one-frame white flash rendered black, then went missing. The decode pipe was re-timing
   frames, which also pushed everything after 56 s one frame late.
-- For four versions the ignition "drop" measured quieter than the countdown before it.
+- The ignition "drop" barely rose over the countdown (1 LU louder in v8), because the music
+  duck held through the launch lines. v10 put it 2.7 LU over the cold open.
 - Stills-only critics reported one false alarm ("MILES TO THE MOON clipped") at least nine
   times. The loop fixed it with a known-non-issues file and an adjacent-frame rule.
 - The Sonniss sound-effects licence forbids AI training, and mixes containing them had been
@@ -226,8 +229,11 @@ one short search, not the field.
 ## Not done
 
 - A viewer test with people (the kit exists; the director deferred it until after the 24 hours).
-- The reliability and position-bias studies (`analytics/studies/`: the harnesses are frozen, none
-  of the critic calls has been run).
+- Merging the critic studies. They ran on 2026-10-09 and sit on the `studies` branch (PR #5).
+  Study 1 re-asked the editor critic to score 8 versions three times each: ICC(2,1) = 0.38 (95% CI
+  -0.20 to 0.67), well short of the pre-registered 0.75, so a 0.5 to 1.0 move between adjacent
+  versions is within re-ask noise. Study 2 found no position bias in the A/B judge (it picked the
+  top strip in 18 of 38 decisive calls; randomization p = 0.67).
 - A vertical teaser, 15 and 30 second cutdowns and a poster.
 - A rebuilt raw-vs-final video, a version-explorer page and a supercut from v28.
 - Captions: the SRT and VTT files were made on the v16 timeline and not regenerated.
